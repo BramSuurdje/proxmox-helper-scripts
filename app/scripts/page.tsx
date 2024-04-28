@@ -21,7 +21,7 @@ interface Category {
   Items: Script[];
 }
 
-function page() {
+export default function Page() {
   // set the items as a state
   const [selectedItem, setSelectedItem] = useState("");
 
@@ -110,5 +110,3 @@ function page() {
     </>
   );
 }
-
-export default page;
