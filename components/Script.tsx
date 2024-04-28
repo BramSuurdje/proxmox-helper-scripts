@@ -37,14 +37,14 @@ type RecordModel = {
   updated: string;
 };
 
-const Script: React.FC<ScriptProps> = ({ scriptID }) => {
+const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
   const [item, setItem] = useState<Script | null>(null);
 
   const getItem = async () => {
     const record = await pb
       .collection("proxmox_scripts")
       .getOne(`${scriptID}`, {});
-    setItem(record as Script);
+    setItem(record as unknown as Script);
   };
 
   useEffect(() => {
@@ -202,4 +202,4 @@ const Script: React.FC<ScriptProps> = ({ scriptID }) => {
   );
 };
 
-export default Script;
+export default ScriptItem;

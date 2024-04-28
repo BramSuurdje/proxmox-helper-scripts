@@ -1,7 +1,6 @@
 'use client'
 import Navbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
-import Script from "@/components/Script";
 import {
   Accordion,
   AccordionItem,
@@ -9,6 +8,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
+import ScriptItem from "@/components/Script";
 
 interface Script {
   title: string;
@@ -103,7 +103,7 @@ export default function Page() {
         </div>
         <div className="flex">
           <div className="h-screen w-full">
-            <Script scriptID={selectedItem} />
+            <ScriptItem scriptID={selectedItem} />
           </div>
         </div>
       </div>
