@@ -80,6 +80,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                       width={400}
                       height={400}
                       alt={item.title}
+                      priority={true}
                     />
                     <div className="ml-4 flex flex-col justify-between">
                       <div className="w-full">
