@@ -9,6 +9,7 @@ module.exports = {
       "cdn.bramsuurd.nl",
       "raw.githubusercontent.com",
       "technitium.com",
+      "github.com",
     ],
   },
 };
