@@ -10,6 +10,7 @@ module.exports = {
       "raw.githubusercontent.com",
       "technitium.com",
       "github.com",
+      "avatars.githubusercontent.com",
     ],
   },
 };
