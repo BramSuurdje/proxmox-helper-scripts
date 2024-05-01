@@ -4,18 +4,8 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
-import { useTheme } from "next-themes";
 
-  const { theme, resolvedTheme } = useTheme();
-
-  const isLight = theme === "light" || resolvedTheme === "light";
-
-  const imageUrl = isLight
-    ? "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox.png"
-    : "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox-light.png";
-    
 function page() {
-
   return (
     <div className="">
       <div className="flex h-screen items-center justify-center gap-48">
