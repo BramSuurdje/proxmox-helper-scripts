@@ -44,7 +44,7 @@ function page() {
           <Image
             width={250}
             height={250}
-            src={imageUrl}
+            src="https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox.png"
             alt="proxmox logo"
             className="animate-fade-left animate-once animate-ease-in-out"
           ></Image>
