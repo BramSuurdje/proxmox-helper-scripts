@@ -9,14 +9,9 @@ export default function LandingPage() {
     <div className="dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex  h-[50rem] w-full flex-col items-center justify-center">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       <div className="animate-fade-up flex flex-col items-center justify-center">
-        <Image
-          src="/logo.png"
-          alt="proxmox"
-          width={150}
-          height={150}
-        />
+        <Image src="/logo.png" alt="proxmox" width={150} height={150} />
         <h1 className="relative z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-5xl">
-          Proxmox Helper-Scripts
+          Proxmox VE Helper-Scripts
         </h1>
         <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-xl">
           {" "}
