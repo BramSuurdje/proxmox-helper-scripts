@@ -26,12 +26,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen w-full justify-center">
-            <div className="w-full max-w-7xl">
-              <Navbar />
-              {children}
+          <div className="flex flex-col min-h-screen w-full justify-center">
+            <Navbar />
+            <div className="flex w-full justify-center">
+              <div className="max-w-7xl w-full">
+                {children}
+                <Toaster />
+              </div>
             </div>
-            <Toaster />
           </div>
         </ThemeProvider>
       </body>

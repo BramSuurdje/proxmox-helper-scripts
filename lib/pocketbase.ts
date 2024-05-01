@@ -1,7 +1,7 @@
 import PocketBase from "pocketbase";
 
-export const pb = new PocketBase("https://cdn.bramsuurd.nl");
+export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 export const getImageURL = (recordId: String, fileName: String) => {
-  return `https://cdn.bramsuurd.nl/api/files/lcr86sab2cxeua1/${recordId}/${fileName}`;
+  return `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/${recordId}/${fileName}`;
 };

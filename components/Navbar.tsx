@@ -1,15 +1,5 @@
 "use client";
 import React from "react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "../public/logo.png";
@@ -21,7 +11,7 @@ import { Coffee } from "lucide-react";
 function Navbar() {
   return (
     <>
-      <div className="flex w-full justify-center">
+      <div className="flex sticky top-0 left-0 w-full justify-center border-b backdrop-blur-lg">
         <div className="flex h-20 w-full max-w-7xl items-center justify-between">
           <h1 className="font-semibold ">
             <Link href="/" className=" flex items-center gap-2">

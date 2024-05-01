@@ -1,5 +1,4 @@
 'use client'
-import Navbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
 import {
   Accordion,
@@ -43,7 +42,7 @@ export default function Page() {
 
   const getLinks = async () => {
     const res = await fetch(
-      "https://cdn.bramsuurd.nl/api/collections/9bex5k2cida1z8f/records",
+      `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/proxmox_items/records`,
     );
     const data = await res.json();
     return data.items as Category[];
