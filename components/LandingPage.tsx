@@ -10,7 +10,7 @@ export default function LandingPage() {
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       <div className="animate-fade-up flex flex-col items-center justify-center">
         <Image
-          src="https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox-light.png"
+          src="/logo.png"
           alt="proxmox"
           width={150}
           height={150}
