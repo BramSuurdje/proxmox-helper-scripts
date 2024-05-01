@@ -4,8 +4,15 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
+import { useTheme } from "next-themes";
 
 function page() {
+  const { theme } = useTheme();
+
+  const imageUrl =
+    theme === "light"
+      ? "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox.png"
+      : "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox-light.png";
   return (
     <div className="">
       <div className="flex h-screen items-center justify-center gap-48 ">
@@ -14,11 +21,13 @@ function page() {
           <div>
             <p>
               {" "}
-              Proxmox VE Scripts for
-              {" "}
+              Proxmox VE Scripts for{" "}
               <Typewriter
                 words={[
-                  "Streamlining", "Automating", "Simplifying", "Optimizing",
+                  "Streamlining",
+                  "Automating",
+                  "Simplifying",
+                  "Optimizing",
                 ]}
                 loop={false}
                 cursor={true}
@@ -26,7 +35,6 @@ function page() {
                 deleteSpeed={50}
                 delaySpeed={1250}
               />
-              
               Your Homelab
             </p>
           </div>
@@ -43,13 +51,13 @@ function page() {
           <Image
             width={250}
             height={250}
-            src="https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox.png"
+            src={imageUrl}
             alt="proxmox logo"
             className="animate-fade-left animate-once animate-ease-in-out"
           ></Image>
         </div>
       </div>
-      <div className="h-screen">awdawd</div>
+      <div className="-z-10 h-screen"></div>
     </div>
   );
 }
