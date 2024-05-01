@@ -7,15 +7,17 @@ import { Typewriter } from "react-simple-typewriter";
 import { useTheme } from "next-themes";
 
 function page() {
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
-  const imageUrl =
-    theme === "light"
-      ? "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox.png"
-      : "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox-light.png";
+  const isLight = theme === "light" || resolvedTheme === "light";
+
+  const imageUrl = isLight
+    ? "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox.png"
+    : "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/proxmox-light.png";
+    
   return (
     <div className="">
-      <div className="flex h-screen items-center justify-center gap-48 ">
+      <div className="flex h-screen items-center justify-center gap-48">
         <div className="flex flex-col gap-2 text-left">
           <h1 className="text-4xl font-extrabold">Proxmox helper scripts</h1>
           <div>
