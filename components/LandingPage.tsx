@@ -16,7 +16,7 @@ export default function LandingPage() {
           height={150}
         />
         <h1 className="relative z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-5xl">
-          Proxmox helper scripts
+          Proxmox Helper-Scripts
         </h1>
         <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-xl">
           {" "}
