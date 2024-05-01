@@ -1,33 +1,14 @@
-**Checklist:**
+# Proxmox Helper Scripts
 
-1. **Main Index Page Design:**
-   - [ ] Make it POP, GLOW, LOOK AMAZING AF.
-   - [ ] Check examples:
-     - [ ] [Codepen example](https://codepen.io/TurkAysenur/details/ZEpxeYm)
-     - [ ] [Umbrel](https://umbrel.com/)
-     - [ ] [Casa OS](https://casaos.io/)
-   - [ ] Consider Black and Silver colors for a professional look.
-   - [ ] Ensure full width and responsiveness on phone sizes.
+Unofficial re-design of the [Proxmox helper script website](https://tteck.github.io/Proxmox/)
 
-2. **UIUX:**
-   - [ ] Avoid taking users to another page when clicking "Get Started."
-   - [ ] Decrease friction by having a dynamic search bar in the middle.
-     - [ ] On typing, dynamically scroll to the corresponding service.
-   - [ ] Make everything about "ttek Promox Scripts" accessible on the front page.
-     - [ ] Lazy load content by scrolling down.
-     - [ ] Ensure fast and responsive loading for SEO.
-   - [ ] Consider adding icons for main topics on the left.
+feel free to fork the project. or post feedback in the [Discussion tab](https://github.com/BramSuurdje/proxmox-helper-scripts/discussions). your feedback is always welcomed since we're all learing. 
 
-3. **Logo Design:**
-   - [ ] Render the current logo in 3D for a more professional, futuristic look.
+## Todo
 
-4. **Community Engagement:**
-   - [ ] Aim to inspire more contributions.
-   - [ ] Include a page linking to other Proxmox Projects.
-     - [ ] Refer to [awesome-proxmox-ve](https://github.com/Corsinvest/awesome-proxmox-ve).
-   - [ ] Provide links to official website, forums, and unofficial Discord.
-   - [ ] Consider adding a page with YouTube videos demonstrating community use of ttek scripts.
-
-5. **Future Considerations:**
-   - [ ] Plan for a page linking to other Proxmox Projects.
-   - [ ] Incorporate YouTube videos showing community usage of ttek scripts.
+- [ ] re-design the home-page
+  - [ ] Add search bar for easy finding of scripts
+  - [ ] Add modern landing page.
+  - [ ] Add links for videos mentioning the script
+  - [ ] Add links for socials. e.g. discord etc
+- [ ] FIX: fix drop downs not opening when searching
