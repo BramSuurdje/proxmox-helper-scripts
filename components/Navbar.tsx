@@ -7,11 +7,28 @@ import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { ModeToggle } from "./theme-toggle";
 import { Coffee } from "lucide-react";
+import { useState, useEffect } from "react";
 
 function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="flex sticky top-0 left-0 w-full justify-center border-b backdrop-blur-lg">
+      <div
+        className={`sticky left-0 top-0 z-50 flex w-full justify-center duration-200 ease-in-out ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
+      >
         <div className="flex h-20 w-full max-w-7xl items-center justify-between">
           <h1 className="font-semibold ">
             <Link href="/" className=" flex items-center gap-2">
@@ -35,7 +52,7 @@ function Navbar() {
                 View on Github
               </Link>
             </Button>
-            <ModeToggle />
+            {/* <ModeToggle /> */}
           </div>
         </div>
       </div>
