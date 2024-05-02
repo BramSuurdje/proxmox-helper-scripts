@@ -34,7 +34,7 @@ function Navbar() {
           <h1 className="font-semibold ">
             <Link href="/" className=" flex items-center gap-2">
               <Image height={18} width={18} alt="logo" src={logo} />
-              Proxmox VE Helper-Scripts
+              <span className=" hidden md:block">Proxmox VE Helper-Scripts</span>
             </Link>
           </h1>
           <div className="flex gap-2">
