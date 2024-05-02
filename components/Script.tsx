@@ -84,7 +84,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                 <div className="flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-48 w-48 rounded-lg bg-[#077EC7] p-5"
+                      className="h-48 w-48 rounded-lg bg-[#077EC7] object-contain p-5"
                       src={item.logo}
                       width={400}
                       height={400}
@@ -188,21 +188,19 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                       How to {item.item_type ? "install" : "use"}
                     </h2>
                     {item.item_type && (
-                      <p>
-                        To create a new Proxmox VE {item.title} {item.item_type}
-                        , run the command below in the Proxmox VE Shell.
-                      </p>
-                    )}
-                    {item.isUpdateable ? (
-                      <p>
-                        To Update {item.title}, run the command below (or type
-                        update) in the LXC Console.
-                      </p>
-                    ) : (
-                      <p>
-                        Run the command below in the{" "}
-                        <span className="font-semibold">Proxmox VE Shell</span>.
-                      </p>
+                      <>
+                        <p>
+                          To create a new Proxmox VE {item.title}{" "}
+                          {item.item_type}, run the command below in the Proxmox
+                          VE Shell.
+                        </p>
+                        {item.isUpdateable && (
+                          <p>
+                            To Update {item.title}, run the command below (or
+                            type update) in the LXC Console.
+                          </p>
+                        )}
+                      </>
                     )}
 
                     <p className="mt-3 pb-1 pl-1 text-sm text-muted-foreground">
