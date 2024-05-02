@@ -7,10 +7,12 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/Footer";
 import React from "react";
+import { title } from "process";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  title: "proxmox VE Helper-Scripts | Scripts for Streamlining Your Homelab with Proxmox VE",
   generator: "Next.js",
   applicationName: "Proxmox VE Helper-Scripts",
   referrer: "origin-when-cross-origin",
