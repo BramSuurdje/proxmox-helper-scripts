@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function LandingPage() {
   return (
     <div className="flex justify-center">
-      <div className="dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex h-[50rem] w-5/6 flex-col items-center justify-center">
+      <div className="dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex h-screen w-5/6 flex-col items-center justify-center">
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
         <div className="animate-fade-up flex flex-col items-center justify-center">
           <Image src="/logo.png" alt="proxmox" width={150} height={150} />
@@ -29,7 +29,7 @@ export default function LandingPage() {
           </p>
           <div className="flex gap-2 py-4">
             <Button asChild>
-              <Link href="/scripts">Get Started</Link>
+              <Link href="/scripts">Browse Scripts</Link>
             </Button>
             <Button variant="secondary" asChild>
               <Link href="/about">Learn More</Link>
