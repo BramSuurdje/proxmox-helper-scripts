@@ -62,7 +62,7 @@ export default function Page() {
     : links;
   return (
     <>
-      <div className="flex">
+      <div className="flex mt-20">
         <div className="min-w-72 max-w-72 flex flex-col">
           <h1 className="mb-5 text-xl font-bold">Scripts</h1>
           <Input
