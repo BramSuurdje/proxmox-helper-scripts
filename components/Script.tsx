@@ -84,7 +84,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                 <div className="flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-48 w-48"
+                      className="h-48 w-48 rounded-lg bg-[#077EC7] p-5"
                       src={item.logo}
                       width={400}
                       height={400}
