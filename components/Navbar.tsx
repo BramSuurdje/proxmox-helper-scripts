@@ -8,6 +8,7 @@ import { FaGithub } from "react-icons/fa";
 import { ModeToggle } from "./theme-toggle";
 import { Coffee } from "lucide-react";
 import { useState, useEffect } from "react";
+import { FaDiscord } from "react-icons/fa";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +28,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={`fixed left-0 top-0 z-50 flex w-full justify-center duration-200 ease-in-out ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
+        className={`fixed left-0 top-0 z-50 flex w-full justify-center ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
       >
         <div className="flex h-20 w-full max-w-7xl items-center justify-between">
           <h1 className="font-semibold ">
@@ -37,6 +38,12 @@ function Navbar() {
             </Link>
           </h1>
           <div className="flex gap-2">
+            {/* <Button variant="ghost" asChild>
+              <Link target="_blank" href="https://discord.gg/2zZ5Y2b">
+                <FaDiscord className="mr-2 h-4 w-4" />
+                Join Discord
+              </Link>
+            </Button> */}
             <Button variant="ghost" asChild>
               <Link
                 target="_blank"
