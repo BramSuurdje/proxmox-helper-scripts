@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard } from "lucide-react";
+import { Clipboard, Info } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
@@ -18,6 +18,7 @@ type Script = {
   installCommand: string;
   logo: string;
   updated: string;
+  created: string;
   default_cpu: string;
   default_ram: string;
   default_hdd: string;
@@ -27,6 +28,14 @@ type Script = {
   documentation: string;
   isUpdateable: boolean;
   post_install: string;
+  hasAlpineScript: boolean;
+  alpineScript: string;
+  alpine_default_cpu: string;
+  alpine_default_ram: string;
+  alpine_default_hdd: string;
+  alert1: string;
+  alert2: string;
+  alert3: string;
 };
 
 type RecordModel = {
@@ -59,7 +68,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
       <div className="flex items-center gap-2">
         <Clipboard className="h-4 w-4" />
         <span>Copied {type} to clipboard</span>
-      </div>
+      </div>,
     );
   }
 
@@ -83,28 +92,50 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                       priority={true}
                     />
                     <div className="ml-4 flex flex-col justify-between">
-                      <div className="w-full">
-                        <h1 className="text-xl font-semibold">{item.title}</h1>
-                        <p className="w-full text-lg text-muted-foreground">
-                          Last updated: {extractDate(item.updated)}
-                        </p>
-                      </div>
-                      {item.default_cpu && (
+                      <div className="flex h-full w-full flex-col justify-between">
                         <div>
-                          <h2 className="text-lg font-semibold">
-                            Default settings
-                          </h2>
-                          <p className="text-muted-foreground">
-                            CPU: {item.default_cpu}
-                          </p>
-                          <p className="text-muted-foreground">
-                            RAM: {item.default_ram}
-                          </p>
-                          <p className="text-muted-foreground">
-                            HDD: {item.default_hdd}
+                          <h1 className="text-xl font-semibold">
+                            {item.title}
+                          </h1>
+                          <p className="w-full text-lg text-muted-foreground">
+                            Date added: {extractDate(item.created)}
                           </p>
                         </div>
-                      )}
+                        <div className="flex gap-5">
+                          {item.default_cpu && (
+                            <div>
+                              <h2 className="text-lg font-semibold">
+                                Default settings
+                              </h2>
+                              <p className="text-muted-foreground">
+                                CPU: {item.default_cpu}
+                              </p>
+                              <p className="text-muted-foreground">
+                                RAM: {item.default_ram}
+                              </p>
+                              <p className="text-muted-foreground">
+                                HDD: {item.default_hdd}
+                              </p>
+                            </div>
+                          )}
+                          {item.hasAlpineScript && (
+                            <div>
+                              <h2 className="text-lg font-semibold">
+                                Default Alpine settings
+                              </h2>
+                              <p className="text-muted-foreground">
+                                CPU: {item.alpine_default_cpu}
+                              </p>
+                              <p className="text-muted-foreground">
+                                RAM: {item.alpine_default_ram}
+                              </p>
+                              <p className="text-muted-foreground">
+                                HDD: {item.alpine_default_hdd}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-end justify-end gap-2">
@@ -129,6 +160,27 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                   <div className="mt-6">
                     <h2 className="text-xl font-semibold">Description</h2>
                     <p>{item.description}</p>
+
+                    {item.alert1 && (
+                      <div className="mt-6 flex flex-col gap-1">
+                        <p className="flex items-center gap-2">
+                          <Info className="h-4 w-4" />
+                          {item.alert1}
+                        </p>
+                        {item.alert2 && (
+                          <p className="flex items-center gap-2">
+                            <Info className="h-4 w-4" />
+                            {item.alert2}
+                          </p>
+                        )}
+                        {item.alert3 && (
+                          <p className="flex items-center gap-2">
+                            <Info className="h-4 w-4" />
+                            {item.alert3}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <Separator className="mt-7" />
                   <div className="mt-6">
@@ -148,7 +200,8 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                       </p>
                     ) : (
                       <p>
-                        Run the command below in the <b>Proxmox VE Shell</b>.
+                        Run the command below in the{" "}
+                        <span className="font-semibold">Proxmox VE Shell</span>.
                       </p>
                     )}
 
@@ -163,6 +216,43 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                     >
                       {item.installCommand}
                     </Button>
+
+                    {item.hasAlpineScript && (
+                      <>
+                        <Separator className="mt-7" />
+
+                        <h2 className="mt-6 text-xl font-semibold">
+                          Alpine Linux
+                        </h2>
+                        <p>
+                          As an alternative option, you can use Alpine Linux and
+                          the
+                          {item.title} package to create a {item.title}{" "}
+                          {item.item_type} container with faster creation time
+                          and minimal system resource usage.
+                        </p>
+
+                        <p className="mt-3">
+                          To create a new Proxmox VE Alpine-{item.title}{" "}
+                          {item.item_type}, run the command below in the{" "}
+                          <span className="text-semibold">
+                            Proxmox VE Shell
+                          </span>
+                        </p>
+
+                        <p className="mt-3 pb-1 pl-1 text-sm text-muted-foreground">
+                          click to copy
+                        </p>
+                        <Button
+                          variant="outline"
+                          onClick={() =>
+                            handleCopy("install command", item.alpineScript)
+                          }
+                        >
+                          {item.alpineScript}
+                        </Button>
+                      </>
+                    )}
                   </div>
                   {item.port != 0 && (
                     <div className="mt-6">

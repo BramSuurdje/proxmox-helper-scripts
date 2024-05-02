@@ -4,7 +4,6 @@ function page() {
   return (
     <>
       <LandingPage />
-      <div className="h-screen"></div>
     </>
   );
 }
