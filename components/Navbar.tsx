@@ -52,7 +52,7 @@ function Navbar() {
                 View on Github
               </Link>
             </Button>
-            {/* <ModeToggle /> */}
+            <ModeToggle />
           </div>
         </div>
       </div>
