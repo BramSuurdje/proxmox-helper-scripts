@@ -1,5 +1,5 @@
+'use client'
 import Image from "next/image";
-import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { Button } from "./ui/button";
 import Link from "next/link";
