@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -64,14 +65,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen w-full justify-center">
+          <div className="flex min-h-screen w-full flex-col justify-center">
             <Navbar />
             <div className="flex w-full justify-center">
-              <div className="max-w-7xl w-full">
+              <div className="w-full max-w-7xl">
                 {children}
                 <Toaster />
               </div>
             </div>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
