@@ -226,8 +226,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                         </h2>
                         <p>
                           As an alternative option, you can use Alpine Linux and
-                          the
-                          {item.title} package to create a {item.title}{" "}
+                          the {item.title} package to create a {item.title}{" "}
                           {item.item_type} container with faster creation time
                           and minimal system resource usage.
                         </p>
