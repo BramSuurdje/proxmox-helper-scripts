@@ -15,7 +15,6 @@ function page() {
           </div>
       </div>
       <div className="h-screen">
-
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={`sticky left-0 top-0 z-50 flex w-full justify-center duration-200 ease-in-out ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
+        className={`fixed left-0 top-0 z-50 flex w-full justify-center duration-200 ease-in-out ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
       >
         <div className="flex h-20 w-full max-w-7xl items-center justify-between">
           <h1 className="font-semibold ">
