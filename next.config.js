@@ -5,12 +5,11 @@ module.exports = {
     return config;
   },
   images: {
-    domains: [
-      "cdn.bramsuurd.nl",
-      "raw.githubusercontent.com",
-      "technitium.com",
-      "github.com",
-      "avatars.githubusercontent.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
 };
