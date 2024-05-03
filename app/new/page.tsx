@@ -82,7 +82,7 @@ const getItems = async () => {
   }
 
 
-function page() {
+function Page() {
   const [selectedItem, setSelectedItem] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [items, setItems] = useState<Scripts[]>([]);
@@ -113,10 +113,9 @@ function page() {
               const item = items.find((item) => item.id === script.scriptID);
               if (item) {
                 return (
-                  <Dialog>
+                  <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div
-                        key={item.id}
                         className="flex min-w-[400px] max-w-[400px] cursor-pointer flex-col rounded-lg border border-b bg-gray-900 p-4 backdrop-blur-xl"
                         onClick={() => setSelectedItem(item.id)}
                       >
@@ -374,4 +373,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
