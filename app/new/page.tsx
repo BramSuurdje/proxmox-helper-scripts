@@ -116,7 +116,7 @@ function Page() {
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div
-                        className="flex min-w-[400px] max-w-[400px] cursor-pointer flex-col rounded-lg border border-b bg-gray-900 p-4 backdrop-blur-xl"
+                        className="flex min-w-[400px] max-w-[400px] animate-fade-up cursor-pointer flex-col rounded-lg border border-b bg-gray-900 p-4 backdrop-blur-xl"
                         onClick={() => setSelectedItem(item.id)}
                       >
                         <div className="flex justify-between">

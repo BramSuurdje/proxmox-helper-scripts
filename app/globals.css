@@ -55,3 +55,11 @@
       @apply bg-background text-foreground;
     }
   }
+
+    [data-state="open"] .accordioncontent {
+      display: block;
+    }
+  
+    [data-state="closed"] .accordioncontent {
+      display: none;
+    }
