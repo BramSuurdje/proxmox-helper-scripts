@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import ScriptItem from "@/components/Script";
 import { pb } from "@/lib/pocketbase";
+import Fuse from "fuse.js";
 
 interface Script {
   title: string;
@@ -34,6 +35,7 @@ export default function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [accordionExpanded, setAccordionExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [rootDefaultValue, setRootDefaultValue] = React.useState([]);
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -81,19 +83,29 @@ export default function Page() {
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
-    setAccordionExpanded(true); // Expand the accordion when searching
+    setAccordionExpanded(true); // Set accordionExpanded to true when the search term changes
+    setRootDefaultValue(["dguzo72sw1zs6kl"]);
   };
 
+  const fuse = new Fuse(
+    links.flatMap((category) => category.Items),
+    {
+      keys: ["title"],
+      includeScore: true,
+      includeMatches: true,
+      findAllMatches: true,
+      threshold: 0.4,
+      minMatchCharLength: 1,
+      ignoreLocation: true,
+      ignoreFieldNorm: true,
+      distance: 100,
+      useExtendedSearch: true,
+    },
+  );
+
   const filteredLinks = searchTerm
-    ? links
-        .map((category) => ({
-          ...category,
-          Items: category.Items.filter((script) =>
-            script.title.toLowerCase().includes(searchTerm.toLowerCase()),
-          ),
-        }))
-        .filter((category) => category.Items.length > 0)
-    : links;
+    ? fuse.search(searchTerm).map((result) => result.item)
+    : links.flatMap((category) => category.Items);
 
   return (
     <>
@@ -106,36 +118,50 @@ export default function Page() {
             placeholder="Type '/' to search"
             value={searchTerm}
             onChange={(e) => handleSearch(e.target.value)}
+            defaultValue={searchTerm}
             ref={inputRef}
           />
           <Accordion
             type={searchTerm ? "multiple" : "single"}
-            collapsible
-            data-state={accordionExpanded ? "open" : "closed"}
-            className="data-[state=open]"
+            {...(searchTerm ? {} : { collapsible: true })}
           >
-            {filteredLinks.map((category) => (
-              <AccordionItem
-                value={category.id}
-                key={category.id}
-                className={`text-md data-[state=open]: flex flex-col gap-2 `}
-              >
-                <AccordionTrigger>{category.Catagory_Title}</AccordionTrigger>
-                <AccordionContent
-                  className={`${accordionExpanded ? "data-[state=closed]" : "data-[state=open"}`}
-                >
-                  {category.Items.map((script, index) => (
-                    <p
-                      className="cursor-pointer text-muted-foreground py-1"
-                      onClick={() => setSelectedItem(script.scriptID)}
-                      key={index}
-                    >
-                      {script.title}
-                    </p>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+            {links.map(
+              (category) =>
+                category.Items.filter(
+                  (script) =>
+                    !searchTerm ||
+                    script.title
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase()),
+                ).length > 0 && (
+                  <AccordionItem
+                    value={category.id}
+                    key={category.id}
+                    className={`text-md flex flex-col gap-2`}
+                  >
+                    <AccordionTrigger>
+                      {category.Catagory_Title}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      {category.Items.filter(
+                        (script) =>
+                          !searchTerm ||
+                          script.title
+                            .toLowerCase()
+                            .includes(searchTerm.toLowerCase()),
+                      ).map((script, index) => (
+                        <p
+                          className="cursor-pointer py-1 text-muted-foreground"
+                          onClick={() => setSelectedItem(script.scriptID)}
+                          key={index}
+                        >
+                          {script.title}
+                        </p>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ),
+            )}
           </Accordion>
         </div>
         <div className="flex">
