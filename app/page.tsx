@@ -33,12 +33,14 @@ export default function Page() {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [accordionExpanded, setAccordionExpanded] = useState(false);
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
       if (event.key === "/") {
-        inputRef.current.focus();
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
         event.preventDefault();
       }
     };
