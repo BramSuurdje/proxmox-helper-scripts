@@ -67,10 +67,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen w-full flex-col justify-center">
+          <div className="flex min-h-screen w-full flex-col justify-center px-7 xl:px-0">
             <Navbar />
             <div className="flex w-full justify-center">
-              <div className="w-full max-w-7xl">
+              <div className="w-full max-w-7xl ">
                 {children}
                 <Toaster />
               </div>
