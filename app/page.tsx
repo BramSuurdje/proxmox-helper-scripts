@@ -126,7 +126,7 @@ export default function Page() {
                 >
                   {category.Items.map((script, index) => (
                     <p
-                      className="cursor-pointer text-muted-foreground"
+                      className="cursor-pointer text-muted-foreground py-1"
                       onClick={() => setSelectedItem(script.scriptID)}
                       key={index}
                     >
