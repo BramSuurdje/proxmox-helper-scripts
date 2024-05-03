@@ -6,12 +6,8 @@ feel free to fork the project. or post feedback in the [Discussion tab](https://
 
 ## Todo
 
-- [ ] re-design the home-page
-  - [ ] Add search bar for easy finding of scripts
-  - [ ] Add modern landing page.
-  - [ ] Add links for videos mentioning the script
-  - [ ] Add links for socials. e.g. discord etc
-- [ ] FIX: fix drop downs not opening when searching
+- [ ] fix issue with accordions not expanding when searching
+- [ ] add icons after items for better readability
 
 ## How to contribute
 
