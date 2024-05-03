@@ -35,7 +35,6 @@ export default function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [accordionExpanded, setAccordionExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [rootDefaultValue, setRootDefaultValue] = React.useState([]);
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -84,7 +83,6 @@ export default function Page() {
   const handleSearch = (value: string) => {
     setSearchTerm(value);
     setAccordionExpanded(true); // Set accordionExpanded to true when the search term changes
-    setRootDefaultValue(["dguzo72sw1zs6kl"]);
   };
 
   const fuse = new Fuse(
