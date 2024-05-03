@@ -8,6 +8,7 @@ feel free to fork the project. or post feedback in the [Discussion tab](https://
 
 - [ ] fix issue with accordions not expanding when searching
 - [ ] add icons after items for better readability
+- [ ] when no item is selected. display populair scripts etc.
 
 ## How to contribute
 
