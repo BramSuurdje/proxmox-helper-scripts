@@ -75,8 +75,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
   return (
     <div className="h-full w-full">
       {scriptID === "" ? (
-        <div className="flex h-screen w-full ml-10">
-        </div>
+        <div className="ml-10 flex h-screen w-full"></div>
       ) : (
         <div className="fixed ml-10 mt-10 flex h-screen w-full max-w-4xl">
           {item && (
@@ -85,7 +84,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                 <div className="flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-32 w-32 rounded-lg bg-[#8C9A9A] object-contain p-5"
+                      className="h-32 w-32 rounded-lg bg-accent object-contain p-5"
                       src={item.logo}
                       width={400}
                       height={400}
