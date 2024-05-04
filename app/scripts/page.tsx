@@ -97,13 +97,13 @@ export default function Page() {
                             .toLowerCase()
                             .includes(searchTerm.toLowerCase()),
                       ).map((script, index) => (
-                        <p key={index}>
+                        <p key={index} className="py-1">
                           <Link
                             href={{
                               pathname: "/scripts",
                               query: { id: script.scriptID },
                             }}
-                            className="py-1 text-muted-foreground"
+                            className="text-muted-foreground"
                           >
                             {script.title}
                           </Link>
