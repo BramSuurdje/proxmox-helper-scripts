@@ -8,8 +8,6 @@ import {
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import ScriptItem from "@/components/Script";
-import { pb } from "@/lib/pocketbase";
-import Fuse from "fuse.js";
 import { Category, Scripts} from "@/lib/types";
 
 export default function Page() {
