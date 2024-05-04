@@ -207,7 +207,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                       click to copy
                     </p>
                     <Button
-                      variant="outline"
+                      variant="secondary"
                       size={"sm"}
                       onClick={() =>
                         handleCopy("install command", item.installCommand)
@@ -242,7 +242,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                           click to copy
                         </p>
                         <Button
-                          variant="outline"
+                          variant={"secondary"}
                           size={"sm"}
                           onClick={() =>
                             handleCopy("install command", item.alpineScript)
@@ -254,13 +254,13 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                     )}
                   </div>
                   {item.port != 0 && (
-                    <div className="mt-6">
+                    <div className="mt-4">
                       <h2 className="text-lg font-semibold">Default Port</h2>
-                      <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
+                      <p className="mt-2 pb-1 pl-1 text-xs text-muted-foreground">
                         click to copy
                       </p>
                       <Button
-                        variant="outline"
+                        variant={"secondary"}
                         size={"sm"}
                         onClick={() => handleCopy("port", item.port)}
                       >
@@ -269,21 +269,6 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                     </div>
                   )}
                 </div>
-                {item.post_install && (
-                  <div className="mt-6">
-                    <h2 className="text-xl font-semibold">Post Install</h2>
-                    <p>
-                      {item.title} requires some extra steps post-install, you
-                      can follow this guide to fully set it up.
-                    </p>
-                    <p className="mt-1 pb-1 pl-1 text-sm text-muted-foreground">
-                      click to copy
-                    </p>
-                    <Button variant="outline" asChild>
-                      <Link href={item.post_install}>Guide</Link>
-                    </Button>
-                  </div>
-                )}
               </div>
             </>
           )}
