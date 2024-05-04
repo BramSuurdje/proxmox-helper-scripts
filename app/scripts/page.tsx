@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import ScriptItem from "@/components/Script";
-import { Category, Scripts} from "@/lib/types";
+import { Category } from "@/lib/types";
 
 export default function Page() {
   const [selectedItem, setSelectedItem] = useState("");
