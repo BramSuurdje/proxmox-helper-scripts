@@ -73,11 +73,12 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
   }
 
   return (
-    <div className="fixed h-full w-full max-w-4xl">
+    <div className="h-full w-full">
       {scriptID === "" ? (
-        <div className="flex h-screen w-full items-center justify-center"></div>
+        <div className="flex h-screen w-full ml-10">
+        </div>
       ) : (
-        <div className="ml-10 mt-10 flex h-screen w-full">
+        <div className="fixed ml-10 mt-10 flex h-screen w-full max-w-4xl">
           {item && (
             <>
               <div className="mr-4 flex flex-col">
