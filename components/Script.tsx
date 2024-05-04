@@ -99,7 +99,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                 <div className="flex flex-col justify-between gap-2">
                   <div>
                     {item.port !== 0 && (
-                      <div className="flex items-center">
+                      <div className="flex items-center justify-end">
                         <h2 className="mr-2 text-end text-lg font-semibold">
                           Default Port:
                         </h2>{" "}
@@ -113,7 +113,7 @@ const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-end">
+                  <div className="flex justify-end gap-2">
                     {item.website && (
                       <Button variant="outline" asChild>
                         <Link target="_blank" href={item.website}>
