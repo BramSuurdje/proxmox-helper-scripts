@@ -3,6 +3,7 @@ export type ScriptProps = {
 };
 
 export type Script = {
+  scriptID: string;
   title: string;
   description: string;
   installCommand: string;

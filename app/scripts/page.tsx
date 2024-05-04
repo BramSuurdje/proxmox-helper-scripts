@@ -10,23 +10,7 @@ import { Input } from "@/components/ui/input";
 import ScriptItem from "@/components/Script";
 import { pb } from "@/lib/pocketbase";
 import Fuse from "fuse.js";
-
-interface Script {
-  title: string;
-  scriptID: string;
-}
-
-interface Category {
-  id: string;
-  Catagory_Title: string;
-  Items: Script[];
-}
-
-type Scripts = {
-  id: string;
-  title: string;
-  logo: string;
-};
+import { Category, Scripts} from "@/lib/types";
 
 export default function Page() {
   const [selectedItem, setSelectedItem] = useState("");
