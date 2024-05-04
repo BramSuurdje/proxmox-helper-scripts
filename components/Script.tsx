@@ -13,8 +13,7 @@ import { useSearchParams  } from "next/navigation";
 
 function ScriptItem() {
   const [item, setItem] = useState<Script | null>(null);
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const id = useSearchParams().get("id");
 
   const getItem = async () => {
     const record = await pb.collection("proxmox_scripts").getOne(`${id}`, {});
