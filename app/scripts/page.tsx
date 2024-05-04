@@ -64,14 +64,12 @@ export default function Page() {
             className="mb-5"
             type="text"
             placeholder="Type '/' to search"
-            value={searchTerm}
             onChange={(e) => handleSearch(e.target.value)}
-            defaultValue={searchTerm}
             ref={inputRef}
           />
           <Accordion
             type={searchTerm ? "multiple" : "single"}
-            {...(searchTerm ? {} : { collapsible: true })}
+            {...(searchTerm ? {} : { collapsible: true})}
           >
             {links.map(
               (category) =>
