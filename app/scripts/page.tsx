@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import ScriptItem from "@/components/Script";
 import { Category } from "@/lib/types";
+import Link from "next/link";
 
 export default function Page() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -69,7 +70,7 @@ export default function Page() {
           />
           <Accordion
             type={searchTerm ? "multiple" : "single"}
-            {...(searchTerm ? {} : { collapsible: true})}
+            {...(searchTerm ? {} : { collapsible: true })}
           >
             {links.map(
               (category) =>
@@ -96,12 +97,16 @@ export default function Page() {
                             .toLowerCase()
                             .includes(searchTerm.toLowerCase()),
                       ).map((script, index) => (
-                        <p
-                          className="cursor-pointer py-1 text-muted-foreground"
-                          onClick={() => setSelectedItem(script.scriptID)}
-                          key={index}
-                        >
-                          {script.title}
+                        <p key={index}>
+                          <Link
+                            href={{
+                              pathname: "/scripts",
+                              query: { id: script.scriptID },
+                            }}
+                            className="py-1 text-muted-foreground"
+                          >
+                            {script.title}
+                          </Link>
                         </p>
                       ))}
                     </AccordionContent>
@@ -112,7 +117,7 @@ export default function Page() {
         </div>
         <div className="flex">
           <div className="h-screen w-full">
-            <ScriptItem scriptID={selectedItem} />
+            <ScriptItem/>
           </div>
         </div>
       </div>

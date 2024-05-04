@@ -1,3 +1,4 @@
+'use client'
 import { pb } from "@/lib/pocketbase";
 import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
@@ -7,23 +8,24 @@ import { toast } from "sonner";
 import { Clipboard, Info } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { Script, ScriptProps } from "@/lib/types";
+import { Script } from "@/lib/types";
+import { useSearchParams  } from "next/navigation";
 
-const ScriptItem: React.FC<ScriptProps> = ({ scriptID }) => {
+function ScriptItem() {
   const [item, setItem] = useState<Script | null>(null);
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
 
   const getItem = async () => {
-    const record = await pb
-      .collection("proxmox_scripts")
-      .getOne(`${scriptID}`, {});
+    const record = await pb.collection("proxmox_scripts").getOne(`${id}`, {});
     setItem(record as unknown as Script);
   };
 
   useEffect(() => {
-    if (scriptID) {
+    if (id) {
       getItem();
     }
-  }, [scriptID]);
+  }, [id]);
 
   function handleCopy(type: string, value: any) {
     navigator.clipboard.writeText(value);
