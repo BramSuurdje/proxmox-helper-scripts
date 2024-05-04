@@ -36,6 +36,30 @@ function ScriptItem() {
     );
   }
 
+  function descriptionCodeBlock(description: string) {
+    const pattern = /`([^`]*)`/g;
+    const parts = description.split(pattern);
+
+    const formattedDescription = parts.map((part: string, index: number) => {
+      if (index % 2 === 1) {
+        return (
+          <Button
+            variant={"secondary"}
+            size={"sm"}
+            key={index}
+            onClick={() => handleCopy("code", part)}
+          >
+            {part}
+          </Button>
+        );
+      } else {
+        return part;
+      }
+    });
+
+    return formattedDescription;
+  }
+
   return (
     <div className="h-full w-full">
       <Suspense fallback={null}>
@@ -136,24 +160,25 @@ function ScriptItem() {
               <div>
                 <div className="mt-6">
                   <h2 className="text-lg font-semibold">Description</h2>
-                  <p className="text-sm">{item.description}</p>
-
+                  <p className="text-sm">
+                    {descriptionCodeBlock(item.description)}
+                  </p>
                   {item.alert1 && (
                     <div className="mt-4 flex flex-col gap-1">
                       <p className="flex items-center gap-2 text-sm">
                         <Info className="h-4 w-4" />
-                        {item.alert1}
+                        {descriptionCodeBlock(item.alert1)}
                       </p>
                       {item.alert2 && (
                         <p className="flex  items-center gap-2 text-sm">
                           <Info className="h-4 w-4" />
-                          {item.alert2}
+                          {descriptionCodeBlock(item.alert2)}
                         </p>
                       )}
                       {item.alert3 && (
                         <p className="flex items-center gap-2 text-sm">
                           <Info className="h-4 w-4" />
-                          {item.alert3}
+                          {descriptionCodeBlock(item.alert3)}
                         </p>
                       )}
                     </div>
