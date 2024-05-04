@@ -14,10 +14,8 @@ import { Category, Scripts} from "@/lib/types";
 
 export default function Page() {
   const [selectedItem, setSelectedItem] = useState("");
-  const [items, setItems] = useState<Scripts[]>([]);
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [accordionExpanded, setAccordionExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -33,9 +31,7 @@ export default function Page() {
     const fetchData = async () => {
       try {
         const data = await getLinks();
-        const items = await getItems();
         setLinks(data);
-        setItems(items);
       } catch (error) {
         console.error("Error fetching links:", error);
       }
@@ -57,37 +53,9 @@ export default function Page() {
     return data.items as Category[];
   };
 
-  const getItems = async () => {
-    const records = await pb.collection("proxmox_scripts").getFullList({
-      sort: "-created",
-    });
-    return records as unknown as Scripts[];
-  };
-
   const handleSearch = (value: string) => {
     setSearchTerm(value);
-    setAccordionExpanded(true); // Set accordionExpanded to true when the search term changes
   };
-
-  const fuse = new Fuse(
-    links.flatMap((category) => category.Items),
-    {
-      keys: ["title"],
-      includeScore: true,
-      includeMatches: true,
-      findAllMatches: true,
-      threshold: 0.4,
-      minMatchCharLength: 1,
-      ignoreLocation: true,
-      ignoreFieldNorm: true,
-      distance: 100,
-      useExtendedSearch: true,
-    },
-  );
-
-  const filteredLinks = searchTerm
-    ? fuse.search(searchTerm).map((result) => result.item)
-    : links.flatMap((category) => category.Items);
 
   return (
     <>
