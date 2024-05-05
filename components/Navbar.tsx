@@ -6,6 +6,9 @@ import logo from "../public/logo.png";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { ModeToggle } from "./theme-toggle";
+import { LuGitPullRequestDraft } from "react-icons/lu";
+import { LuBookOpenCheck } from "react-icons/lu";
+import { LuClipboardSignature } from "react-icons/lu";
 import { Coffee } from "lucide-react";
 import { useState, useEffect } from "react";
 import { FaDiscord } from "react-icons/fa";
@@ -46,6 +49,33 @@ function Navbar() {
                 Join Discord
               </Link>
             </Button> */}
+            <Button variant="ghost" asChild>
+              <Link
+                target="_blank"
+                href="https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md"
+              >
+                <LuGitPullRequestDraft className="mr-2 h-4 w-4" />
+                Contribute
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link
+                target="_blank"
+                href="https://github.com/tteck/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md"
+              >
+                <LuBookOpenCheck className="mr-2 h-4 w-4" />
+                Guides
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link
+                target="_blank"
+                href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.md"
+              >
+                <LuClipboardSignature className="mr-2 h-4 w-4" />
+                Changelog
+              </Link>
+            </Button>
             <Button variant="ghost" asChild>
               <Link
                 target="_blank"
