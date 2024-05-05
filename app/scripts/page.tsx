@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import ScriptItem from "@/components/Script";
 import { Category } from "@/lib/types";
 import Link from "next/link";
+import Particles from "@/components/ui/particles";
 
 export default function Page() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -58,6 +59,10 @@ export default function Page() {
 
   return (
     <>
+      <Particles
+        className="animate-fade-in absolute inset-0 -z-10"
+        quantity={100}
+      />
       <div className="mt-20 flex">
         <div className="flex min-w-72 max-w-72 flex-col">
           <h1 className="mb-5 text-xl font-bold">Scripts</h1>
@@ -117,7 +122,7 @@ export default function Page() {
         </div>
         <div className="flex">
           <div className="h-screen w-full">
-            <ScriptItem/>
+            <ScriptItem />
           </div>
         </div>
       </div>
