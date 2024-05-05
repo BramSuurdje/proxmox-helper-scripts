@@ -34,14 +34,14 @@ function Navbar() {
         className={`fixed left-0 top-0 z-50 flex w-full justify-center px-7 xl:px-0 ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
       >
         <div className="flex h-20 w-full max-w-7xl items-center justify-between">
-          <h1 className="font-semibold ">
+          <h2 className="font-semibold ">
             <Link href="/" className=" flex items-center gap-2">
               <Image height={18} width={18} alt="logo" src={logo} />
               <span className=" hidden md:block">
                 Proxmox VE Helper-Scripts
               </span>
             </Link>
-          </h1>
+          </h2>
           <div className="flex gap-2">
             {/* <Button variant="ghost" asChild>
               <Link target="_blank" href="https://discord.gg/2zZ5Y2b">
