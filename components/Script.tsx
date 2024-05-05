@@ -47,7 +47,7 @@ function ScriptItem() {
             variant={"secondary"}
             size={"sm"}
             key={index}
-            onClick={() => handleCopy("code", part)}
+            onClick={() => handleCopy("command", part)}
           >
             {part}
           </Button>
