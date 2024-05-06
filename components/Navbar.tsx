@@ -93,7 +93,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={`fixed left-0 top-0 z-50 flex w-full justify-center px-7 xl:px-0 ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
+        className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-7 xl:px-0 ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
           <h2 className="font-semibold ">
@@ -142,8 +142,8 @@ function Navbar() {
                                   .toLowerCase()
                                   .includes(searchTerm.toLowerCase()),
                               ).map((script, index) => (
-                                <p key={index} className="py-1">
-                                  <SheetClose asChild>
+                                <SheetClose asChild>
+                                  <p key={index} className="py-1">
                                     <Link
                                       href={{
                                         pathname: "/scripts",
@@ -153,8 +153,8 @@ function Navbar() {
                                     >
                                       {script.title}
                                     </Link>
-                                  </SheetClose>
-                                </p>
+                                  </p>
+                                </SheetClose>
                               ))}
                             </AccordionContent>
                           </AccordionItem>
