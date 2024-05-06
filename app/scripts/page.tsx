@@ -15,7 +15,7 @@ export default function Page() {
         <div className="hidden sm:flex">
           <ScriptBrowser />
         </div>
-        <div className="mx-7 max-w-md">
+        <div className="mx-7 sm:mx-0">
           <ScriptItem />
         </div>
       </div>
