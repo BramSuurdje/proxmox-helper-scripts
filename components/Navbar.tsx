@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "../public/logo.png";
@@ -10,17 +10,24 @@ import { LuGitPullRequestDraft } from "react-icons/lu";
 import { LuBookOpenCheck } from "react-icons/lu";
 import { LuClipboardSignature } from "react-icons/lu";
 import { Coffee, Menu } from "lucide-react";
-import { useState, useEffect } from "react";
 import { FaDiscord } from "react-icons/fa";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import ScriptBrowser from "./ScriptBrowser";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import { Input } from "@/components/ui/input";
+import { Category } from "@/lib/types";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,6 +43,52 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+    const [links, setLinks] = useState<Category[]>([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "/") {
+          inputRef.current?.focus();
+          event.preventDefault();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, []);
+
+    const fetchLinks = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/proxmox_items/records`,
+        );
+        const data = await res.json();
+        setLinks(data.items as Category[]);
+      } catch (error) {
+        console.error("Error fetching links:", error);
+      }
+    };
+
+    useEffect(() => {
+      fetchLinks();
+    }, []);
+
+    const handleSearch = (value: string) => {
+      setSearchTerm(value);
+    };
+
+    const filteredLinks = useMemo(() => {
+      return links.filter((category) =>
+        category.Items.some((script) =>
+          script.title.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
+      );
+    }, [links, searchTerm]);
 
   return (
     <>
@@ -55,13 +108,59 @@ function Navbar() {
           <div className="flex items-center sm:hidden">
             <Sheet>
               <SheetTrigger>
-                <Menu className="w-8 h-8" />
+                <Menu className="h-8 w-8" />
               </SheetTrigger>
-              <SheetContent side={"left"} className="w-full max-w-screen">
+              <SheetContent side={"left"} className="max-w-screen w-full">
                 <SheetHeader>
                   <SheetTitle>Proxmox Helper Scripts</SheetTitle>
                   <SheetDescription>
-                    <ScriptBrowser />
+                    <div className="flex min-w-72 flex-col sm:max-w-72">
+                      <h1 className="mb-5 text-xl font-bold">Scripts</h1>
+                      <Input
+                        className="mb-5"
+                        type="text"
+                        placeholder="Type '/' to search"
+                        onChange={(e) => handleSearch(e.target.value)}
+                        ref={inputRef}
+                      />
+                      <Accordion
+                        type={searchTerm ? "multiple" : "single"}
+                        collapsible
+                      >
+                        {filteredLinks.map((category) => (
+                          <AccordionItem
+                            key={category.id}
+                            value={category.Catagory_Title}
+                            className={`sm:text-md flex flex-col gap-2`}
+                          >
+                            <AccordionTrigger>
+                              {category.Catagory_Title}
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              {category.Items.filter((script) =>
+                                script.title
+                                  .toLowerCase()
+                                  .includes(searchTerm.toLowerCase()),
+                              ).map((script, index) => (
+                                <p key={index} className="py-1">
+                                  <SheetClose asChild>
+                                    <Link
+                                      href={{
+                                        pathname: "/scripts",
+                                        query: { id: script.scriptID },
+                                      }}
+                                      className="text-muted-foreground"
+                                    >
+                                      {script.title}
+                                    </Link>
+                                  </SheetClose>
+                                </p>
+                              ))}
+                            </AccordionContent>
+                          </AccordionItem>
+                        ))}
+                      </Accordion>
+                    </div>
                   </SheetDescription>
                 </SheetHeader>
               </SheetContent>
