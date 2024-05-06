@@ -57,7 +57,7 @@ function Navbar() {
               <SheetTrigger>
                 <Menu className="w-8 h-8" />
               </SheetTrigger>
-              <SheetContent side={"left"} className="w-full">
+              <SheetContent side={"left"} className="w-full max-w-screen">
                 <SheetHeader>
                   <SheetTitle>Proxmox Helper Scripts</SheetTitle>
                   <SheetDescription>
