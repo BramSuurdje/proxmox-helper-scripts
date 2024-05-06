@@ -58,7 +58,7 @@ const ScriptBrowser = () => {
   }, [links, searchTerm]);
 
   return (
-    <div className="flex min-w-72 max-w-72 flex-col">
+    <div className="min-w-72 max-w-72 flex-col hidden sm:flex">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
       <Input
         className="mb-5"
@@ -67,7 +67,7 @@ const ScriptBrowser = () => {
         onChange={(e) => handleSearch(e.target.value)}
         ref={inputRef}
       />
-      <Accordion type={searchTerm ? "multiple" : "single"}>
+      <Accordion type={searchTerm ? "multiple" : "single"} collapsible>
         {filteredLinks.map((category) => (
           <AccordionItem
             key={category.id}
