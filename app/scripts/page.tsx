@@ -11,7 +11,7 @@ export default function Page() {
         className="animate-fade-in absolute inset-0 -z-10"
         quantity={100}
       />
-      <div className="mt-20 flex">
+      <div className="mt-20 flex max-w-screen sm:max-w-full">
         <div className="hidden sm:flex">
           <ScriptBrowser />
         </div>

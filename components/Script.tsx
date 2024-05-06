@@ -64,10 +64,10 @@ function ScriptItem() {
     <div className="h-full w-full">
       <Suspense fallback={null}>
         {item && (
-          <div className="sm:fixed sm:ml-10 mt-0 flex h-screen w-full sm:max-w-4xl max-w-screen">
+          <div className="mt-0 flex h-screen w-full sm:fixed sm:ml-10 sm:max-w-4xl">
             <div className="mr-4 flex w-full flex-col">
               <h2 className="text-xl font-semibold">Last viewed</h2>
-              <div className="flex mt-5 justify-between">
+              <div className="mt-5 flex justify-between">
                 <div className="flex">
                   <Image
                     className="h-32 w-32 rounded-lg bg-accent object-contain p-3"
@@ -122,7 +122,7 @@ function ScriptItem() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col justify-between gap-2">
+                <div className="sm:flex flex-col justify-between gap-2 hidden">
                   <div>
                     {item.port !== 0 && (
                       <div className="flex items-center justify-end">
