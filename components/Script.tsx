@@ -153,6 +153,13 @@ function ScriptItem() {
                         </Link>
                       </Button>
                     )}
+                    {item.post_install && (
+                      <Button variant="outline" asChild>
+                        <Link target="_blank" href={item.post_install}>
+                          Post Install
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
