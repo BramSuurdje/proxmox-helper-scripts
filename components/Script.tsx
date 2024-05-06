@@ -64,7 +64,7 @@ function ScriptItem() {
     <div className="h-full w-full">
       <Suspense fallback={null}>
         {item && (
-          <div className="sm:fixed ml-10 mt-0 flex h-screen w-full max-w-4xl">
+          <div className="sm:fixed sm:ml-10 mt-0 flex h-screen w-full sm:max-w-4xl max-w-screen">
             <div className="mr-4 flex w-full flex-col">
               <h2 className="text-xl font-semibold">Last viewed</h2>
               <div className="flex mt-5 justify-between">
