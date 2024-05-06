@@ -60,13 +60,28 @@ function ScriptItem() {
     return formattedDescription;
   }
 
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 640;
+
   return (
     <div className="h-full w-full">
       <Suspense fallback={null}>
         {item && (
-          <div className="fixed ml-10 mt-10 flex h-screen w-full max-w-4xl">
-            <div className="mr-4 flex w-full flex-col">
-              <div className="flex justify-between">
+          <div className="mt-0 flex h-screen w-full sm:fixed sm:ml-10 sm:max-w-4xl max-w-screen mr-7">
+            <div className="flex w-full flex-col max-w-screen">
+              <h2 className="text-xl font-semibold">Last viewed</h2>
+              <div className="mt-5 flex justify-between">
                 <div className="flex">
                   <Image
                     className="h-32 w-32 rounded-lg bg-accent object-contain p-3"
@@ -121,7 +136,7 @@ function ScriptItem() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col justify-between gap-2">
+                <div className="sm:flex flex-col justify-between gap-2 hidden">
                   <div>
                     {item.port !== 0 && (
                       <div className="flex items-center justify-end">
@@ -221,7 +236,7 @@ function ScriptItem() {
                       handleCopy("install command", item.installCommand)
                     }
                   >
-                    {item.installCommand}
+                    {!isMobile && item.installCommand ? item.installCommand : "Copy install command"}
                   </Button>
 
                   {item.hasAlpineScript && (
@@ -254,7 +269,7 @@ function ScriptItem() {
                           handleCopy("install command", item.alpineScript)
                         }
                       >
-                        {item.alpineScript}
+                        {isMobile && item.alpineScript ? item.alpineScript : "Copy install command"}
                       </Button>
                     </>
                   )}

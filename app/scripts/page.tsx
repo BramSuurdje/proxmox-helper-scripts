@@ -2,6 +2,8 @@ import ScriptItem from "@/components/Script";
 import ScriptBrowser from "@/components/ScriptBrowser";
 import Particles from "@/components/ui/particles";
 
+
+
 export default function Page() {
   return (
     <>
@@ -10,11 +12,11 @@ export default function Page() {
         quantity={100}
       />
       <div className="mt-20 flex">
-        <ScriptBrowser />
-        <div className="flex">
-          <div className="h-screen w-full">
-            <ScriptItem />
-          </div>
+        <div className="hidden sm:flex">
+          <ScriptBrowser />
+        </div>
+        <div className="mx-7 sm:mx-0">
+          <ScriptItem />
         </div>
       </div>
     </>

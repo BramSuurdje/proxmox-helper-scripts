@@ -28,6 +28,8 @@ export const metadata = {
   authors: [{ name: "tteck" }, { name: "Bram" }],
   creator: "tteck, Bram Suurd",
   publisher: "tteck, Bram Suurd",
+  description:
+    "Scripts for Streamlining Your Homelab with Proxmox VE",
   favicon: "/app/favicon.ico",
   formatDetection: {
     email: false,
@@ -67,7 +69,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen w-full flex-col justify-center px-7 xl:px-0">
+          <div className="flex w-full flex-col justify-center">
             <Navbar />
             <div className="flex w-full justify-center">
               <div className="w-full max-w-7xl ">
