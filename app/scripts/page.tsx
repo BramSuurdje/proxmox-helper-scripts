@@ -12,7 +12,9 @@ export default function Page() {
         quantity={100}
       />
       <div className="mt-20 flex">
-        <ScriptBrowser />
+        <div className="hidden sm:flex">
+          <ScriptBrowser />
+        </div>
         <div className="flex">
           <div className="h-screen w-full">
             <ScriptItem />

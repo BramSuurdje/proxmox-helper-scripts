@@ -58,7 +58,7 @@ const ScriptBrowser = () => {
   }, [links, searchTerm]);
 
   return (
-    <div className="min-w-72 max-w-72 flex-col hidden sm:flex">
+    <div className="min-w-72 sm:max-w-72 flex-col flex">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
       <Input
         className="mb-5"
@@ -72,7 +72,7 @@ const ScriptBrowser = () => {
           <AccordionItem
             key={category.id}
             value={category.Catagory_Title}
-            className={`text-md flex flex-col gap-2`}
+            className={`sm:text-md flex flex-col gap-2`}
           >
             <AccordionTrigger>{category.Catagory_Title}</AccordionTrigger>
             <AccordionContent>
