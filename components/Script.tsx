@@ -60,12 +60,26 @@ function ScriptItem() {
     return formattedDescription;
   }
 
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 640;
+
   return (
     <div className="h-full w-full">
       <Suspense fallback={null}>
         {item && (
-          <div className="mt-0 flex h-screen w-full sm:fixed sm:ml-10 sm:max-w-4xl">
-            <div className="mr-4 flex w-full flex-col">
+          <div className="mt-0 flex h-screen w-full sm:fixed sm:ml-10 sm:max-w-4xl max-w-screen mr-7">
+            <div className="flex w-full flex-col max-w-screen">
               <h2 className="text-xl font-semibold">Last viewed</h2>
               <div className="mt-5 flex justify-between">
                 <div className="flex">
@@ -222,7 +236,7 @@ function ScriptItem() {
                       handleCopy("install command", item.installCommand)
                     }
                   >
-                    {item.installCommand}
+                    {!isMobile && item.installCommand ? item.installCommand : "Copy install command"}
                   </Button>
 
                   {item.hasAlpineScript && (
@@ -255,7 +269,7 @@ function ScriptItem() {
                           handleCopy("install command", item.alpineScript)
                         }
                       >
-                        {item.alpineScript}
+                        {isMobile && item.alpineScript ? item.alpineScript : "Copy install command"}
                       </Button>
                     </>
                   )}
