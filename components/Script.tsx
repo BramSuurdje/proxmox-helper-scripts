@@ -269,7 +269,7 @@ function ScriptItem() {
                           handleCopy("install command", item.alpineScript)
                         }
                       >
-                        {isMobile && item.alpineScript ? item.alpineScript : "Copy install command"}
+                        {!isMobile && item.alpineScript ? item.alpineScript : "Copy install command"}
                       </Button>
                     </>
                   )}
