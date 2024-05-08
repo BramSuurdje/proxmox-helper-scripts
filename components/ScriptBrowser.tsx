@@ -14,6 +14,7 @@ const ScriptBrowser = () => {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [categoryList, setCategoryList] = useState<string[]>([]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -41,6 +42,11 @@ const ScriptBrowser = () => {
     }
   };
 
+  // get a list of all the category ids
+  useEffect(() => {
+    setCategoryList(links.map((category) => category.id));
+  }, [links]);
+
   useEffect(() => {
     fetchLinks();
   }, []);
@@ -67,7 +73,7 @@ const ScriptBrowser = () => {
         onChange={(e) => handleSearch(e.target.value)}
         ref={inputRef}
       />
-      <Accordion type={searchTerm ? "multiple" : "single"} collapsible>
+      <Accordion type={searchTerm ? "multiple" : "single"} collapsible={searchTerm != ""}>
         {filteredLinks.map((category) => (
           <AccordionItem
             key={category.id}
