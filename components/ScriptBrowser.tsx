@@ -73,7 +73,7 @@ const ScriptBrowser = () => {
         onChange={(e) => handleSearch(e.target.value)}
         ref={inputRef}
       />
-      <Accordion type={searchTerm ? "multiple" : "single"} collapsible={searchTerm != ""}>
+      <Accordion type={searchTerm ? "multiple" : "single"} collapsible>
         {filteredLinks.map((category) => (
           <AccordionItem
             key={category.id}
