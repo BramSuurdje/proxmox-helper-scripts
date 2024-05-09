@@ -85,7 +85,7 @@ function ScriptItem() {
     <Suspense fallback={null}>
       {item && (
         <div className="mr-7 mt-0 flex h-screen  w-full sm:ml-7">
-          <div className="flex sm:fixed w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
+          <div className="flex w-full sm:fixed sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             <div className="flex w-full flex-col">
               <h2 className="text-xl font-semibold">Selected script</h2>
               <div className="mt-5 flex justify-between">
@@ -270,12 +270,10 @@ function ScriptItem() {
                               faster creation time and minimal system resource
                               usage.
                             </p>
-                            <p className="mt-2 text-sm flex">
+                            <p className="mt-2 flex text-sm">
                               To create a new Proxmox VE Alpine-{item.title}{" "}
-                              {item.item_type}, run the command below in the{" "}
-                              <span className="text-semibold">
-                                Proxmox VE Shell
-                              </span>
+                              {item.item_type}, run the command below in the
+                              Proxmox VE Shell
                             </p>
                             <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
                               click to copy
