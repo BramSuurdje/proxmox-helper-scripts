@@ -5,12 +5,13 @@ import { Suspense, useEffect, useState } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard, Info } from "lucide-react";
+import { Clipboard, Info, X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Script } from "@/lib/types";
 import { useSearchParams  } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import LatestScripts from "./LatestScripts";
 
 function ScriptItem() {
   const [item, setItem] = useState<Script | null>(null);
@@ -35,6 +36,12 @@ function ScriptItem() {
         <span>Copied {type} to clipboard</span>
       </div>,
     );
+  }
+
+  function closeScript() {
+    // remove the id from the url and reset the state
+    window.history.pushState({}, document.title, window.location.pathname);
+    setItem(null);
   }
 
   function descriptionCodeBlock(description: string) {
@@ -84,11 +91,14 @@ function ScriptItem() {
   return (
     <Suspense fallback={null}>
       {item && (
-        <div className="mr-7 mt-0 flex h-screen  w-full sm:ml-7">
-          <div className="flex w-full sm:fixed sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
+        <div className="mr-7 mt-0 flex h-screen w-full rounded-lg p-4">
+          <div className="flex w-full sm:fixed sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl ">
             <div className="flex w-full flex-col">
-              <h2 className="text-xl font-semibold">Selected script</h2>
-              <div className="mt-5 flex justify-between">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold">Selected script</h2>
+                <X onClick={closeScript} className="cursor-pointer" />
+              </div>
+              <div className="mt-5 flex justify-between ">
                 <div className="flex">
                   <Image
                     className="h-32 w-32 rounded-lg bg-accent object-contain p-3"
@@ -185,9 +195,9 @@ function ScriptItem() {
                   </div>
                 </div>
               </div>
-              <Separator className="mt-7" />
+              <Separator className="mt-5" />
               <div>
-                <div className="mt-6">
+                <div className="mt-5">
                   <h2 className="max-w-prose text-lg font-semibold">
                     Description
                   </h2>
@@ -331,6 +341,11 @@ function ScriptItem() {
             </div>
           </div>
         </div>
+      )}
+      {item ? null : (
+        <>
+          <LatestScripts />
+        </>
       )}
     </Suspense>
   );
