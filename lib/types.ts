@@ -3,6 +3,7 @@ export type ScriptProps = {
 };
 
 export type Script = {
+  id: string;
   scriptID: string;
   title: string;
   description: string;
