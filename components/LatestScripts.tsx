@@ -32,9 +32,12 @@ function LatestScripts() {
   return (
     <div className="">
       <h2 className="mb-2 text-lg font-semibold ">Newest scripts</h2>
-      <div className="min-w flex w-full flex-col gap-4 sm:flex-row">
+      <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.map((item) => (
-          <Card key={item.id} className="w-full animate-fade-up">
+          <Card
+            key={item.id}
+            className=" min-w-[250px] max-w-[310.6666666666667px] flex-grow animate-fade-up"
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <div className="flex max-h-16 min-h-16 min-w-16 max-w-16 items-center justify-center rounded-lg bg-accent p-1">
