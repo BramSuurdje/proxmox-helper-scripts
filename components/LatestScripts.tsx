@@ -30,8 +30,8 @@ function LatestScripts() {
   }, []);
 
   return (
-    <div className="ml-7">
-      <h2 className="mb-2 text-lg font-semibold ">New scripts</h2>
+    <div className="">
+      <h2 className="mb-2 text-lg font-semibold ">Newest scripts</h2>
       <div className="min-w flex w-full flex-col gap-4 sm:flex-row">
         {latestScripts.map((item) => (
           <Card key={item.id} className="w-full animate-fade-up">
