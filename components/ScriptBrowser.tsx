@@ -35,6 +35,7 @@ const ScriptBrowser = () => {
       // you can also fetch all records at once via getFullList
       const res = await pb.collection("categories").getFullList({
         expand: "items",
+        requestKey: "desktop",
       });
       setLinks(res as unknown as Category[]);
     } catch (error) {

@@ -66,6 +66,7 @@ function Navbar() {
     try {
       const res = await pb.collection("categories").getFullList({
         expand: "items",
+        requestKey : "navbar"
       });
       setLinks(res as unknown as Category[]);
     } catch (error) {
