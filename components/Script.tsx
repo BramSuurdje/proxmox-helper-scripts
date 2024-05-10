@@ -25,6 +25,8 @@ function ScriptItem() {
   useEffect(() => {
     if (id) {
       getItem();
+    } else {
+      setItem(null);
     }
   }, [id]);
 
