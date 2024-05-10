@@ -64,7 +64,6 @@ function Navbar() {
 
   const fetchLinks = async () => {
     try {
-      // you can also fetch all records at once via getFullList
       const res = await pb.collection("categories").getFullList({
         expand: "items",
       });
@@ -144,6 +143,7 @@ function Navbar() {
                                     .includes(searchTerm.toLowerCase()),
                                 )
                                 .map((script, index) => (
+                                  <SheetClose>
                                   <p key={index} className="py-1">
                                     <Link
                                       href={{
@@ -155,6 +155,7 @@ function Navbar() {
                                       {script.title} {script.item_type}
                                     </Link>
                                   </p>
+                                  </SheetClose>
                                 ))}
                             </AccordionContent>
                           </AccordionItem>
