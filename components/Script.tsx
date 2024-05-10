@@ -97,7 +97,7 @@ function ScriptItem() {
           <div className="flex w-full sm:fixed sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl ">
             <div className="flex w-full flex-col">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Selected script</h2>
+                <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
               <div className="mt-5 flex justify-between ">

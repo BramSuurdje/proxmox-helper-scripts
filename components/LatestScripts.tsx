@@ -31,7 +31,7 @@ function LatestScripts() {
 
   return (
     <div className="">
-      <h2 className="mb-2 text-lg font-semibold ">Newest scripts</h2>
+      <h2 className="mb-2 text-lg font-semibold ">Newest Scripts</h2>
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.map((item) => (
           <Card
