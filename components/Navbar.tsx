@@ -144,20 +144,19 @@ function Navbar() {
                                     .includes(searchTerm.toLowerCase()),
                                 )
                                 .map((script, index) => (
-                                  
-                                  <p key={index} className="py-1">
-                                    <SheetClose>
-                                    <Link
-                                      href={{
-                                        pathname: "/scripts",
-                                        query: { id: script.id },
-                                      }}
-                                      className="text-muted-foreground"
-                                    >
-                                      {script.title} {script.item_type}
-                                    </Link>
+                                  <div key={index} className="py-1">
+                                    <SheetClose asChild>
+                                      <Link
+                                        href={{
+                                          pathname: "/scripts",
+                                          query: { id: script.id },
+                                        }}
+                                        className="text-muted-foreground"
+                                      >
+                                        {script.title}
+                                      </Link>
                                     </SheetClose>
-                                  </p>
+                                  </div>
                                 ))}
                             </AccordionContent>
                           </AccordionItem>
