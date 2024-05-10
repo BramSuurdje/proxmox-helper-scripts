@@ -18,8 +18,8 @@ function ScriptItem() {
   const id = useSearchParams().get("id");
 
   const getItem = async () => {
-    const record = await pb.collection("proxmox_scripts").getOne(`${id}`, {});
-    setItem(record as unknown as Script);
+    const res = await pb.collection("proxmox_scripts").getOne(`${id}`, {});
+    setItem(res as unknown as Script);
   };
 
   useEffect(() => {

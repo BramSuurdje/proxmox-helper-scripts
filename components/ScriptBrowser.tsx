@@ -9,12 +9,12 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
+import { pb } from "@/lib/pocketbase";
 
 const ScriptBrowser = () => {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const [categoryList, setCategoryList] = useState<string[]>([]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -32,20 +32,15 @@ const ScriptBrowser = () => {
 
   const fetchLinks = async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/proxmox_items/records`,
-      );
-      const data = await res.json();
-      setLinks(data.items as Category[]);
+      // you can also fetch all records at once via getFullList
+      const res = await pb.collection("categories").getFullList({
+        expand: "items",
+      });
+      setLinks(res as unknown as Category[]);
     } catch (error) {
       console.error("Error fetching links:", error);
     }
   };
-
-  // get a list of all the category ids
-  useEffect(() => {
-    setCategoryList(links.map((category) => category.id));
-  }, [links]);
 
   useEffect(() => {
     fetchLinks();
@@ -57,7 +52,7 @@ const ScriptBrowser = () => {
 
   const filteredLinks = useMemo(() => {
     return links.filter((category) =>
-      category.Items.some((script) =>
+      category.expand.items.some((script) =>
         script.title.toLowerCase().includes(searchTerm.toLowerCase()),
       ),
     );
@@ -76,24 +71,24 @@ const ScriptBrowser = () => {
       <Accordion type={searchTerm ? "multiple" : "single"} collapsible>
         {filteredLinks.map((category) => (
           <AccordionItem
-            key={category.id}
-            value={category.Catagory_Title}
+            key={category.collectionId}
+            value={category.catagoryName}
             className={`sm:text-md flex flex-col gap-2`}
           >
-            <AccordionTrigger>{category.Catagory_Title}</AccordionTrigger>
+            <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
             <AccordionContent>
-              {category.Items.filter((script) =>
+              {category.expand.items.filter((script) =>
                 script.title.toLowerCase().includes(searchTerm.toLowerCase()),
               ).map((script, index) => (
                 <p key={index} className="py-1">
                   <Link
                     href={{
                       pathname: "/scripts",
-                      query: { id: script.scriptID },
+                      query: { id: script.id },
                     }}
                     className="text-muted-foreground"
                   >
-                    {script.title}
+                    {script.title}{" "}{script.item_type}
                   </Link>
                 </p>
               ))}
