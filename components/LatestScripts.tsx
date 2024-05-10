@@ -36,7 +36,7 @@ function LatestScripts() {
         {latestScripts.map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] max-w-[310.6666666666667px] flex-grow animate-fade-up"
+            className=" min-w-[250px] flex-1 flex-grow animate-fade-up"
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">

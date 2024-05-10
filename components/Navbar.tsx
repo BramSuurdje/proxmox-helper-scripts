@@ -28,9 +28,13 @@ import {
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Category } from "@/lib/types";
+import { pb } from "@/lib/pocketbase";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [links, setLinks] = useState<Category[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,10 +47,6 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-    const [links, setLinks] = useState<Category[]>([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
@@ -62,33 +62,33 @@ function Navbar() {
       };
     }, []);
 
-    const fetchLinks = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/proxmox_items/records`,
-        );
-        const data = await res.json();
-        setLinks(data.items as Category[]);
-      } catch (error) {
-        console.error("Error fetching links:", error);
-      }
-    };
+  const fetchLinks = async () => {
+    try {
+      // you can also fetch all records at once via getFullList
+      const res = await pb.collection("categories").getFullList({
+        expand: "items",
+      });
+      setLinks(res as unknown as Category[]);
+    } catch (error) {
+      console.error("Error fetching links:", error);
+    }
+  };
 
-    useEffect(() => {
-      fetchLinks();
-    }, []);
+  useEffect(() => {
+    fetchLinks();
+  }, []);
 
-    const handleSearch = (value: string) => {
-      setSearchTerm(value);
-    };
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+  };
 
-    const filteredLinks = useMemo(() => {
-      return links.filter((category) =>
-        category.Items.some((script) =>
-          script.title.toLowerCase().includes(searchTerm.toLowerCase()),
-        ),
-      );
-    }, [links, searchTerm]);
+  const filteredLinks = useMemo(() => {
+    return links.filter((category) =>
+      category.expand.items.some((script) =>
+        script.title.toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
+    );
+  }, [links, searchTerm]);
 
   return (
     <>
@@ -129,33 +129,33 @@ function Navbar() {
                       >
                         {filteredLinks.map((category) => (
                           <AccordionItem
-                            key={category.id}
-                            value={category.Catagory_Title}
+                            key={category.collectionId}
+                            value={category.catagoryName}
                             className={`sm:text-md flex flex-col gap-2`}
                           >
                             <AccordionTrigger>
-                              {category.Catagory_Title}
+                              {category.catagoryName}
                             </AccordionTrigger>
                             <AccordionContent>
-                              {category.Items.filter((script) =>
-                                script.title
-                                  .toLowerCase()
-                                  .includes(searchTerm.toLowerCase()),
-                              ).map((script, index) => (
-                                <div key={index} className="py-1">
-                                  <SheetClose asChild>
+                              {category.expand.items
+                                .filter((script) =>
+                                  script.title
+                                    .toLowerCase()
+                                    .includes(searchTerm.toLowerCase()),
+                                )
+                                .map((script, index) => (
+                                  <p key={index} className="py-1">
                                     <Link
                                       href={{
                                         pathname: "/scripts",
-                                        query: { id: script.scriptID },
+                                        query: { id: script.id },
                                       }}
                                       className="text-muted-foreground"
                                     >
-                                      {script.title}
+                                      {script.title} {script.item_type}
                                     </Link>
-                                  </SheetClose>
-                                </div>
-                              ))}
+                                  </p>
+                                ))}
                             </AccordionContent>
                           </AccordionItem>
                         ))}
