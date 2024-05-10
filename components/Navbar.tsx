@@ -143,8 +143,9 @@ function Navbar() {
                                     .includes(searchTerm.toLowerCase()),
                                 )
                                 .map((script, index) => (
-                                  <SheetClose>
+                                  
                                   <p key={index} className="py-1">
+                                    <SheetClose>
                                     <Link
                                       href={{
                                         pathname: "/scripts",
@@ -154,8 +155,8 @@ function Navbar() {
                                     >
                                       {script.title} {script.item_type}
                                     </Link>
+                                    </SheetClose>
                                   </p>
-                                  </SheetClose>
                                 ))}
                             </AccordionContent>
                           </AccordionItem>
