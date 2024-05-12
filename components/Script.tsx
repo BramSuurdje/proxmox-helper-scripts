@@ -93,10 +93,10 @@ function ScriptItem() {
   return (
     <Suspense fallback={null}>
       {item && (
-        <div className="mr-7 mt-0 flex h-screen w-full rounded-lg">
-          <div className="flex w-full sm:fixed sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl ">
+        <div className="mr-7 mt-0 flex h-screen w-full min-w-fit">
+          <div className="flex w-full min-w-fit">
             <div className="flex w-full flex-col">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between min-w-max">
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
@@ -197,7 +197,7 @@ function ScriptItem() {
                   </div>
                 </div>
               </div>
-              <Separator className="mt-5" />
+              <Separator className="mt-5 min-w-max w-full" />
               <div>
                 <div className="mt-5">
                   <h2 className="max-w-prose text-lg font-semibold">
