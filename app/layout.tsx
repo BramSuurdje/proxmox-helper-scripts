@@ -36,14 +36,14 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://proxmox-helper-scripts.vercel.app/"),
+  metadataBase: new URL("https://helper-scripts.com/"),
   openGraph: {
     title: "Proxmox VE Helper-Scripts",
     description: "Scripts for Streamlining Your Homelab with Proxmox VE",
     url: "/defaultimg.png",
     images: [
       {
-        url: "https://proxmox-helper-scripts.vercel.app/defaultimg.png",
+        url: "https://helper-scripts.com/defaultimg.png",
       },
     ],
     locale: "en_US",
