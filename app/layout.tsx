@@ -3,8 +3,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/Footer";
 import React from "react";
 import { title } from "process";
@@ -59,8 +57,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Analytics />
-        <SpeedInsights />
       </head>
       <body className={inter.className}>
         <ThemeProvider
