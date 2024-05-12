@@ -2,8 +2,6 @@ import ScriptItem from "@/components/Script";
 import ScriptBrowser from "@/components/ScriptBrowser";
 import Particles from "@/components/ui/particles";
 
-
-
 export default function Page() {
   return (
     <>
