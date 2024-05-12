@@ -1,6 +1,6 @@
 # Proxmox Helper Scripts
 
-Unofficial re-design of the [Proxmox helper script website](https://tteck.github.io/Proxmox/)
+official re-design of the [Proxmox helper script website](https://tteck.github.io/Proxmox/)
 
 feel free to fork the project. or post feedback in the [Discussion tab](https://github.com/BramSuurdje/proxmox-helper-scripts/discussions). your feedback is always welcomed since we're all learning.
 
@@ -8,7 +8,7 @@ feel free to fork the project. or post feedback in the [Discussion tab](https://
 
 - [ ] fix issue with accordions not expanding when searching
 - [ ] add icons after items for better readability
-- [ ] when no item is selected. display populair scripts etc.
+- [X] when no item is selected. display populair scripts etc.
 
 ## How to contribute
 
