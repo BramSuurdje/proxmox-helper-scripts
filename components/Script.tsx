@@ -96,7 +96,7 @@ function ScriptItem() {
         <div className="mr-7 mt-0 flex h-screen w-full min-w-fit">
           <div className="flex w-full min-w-fit">
             <div className="flex w-full flex-col">
-              <div className="flex items-center justify-between min-w-max">
+              <div className="flex min-w-max items-center justify-between">
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
@@ -197,7 +197,7 @@ function ScriptItem() {
                   </div>
                 </div>
               </div>
-              <Separator className="mt-5 min-w-max w-full" />
+              <Separator className="mt-5 w-full min-w-max" />
               <div>
                 <div className="mt-5">
                   <h2 className="max-w-prose text-lg font-semibold">
@@ -280,7 +280,8 @@ function ScriptItem() {
                               and the {item.title} package to create a{" "}
                               {item.title} {item.item_type} container with
                               faster creation time and minimal system resource
-                              usage.
+                              usage. You are also obliged to adhere to updates
+                              provided by the package maintainer.
                             </p>
                             <p className="mt-2 flex text-sm">
                               To create a new Proxmox VE Alpine-{item.title}{" "}
