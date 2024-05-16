@@ -45,7 +45,7 @@ function ScriptItem() {
 
       if (parseInt(amountOfScriptsCopied) === 3) {
         setTimeout(() => {
-          toast(
+          toast.info(
             <div className="flex flex-col gap-3">
               <p className="lg">
                 If you like what you are seeing, consider starring the
