@@ -56,8 +56,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -70,7 +68,7 @@ export default function RootLayout({
             <div className="flex w-full justify-center">
               <div className="w-full max-w-7xl ">
                 {children}
-                <Toaster />
+                <Toaster richColors />
               </div>
             </div>
             {/* <Footer /> */}
