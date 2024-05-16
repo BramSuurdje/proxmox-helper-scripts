@@ -32,6 +32,38 @@ function ScriptItem() {
 
   function handleCopy(type: string, value: any) {
     navigator.clipboard.writeText(value);
+
+    let amountOfScriptsCopied = localStorage.getItem("amountOfScriptsCopied");
+
+    if (amountOfScriptsCopied === null) {
+      localStorage.setItem("amountOfScriptsCopied", "1");
+    } else if (parseInt(amountOfScriptsCopied) >= 3) {
+      ""
+    } else {
+      amountOfScriptsCopied = (parseInt(amountOfScriptsCopied) + 1).toString();
+      localStorage.setItem("amountOfScriptsCopied", amountOfScriptsCopied);
+
+      if (parseInt(amountOfScriptsCopied) === 3) {
+        setTimeout(() => {
+          toast(
+            <div className="flex flex-col gap-3">
+              <p className="lg">
+                If you like what you are seeing, consider starring the
+                repository on GitHub. It helps a lot!
+              </p>
+              <div>
+                <Button className="text-foreground">
+                  <Link href="https://github.com/tteck/Proxmox">
+                    Star on GitHub 💫
+                  </Link>
+                </Button>
+              </div>
+            </div>,
+          );
+        }, 500);
+      }
+    }
+
     toast.success(
       <div className="flex items-center gap-2">
         <Clipboard className="h-4 w-4" />
@@ -39,6 +71,7 @@ function ScriptItem() {
       </div>,
     );
   }
+
 
   function closeScript() {
     // remove the id from the url and reset the state
