@@ -32,7 +32,7 @@ function ScriptItem() {
 
   function handleCopy(type: string, value: any) {
     navigator.clipboard.writeText(value);
-    toast(
+    toast.success(
       <div className="flex items-center gap-2">
         <Clipboard className="h-4 w-4" />
         <span>Copied {type} to clipboard</span>
