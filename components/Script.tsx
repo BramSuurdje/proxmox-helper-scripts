@@ -48,17 +48,18 @@ function ScriptItem() {
           toast.info(
             <div className="flex flex-col gap-3">
               <p className="lg">
-                If you like what you are seeing, consider starring the
+                If you find these scripts useful, please consider starring the
                 repository on GitHub. It helps a lot!
               </p>
               <div>
-                <Button className="text-foreground">
+                <Button className="text-white">
                   <Link href="https://github.com/tteck/Proxmox">
                     Star on GitHub 💫
                   </Link>
                 </Button>
               </div>
             </div>,
+            { duration: 8000 },
           );
         }, 500);
       }
