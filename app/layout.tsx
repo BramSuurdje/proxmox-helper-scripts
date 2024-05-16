@@ -10,24 +10,22 @@ import { title } from "process";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "proxmox VE Helper-Scripts | Scripts for Streamlining Your Homelab with Proxmox VE",
+  title: "Proxmox VE Helper Scripts | Streamline Your Homelab",
   generator: "Next.js",
-  applicationName: "Proxmox VE Helper-Scripts",
+  applicationName: "Proxmox VE Helper Scripts",
   referrer: "origin-when-cross-origin",
   keywords: [
     "Proxmox VE",
-    "Helper-Scripts",
+    "Helper Scripts",
     "tteck",
-    "helper",
-    "scripts",
-    "proxmox",
-    "VE",
+    "homelab automation",
+    "Proxmox scripts",
+    "Proxmox tools",
   ],
-  authors: [{ name: "tteck" }, { name: "Bram" }],
+  authors: [{ name: "tteck" }, { name: "Bram Suurd" }],
   creator: "tteck, Bram Suurd",
   publisher: "tteck, Bram Suurd",
-  description:
-    "Scripts for Streamlining Your Homelab with Proxmox VE",
+  description: "Streamline your homelab with Proxmox VE Helper Scripts.",
   favicon: "/app/favicon.ico",
   formatDetection: {
     email: false,
@@ -36,12 +34,13 @@ export const metadata = {
   },
   metadataBase: new URL("https://helper-scripts.com/"),
   openGraph: {
-    title: "Proxmox VE Helper-Scripts",
-    description: "Scripts for Streamlining Your Homelab with Proxmox VE",
-    url: "/defaultimg.png",
+    title: "Proxmox VE Helper Scripts",
+    description: "Streamline your homelab with Proxmox VE Helper Scripts.",
+    url: "https://helper-scripts.com",
     images: [
       {
         url: "https://helper-scripts.com/defaultimg.png",
+        alt: "Proxmox VE Helper Scripts",
       },
     ],
     locale: "en_US",
