@@ -9,7 +9,7 @@ export default function Page() {
         className="animate-fade-in absolute  inset-0 -z-10"
         quantity={100}
       />
-      <div className="mt-20 flex sm:px-7 xl:px-0 sm:mb-16 mb-10">
+      <div className="mt-20 flex sm:px-7 xl:px-0">
         <div className="hidden sm:flex">
           <ScriptBrowser />
         </div>
