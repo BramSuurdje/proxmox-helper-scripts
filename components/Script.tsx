@@ -295,6 +295,8 @@ function ScriptItem() {
                           click to copy
                         </p>
                         <Button
+                          data-umami-event="Copy install command"
+                          data-umami-event-id={item.title + item.item_type}
                           variant="secondary"
                           size={"sm"}
                           onClick={() =>
@@ -326,6 +328,8 @@ function ScriptItem() {
                               click to copy
                             </p>
                             <Button
+                              data-umami-event="Copy install command"
+                              data-umami-event-id={item.title + item.item_type}
                               variant={"secondary"}
                               size={"sm"}
                               onClick={() =>
