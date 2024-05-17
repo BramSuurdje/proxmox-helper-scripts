@@ -92,17 +92,20 @@ const ScriptBrowser = () => {
                         pathname: "/scripts",
                         query: { id: script.id },
                       }}
-                      className="text-muted-foreground flex items-center gap-1 cursor-pointer justify-between"
+                      className="flex cursor-pointer items-center justify-between gap-1 text-muted-foreground"
                     >
                       {script.title}{" "}
                       <Badge
-                        className={clsx({
-                          "border-primary/75 text-primary/75":
-                            script.item_type === "VM",
-                          "border-yellow-500/75 text-yellow-500/75":
-                            script.item_type === "LXC",
-                          hidden: !["VM", "LXC"].includes(script.item_type),
-                        })}
+                        className={clsx(
+                          "w-[37.69px] justify-center text-center",
+                          {
+                            "border-primary/75 text-primary/75":
+                              script.item_type === "VM",
+                            "border-yellow-500/75 text-yellow-500/75":
+                              script.item_type === "LXC",
+                            hidden: !["VM", "LXC"].includes(script.item_type),
+                          },
+                        )}
                       >
                         {script.item_type}
                       </Badge>
