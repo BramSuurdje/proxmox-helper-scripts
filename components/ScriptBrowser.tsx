@@ -92,7 +92,7 @@ const ScriptBrowser = () => {
                         pathname: "/scripts",
                         query: { id: script.id },
                       }}
-                      className="text-muted-foreground flex items-center gap-1 cursor-pointer"
+                      className="text-muted-foreground flex items-center gap-1 cursor-pointer justify-between"
                     >
                       {script.title}{" "}
                       <Badge
