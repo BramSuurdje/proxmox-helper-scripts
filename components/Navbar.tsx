@@ -6,11 +6,12 @@ import logo from "../public/logo.png";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { ModeToggle } from "./theme-toggle";
-import { LuGitPullRequestDraft } from "react-icons/lu";
-import { LuBookOpenCheck } from "react-icons/lu";
-import { LuClipboardSignature } from "react-icons/lu";
+import {
+  LuGitPullRequestDraft,
+  LuBookOpenCheck,
+  LuClipboardSignature,
+} from "react-icons/lu";
 import { Coffee, Menu } from "lucide-react";
-import { FaDiscord } from "react-icons/fa";
 import {
   Sheet,
   SheetClose,
@@ -35,6 +36,7 @@ function Navbar() {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [shouldFocusInput, setShouldFocusInput] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,25 +50,32 @@ function Navbar() {
     };
   }, []);
 
-    useEffect(() => {
-      const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === "/") {
-          inputRef.current?.focus();
-          event.preventDefault();
-        }
-      };
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "/") {
+        setShouldFocusInput(true);
+        event.preventDefault();
+      }
+    };
 
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    }, []);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (shouldFocusInput) {
+      inputRef.current?.focus();
+      setShouldFocusInput(false);
+    }
+  }, [shouldFocusInput]);
 
   const fetchLinks = async () => {
     try {
       const res = await pb.collection("categories").getFullList({
         expand: "items",
-        requestKey : "navbar"
+        requestKey: "navbar",
       });
       setLinks(res as unknown as Category[]);
     } catch (error) {
@@ -78,22 +87,12 @@ function Navbar() {
     fetchLinks();
   }, []);
 
-  const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
-
-  const filteredLinks = useMemo(() => {
-    return links.filter((category) =>
-      category.expand.items.some((script) =>
-        script.title.toLowerCase().includes(searchTerm.toLowerCase()),
-      ),
-    );
-  }, [links, searchTerm]);
-
   return (
     <>
       <div
-        className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-7 xl:px-0 ${isScrolled ? "border-b backdrop-blur-lg" : ""}`}
+        className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-7 xl:px-0 ${
+          isScrolled ? "border-b backdrop-blur-lg" : ""
+        }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
           <h2 className="font-semibold ">
@@ -107,7 +106,7 @@ function Navbar() {
           </h2>
           <div className="flex items-center sm:hidden">
             <Sheet>
-              <SheetTrigger>
+              <SheetTrigger onClick={() => setShouldFocusInput(false)}>
                 <Menu className="h-8 w-8" />
               </SheetTrigger>
               <SheetContent
@@ -119,19 +118,12 @@ function Navbar() {
                   <SheetDescription className=" overflow-scroll">
                     <div className="flex min-w-72 flex-col overflow-scroll sm:max-w-72">
                       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
-                      <Input
-                        className="mb-5"
-                        type="text"
-                        placeholder="Type '/' to search"
-                        onChange={(e) => handleSearch(e.target.value)}
-                        ref={inputRef}
-                      />
                       <Accordion
                         type={searchTerm ? "multiple" : "single"}
                         collapsible
                         className="overflow-scroll"
                       >
-                        {filteredLinks.map((category) => (
+                        {links.map((category) => (
                           <AccordionItem
                             key={category.collectionId}
                             value={category.catagoryName}
@@ -173,12 +165,6 @@ function Navbar() {
             </Sheet>
           </div>
           <div className="hidden gap-2 sm:flex">
-            {/* <Button variant="ghost" asChild>
-              <Link target="_blank" href="https://discord.gg/2zZ5Y2b">
-                <FaDiscord className="mr-2 h-4 w-4" />
-                Join Discord
-              </Link>
-            </Button> */}
             <Button variant="ghost" asChild>
               <Link
                 target="_blank"
