@@ -52,8 +52,11 @@ function ScriptItem() {
                 repository on GitHub. It helps a lot!
               </p>
               <div>
-                <Button data-umami-event="Star on Github" className="text-white">
-                  <Link href="https://github.com/tteck/Proxmox">
+                <Button className="text-white">
+                  <Link
+                    href="https://github.com/tteck/Proxmox"
+                    data-umami-event="Star on Github"
+                  >
                     Star on GitHub 💫
                   </Link>
                 </Button>
