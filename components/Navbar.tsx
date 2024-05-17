@@ -149,7 +149,7 @@ function Navbar() {
                                         }}
                                         className="text-left text-muted-foreground"
                                       >
-                                        {script.title}{" "}{script.item_type}
+                                        {script.title} {script.item_type}
                                       </Link>
                                     </SheetClose>
                                   </div>
@@ -169,6 +169,7 @@ function Navbar() {
               <Link
                 target="_blank"
                 href="https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md"
+                data-umami-event="Contributing"
               >
                 <LuGitPullRequestDraft className="mr-2 h-4 w-4" />
                 Contribute
@@ -178,6 +179,7 @@ function Navbar() {
               <Link
                 target="_blank"
                 href="https://github.com/tteck/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md"
+                data-umami-event="Guides"
               >
                 <LuBookOpenCheck className="mr-2 h-4 w-4" />
                 Guides
@@ -187,6 +189,7 @@ function Navbar() {
               <Link
                 target="_blank"
                 href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.md"
+                data-umami-event="Change Log"
               >
                 <LuClipboardSignature className="mr-2 h-4 w-4" />
                 Changelog
@@ -196,6 +199,7 @@ function Navbar() {
               <Link
                 target="_blank"
                 href="https://ko-fi.com/proxmoxhelperscripts"
+                data-umami-event="ko-fi"
               >
                 <Coffee className="mr-2 h-4 w-4" />
                 Buy me a coffee
