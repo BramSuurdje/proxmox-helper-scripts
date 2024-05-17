@@ -56,6 +56,7 @@ function ScriptItem() {
                   <Link
                     href="https://github.com/tteck/Proxmox"
                     data-umami-event="Star on Github"
+                    target="_blank"
                   >
                     Star on GitHub 💫
                   </Link>
