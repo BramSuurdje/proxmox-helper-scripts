@@ -114,7 +114,7 @@ function Navbar() {
                 className="max-w-screen max-h-screen w-full overflow-y-scroll"
               >
                 <SheetHeader>
-                  <SheetTitle>Proxmox Helper Scripts</SheetTitle>
+                  <SheetTitle>Proxmox VE Helper-Scripts</SheetTitle>
                   <SheetDescription className=" overflow-scroll">
                     <div className="flex min-w-72 flex-col overflow-scroll sm:max-w-72">
                       <p className="mb-5 text-xl font-bold">Scripts</p>
