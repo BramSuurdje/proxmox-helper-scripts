@@ -56,6 +56,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          defer
+          src="https://analytics.pvehs.com/script.js"
+          data-website-id="c43f9685-6302-4359-a049-2936ccc6b7ca"
+        ></script>
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
