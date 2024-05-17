@@ -30,6 +30,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Category } from "@/lib/types";
 import { pb } from "@/lib/pocketbase";
+import { Badge } from "./ui/badge";
+import clsx from "clsx";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -147,9 +149,25 @@ function Navbar() {
                                           pathname: "/scripts",
                                           query: { id: script.id },
                                         }}
-                                        className="text-left text-muted-foreground"
+                                        className="justify-between text-muted-foreground flex"
                                       >
-                                        {script.title} {script.item_type}
+                                        {script.title}{" "}
+                                        <Badge
+                                          className={clsx(
+                                            "w-[37.69px] justify-center text-center",
+                                            {
+                                              "border-primary/75 text-primary/75":
+                                                script.item_type === "VM",
+                                              "border-yellow-500/75 text-yellow-500/75":
+                                                script.item_type === "LXC",
+                                              hidden: !["VM", "LXC"].includes(
+                                                script.item_type,
+                                              ),
+                                            },
+                                          )}
+                                        >
+                                          {script.item_type}
+                                        </Badge>
                                       </Link>
                                     </SheetClose>
                                   </div>
@@ -206,7 +224,11 @@ function Navbar() {
               </Link>
             </Button>
             <Button variant="ghost" asChild>
-              <Link target="_blank" href="https://github.com/tteck/Proxmox">
+              <Link
+                target="_blank"
+                href="https://github.com/tteck/Proxmox"
+                data-umami-event="View on GitHub"
+              >
                 <FaGithub className="mr-2 h-4 w-4" />
                 View on Github
               </Link>
