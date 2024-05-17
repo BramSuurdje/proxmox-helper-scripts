@@ -149,7 +149,7 @@ function Navbar() {
                                           pathname: "/scripts",
                                           query: { id: script.id },
                                         }}
-                                        className="justify-between text-muted-foreground flex"
+                                        className="flex justify-between text-muted-foreground"
                                       >
                                         {script.title}{" "}
                                         <Badge
@@ -183,56 +183,44 @@ function Navbar() {
             </Sheet>
           </div>
           <div className="hidden gap-2 sm:flex">
-            <Button variant="ghost" asChild>
-              <Link
-                target="_blank"
-                href="https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md"
-                data-umami-event="Contributing"
-              >
-                <LuGitPullRequestDraft className="mr-2 h-4 w-4" />
-                Contribute
-              </Link>
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link
-                target="_blank"
-                href="https://github.com/tteck/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md"
-                data-umami-event="Guides"
-              >
-                <LuBookOpenCheck className="mr-2 h-4 w-4" />
-                Guides
-              </Link>
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link
-                target="_blank"
-                href="https://github.com/tteck/Proxmox/blob/main/CHANGELOG.md"
-                data-umami-event="Change Log"
-              >
-                <LuClipboardSignature className="mr-2 h-4 w-4" />
-                Changelog
-              </Link>
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link
-                target="_blank"
-                href="https://ko-fi.com/proxmoxhelperscripts"
-                data-umami-event="ko-fi"
-              >
-                <Coffee className="mr-2 h-4 w-4" />
-                Buy me a coffee
-              </Link>
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link
-                target="_blank"
-                href="https://github.com/tteck/Proxmox"
-                data-umami-event="View on GitHub"
-              >
-                <FaGithub className="mr-2 h-4 w-4" />
-                View on Github
-              </Link>
-            </Button>
+            {[
+              {
+                href: "https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md",
+                event: "Contributing",
+                icon: <LuGitPullRequestDraft className="mr-2 h-4 w-4" />,
+                text: "Contribute",
+              },
+              {
+                href: "https://github.com/tteck/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md",
+                event: "Guides",
+                icon: <LuBookOpenCheck className="mr-2 h-4 w-4" />,
+                text: "Guides",
+              },
+              {
+                href: "https://github.com/tteck/Proxmox/blob/main/CHANGELOG.md",
+                event: "Change Log",
+                icon: <LuClipboardSignature className="mr-2 h-4 w-4" />,
+                text: "Changelog",
+              },
+              {
+                href: "https://ko-fi.com/proxmoxhelperscripts",
+                event: "ko-fi",
+                icon: <Coffee className="mr-2 h-4 w-4" />,
+                text: "Buy me a coffee",
+              },
+              {
+                href: "https://github.com/tteck/Proxmox",
+                event: "View on GitHub",
+                icon: <FaGithub className="mr-2 h-4 w-4" />,
+                text: "View on Github",
+              },
+            ].map(({ href, event, icon, text }) => (
+              <Button key={event} variant="ghost" asChild>
+                <Link target="_blank" href={href} data-umami-event={event}>
+                  {icon} {text}
+                </Link>
+              </Button>
+            ))}
             <ModeToggle />
           </div>
         </div>
