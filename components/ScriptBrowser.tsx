@@ -10,6 +10,8 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
 import { pb } from "@/lib/pocketbase";
+import { Badge } from "./ui/badge";
+import clsx from "clsx";
 
 const ScriptBrowser = () => {
   const [links, setLinks] = useState<Category[]>([]);
@@ -61,7 +63,7 @@ const ScriptBrowser = () => {
   }, [links, searchTerm]);
 
   return (
-    <div className="min-w-72 sm:max-w-72 flex-col flex">
+    <div className="flex min-w-72 flex-col sm:max-w-72">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
       <Input
         className="mb-5"
@@ -79,21 +81,34 @@ const ScriptBrowser = () => {
           >
             <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
             <AccordionContent>
-              {category.expand.items.filter((script) =>
-                script.title.toLowerCase().includes(searchTerm.toLowerCase()),
-              ).map((script, index) => (
-                <p key={index} className="py-1">
-                  <Link
-                    href={{
-                      pathname: "/scripts",
-                      query: { id: script.id },
-                    }}
-                    className="text-muted-foreground"
-                  >
-                    {script.title}{" "}{script.item_type}
-                  </Link>
-                </p>
-              ))}
+              {category.expand.items
+                .filter((script) =>
+                  script.title.toLowerCase().includes(searchTerm.toLowerCase()),
+                )
+                .map((script, index) => (
+                  <p key={index} className="py-1">
+                    <Link
+                      href={{
+                        pathname: "/scripts",
+                        query: { id: script.id },
+                      }}
+                      className="text-muted-foreground flex items-center gap-1 cursor-pointer"
+                    >
+                      {script.title}{" "}
+                      <Badge
+                        className={clsx({
+                          "border-primary/75 text-primary/75":
+                            script.item_type === "VM",
+                          "border-yellow-500/75 text-yellow-500/75":
+                            script.item_type === "LXC",
+                          hidden: !["VM", "LXC"].includes(script.item_type),
+                        })}
+                      >
+                        {script.item_type}
+                      </Badge>
+                    </Link>
+                  </p>
+                ))}
             </AccordionContent>
           </AccordionItem>
         ))}
