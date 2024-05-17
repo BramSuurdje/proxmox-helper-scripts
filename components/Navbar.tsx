@@ -149,7 +149,7 @@ function Navbar() {
                                         }}
                                         className="text-left text-muted-foreground"
                                       >
-                                        {script.title}
+                                        {script.title}{" "}{script.item_type}
                                       </Link>
                                     </SheetClose>
                                   </div>
