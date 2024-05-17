@@ -110,11 +110,14 @@ function Navbar() {
               <SheetTrigger>
                 <Menu className="h-8 w-8" />
               </SheetTrigger>
-              <SheetContent side={"left"} className="max-w-screen w-full">
+              <SheetContent
+                side={"left"}
+                className="max-w-screen max-h-screen w-full overflow-y-scroll"
+              >
                 <SheetHeader>
                   <SheetTitle>Proxmox Helper Scripts</SheetTitle>
-                  <SheetDescription>
-                    <div className="flex min-w-72 flex-col sm:max-w-72">
+                  <SheetDescription className=" overflow-scroll">
+                    <div className="flex min-w-72 flex-col overflow-scroll sm:max-w-72">
                       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
                       <Input
                         className="mb-5"
@@ -126,12 +129,13 @@ function Navbar() {
                       <Accordion
                         type={searchTerm ? "multiple" : "single"}
                         collapsible
+                        className="overflow-scroll"
                       >
                         {filteredLinks.map((category) => (
                           <AccordionItem
                             key={category.collectionId}
                             value={category.catagoryName}
-                            className={`sm:text-md flex flex-col gap-2`}
+                            className={`sm:text-md flex flex-col gap-2 text-left`}
                           >
                             <AccordionTrigger>
                               {category.catagoryName}
@@ -151,7 +155,7 @@ function Navbar() {
                                           pathname: "/scripts",
                                           query: { id: script.id },
                                         }}
-                                        className="text-muted-foreground"
+                                        className="text-left text-muted-foreground"
                                       >
                                         {script.title}
                                       </Link>
