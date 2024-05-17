@@ -117,7 +117,7 @@ function Navbar() {
                   <SheetTitle>Proxmox Helper Scripts</SheetTitle>
                   <SheetDescription className=" overflow-scroll">
                     <div className="flex min-w-72 flex-col overflow-scroll sm:max-w-72">
-                      <h1 className="mb-5 text-xl font-bold">Scripts</h1>
+                      <p className="mb-5 text-xl font-bold">Scripts</p>
                       <Accordion
                         type={searchTerm ? "multiple" : "single"}
                         collapsible
@@ -127,7 +127,7 @@ function Navbar() {
                           <AccordionItem
                             key={category.collectionId}
                             value={category.catagoryName}
-                            className={`sm:text-md flex flex-col gap-2 text-left`}
+                            className={`sm:text-md flex flex-col gap-2 text-left text-foreground`}
                           >
                             <AccordionTrigger>
                               {category.catagoryName}
