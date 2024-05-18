@@ -63,3 +63,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+.glass {
+  backdrop-filter: blur(15px) saturate(100%);
+  -webkit-backdrop-filter: blur(15px) saturate(100%);
+}

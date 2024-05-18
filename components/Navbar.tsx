@@ -93,7 +93,7 @@ function Navbar() {
     <>
       <div
         className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-7 xl:px-0 ${
-          isScrolled ? "border-b backdrop-blur-lg" : ""
+          isScrolled ? "glass border-b bg-background/50" : ""
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
