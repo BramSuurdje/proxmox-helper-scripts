@@ -90,7 +90,7 @@ const ScriptBrowser = () => {
                     <Link
                       href={{
                         pathname: "/scripts",
-                        query: { id: script.id },
+                        query: { id: script.title },
                       }}
                       className="flex cursor-pointer items-center justify-between gap-1 text-muted-foreground"
                     >

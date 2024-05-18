@@ -59,7 +59,7 @@ function LatestScripts() {
                 <Link
                   href={{
                     pathname: "/scripts",
-                    query: { id: item.id },
+                    query: { id: item.title },
                   }}
                   className="text-muted-foreground"
                 >

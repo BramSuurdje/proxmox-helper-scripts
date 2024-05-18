@@ -147,7 +147,7 @@ function Navbar() {
                                       <Link
                                         href={{
                                           pathname: "/scripts",
-                                          query: { id: script.id },
+                                          query: { id: script.title },
                                         }}
                                         className="flex justify-between text-muted-foreground"
                                       >

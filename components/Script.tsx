@@ -18,7 +18,7 @@ function ScriptItem() {
   const id = useSearchParams().get("id");
 
   const getItem = async () => {
-    const res = await pb.collection("proxmox_scripts").getOne(`${id}`, {});
+    const res = await pb.collection('proxmox_scripts').getFirstListItem(`title="${id}"`);
     setItem(res as unknown as Script);
   };
 
