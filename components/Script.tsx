@@ -132,7 +132,7 @@ function ScriptItem() {
   return (
     <Suspense fallback={null}>
       {item && (
-        <div className="mr-7 mt-0 flex w-full min-w-fit">
+        <div className="mr-7 mt-0 flex w-full min-w-fit animate-fade-right">
           <div className="flex w-full min-w-fit">
             <div className="flex w-full flex-col">
               <div className="flex min-w-max items-center justify-between">
@@ -385,7 +385,7 @@ function ScriptItem() {
         </div>
       )}
       {item ? null : (
-        <div className="flex flex-col w-full gap-5">
+        <div className="flex w-full flex-col gap-5">
           <LatestScripts />
           <MostViewedScripts />
         </div>
