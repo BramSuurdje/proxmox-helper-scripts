@@ -74,6 +74,7 @@ function Navbar() {
   }, [shouldFocusInput]);
 
   const fetchLinks = async () => {
+    if (links.length > 0) return;
     try {
       const res = await pb.collection("categories").getFullList({
         expand: "items",
