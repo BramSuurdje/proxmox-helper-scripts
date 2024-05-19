@@ -29,7 +29,7 @@ export type Script = {
   title: string;
   updated: string;
   website: string;
-  isMostPopular: boolean;
+  isMostViewed: boolean;
 };
 
 export interface Category {
