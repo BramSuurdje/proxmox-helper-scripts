@@ -21,7 +21,7 @@ export default function MostPopulairScripts() {
     try {
       const res = await pb.collection("proxmox_scripts").getList(1, 3, {
         sort: "created",
-        filter: "isMostPopular = true",
+        filter: "isMostViewed = true",
       });
       setLatestScripts(res.items as unknown as Script[]);
     } catch (error) {
@@ -38,7 +38,7 @@ export default function MostPopulairScripts() {
   return (
     <div className="">
       <h2 className="mb-2 text-lg font-semibold">
-        Most Popular Scripts
+        Most Viewed Scripts
       </h2>
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.map((item) => (
