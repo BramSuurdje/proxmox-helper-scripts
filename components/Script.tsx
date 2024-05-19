@@ -38,13 +38,11 @@ function ScriptItem() {
 
     if (amountOfScriptsCopied === null) {
       localStorage.setItem("amountOfScriptsCopied", "1");
-    } else if (parseInt(amountOfScriptsCopied) >= 3) {
-      ""
     } else {
       amountOfScriptsCopied = (parseInt(amountOfScriptsCopied) + 1).toString();
       localStorage.setItem("amountOfScriptsCopied", amountOfScriptsCopied);
 
-      if (parseInt(amountOfScriptsCopied) === 3) {
+      if (parseInt(amountOfScriptsCopied) === 3 || parseInt(amountOfScriptsCopied) === 10 || parseInt(amountOfScriptsCopied) === 25 || parseInt(amountOfScriptsCopied) === 50 || parseInt(amountOfScriptsCopied) === 100) {
         setTimeout(() => {
           toast.info(
             <div className="flex flex-col gap-3">
