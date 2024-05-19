@@ -85,10 +85,6 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    fetchLinks();
-  }, []);
-
   return (
     <>
       <div
@@ -108,7 +104,11 @@ function Navbar() {
           </h2>
           <div className="flex items-center sm:hidden">
             <Sheet>
-              <SheetTrigger onClick={() => setShouldFocusInput(false)}>
+              <SheetTrigger
+                onClick={async () => {
+                  await fetchLinks();
+                }}
+              >
                 <Menu className="h-8 w-8" />
               </SheetTrigger>
               <SheetContent
