@@ -14,17 +14,22 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { extractDate } from "@/lib/time";
 
-function LatestScripts() {
+export default function MostPopulairScripts() {
   const [latestScripts, setLatestScripts] = useState<Script[]>([]);
 
   async function getLatestScripts() {
-    const res = await pb.collection("proxmox_scripts").getList(1, 3, {
-      sort: "-created",
-      requestKey: "latest_scripts",
-    });
-
-    setLatestScripts(res.items as unknown as Script[]);
+    try {
+      const res = await pb.collection("proxmox_scripts").getList(1, 3, {
+        sort: "created",
+        filter: "isMostPopulair = true",
+      });
+      setLatestScripts(res.items as unknown as Script[]);
+    } catch (error) {
+      console.error("Error fetching scripts:", error);
+    }
   }
+
+
 
   useEffect(() => {
     getLatestScripts();
@@ -32,14 +37,14 @@ function LatestScripts() {
 
   return (
     <div className="">
-      <h2 className="mb-2 text-lg font-semibold ">
-        Newest Scripts
+      <h2 className="mb-2 text-lg font-semibold">
+        Most Populair Scripts
       </h2>
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] flex-1 flex-grow "
+            className=" min-w-[250px] flex-1 flex-grow"
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
@@ -78,5 +83,3 @@ function LatestScripts() {
     </div>
   );
 }
-
-export default LatestScripts;

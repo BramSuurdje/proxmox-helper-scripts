@@ -12,6 +12,7 @@ import { Script } from "@/lib/types";
 import { useSearchParams  } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LatestScripts from "./LatestScripts";
+import MostPopulairScripts from "./MostPopulairScripts";
 
 function ScriptItem() {
   const [item, setItem] = useState<Script | null>(null);
@@ -384,9 +385,10 @@ function ScriptItem() {
         </div>
       )}
       {item ? null : (
-        <>
+        <div className="flex flex-col w-full gap-5">
           <LatestScripts />
-        </>
+          <MostPopulairScripts />
+        </div>
       )}
     </Suspense>
   );
