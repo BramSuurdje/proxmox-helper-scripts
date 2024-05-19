@@ -14,7 +14,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { extractDate } from "@/lib/time";
 
-export default function MostPopulairScripts() {
+export default function MostViewedScripts() {
   const [latestScripts, setLatestScripts] = useState<Script[]>([]);
 
   async function getLatestScripts() {
