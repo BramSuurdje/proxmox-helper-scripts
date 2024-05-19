@@ -12,7 +12,7 @@ import { Script } from "@/lib/types";
 import { useSearchParams  } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LatestScripts from "./LatestScripts";
-import MostPopulairScripts from "./MostPopulairScripts";
+import MostPopulairScripts from "./MostPopularScripts";
 
 function ScriptItem() {
   const [item, setItem] = useState<Script | null>(null);
