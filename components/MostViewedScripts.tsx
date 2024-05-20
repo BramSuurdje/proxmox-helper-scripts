@@ -20,7 +20,7 @@ export default function MostViewedScripts() {
   async function getLatestScripts() {
     try {
       const res = await pb.collection("proxmox_scripts").getList(1, 3, {
-        sort: "created",
+        sort: "mostViewedPosition",
         filter: "isMostViewed = true",
       });
       setLatestScripts(res.items as unknown as Script[]);
