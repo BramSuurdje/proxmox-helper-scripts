@@ -1,15 +1,15 @@
 # Proxmox Helper Scripts
 
-official re-design of the [Proxmox helper script website](https://tteck.github.io/Proxmox/)
+Official re-design of the [Proxmox helper script website](https://tteck.github.io/Proxmox/).
 
-feel free to fork the project. or post feedback in the [Discussion tab](https://github.com/BramSuurdje/proxmox-helper-scripts/discussions). your feedback is always welcomed.
+Feel free to fork the project or post feedback in the [Discussion tab](https://github.com/BramSuurdje/proxmox-helper-scripts/discussions). Your feedback is always welcome.
 
 ## Todo
 
-- [ ] fix issue with accordions not expanding when searching
-- [X] when no item is selected. display populair scripts etc.
+- [ ] Fix issue with accordions not expanding when searching
+- [X] When no item is selected, display popular scripts, etc.
 
-## How to contribute
+## How to Contribute
 
 First, install the dependencies:
 
@@ -23,20 +23,19 @@ pnpm install
 bun install
 ```
 
-After that, run the docker container to host your own pocketbase instance
+Next, run the Docker container to host your own PocketBase instance:
 
 ```bash
 docker compose up -d
 ```
 
-Head over to localhost:8080 and register with random details (will be overwritten later)
-After that, apply the `pb_backup.zip` that is shipped in the repo.
+Head over to `localhost:8080` and register with random details (they will be overwritten later). Apply the `pb_backup.zip` included in the repo.
 
-you will be logged out from your pocketbase instance and you can then login again wit the following details
-email: `example@example.com`
-password: `changeme123`
+You will be logged out from your PocketBase instance. Log in again with the following details:
+- Email: `example@example.com`
+- Password: `changeme123`
 
-finally you need to rename `example.env` to `.env`
+Finally, rename `example.env` to `.env`.
 
 Then, run the development server:
 
@@ -50,4 +49,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
