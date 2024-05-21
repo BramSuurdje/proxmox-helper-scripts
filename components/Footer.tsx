@@ -7,7 +7,11 @@ export default function Footer() {
   return (
     <div className="glass w-full border-b border-t bg-background/50 py-6 text-center">
       Copyright {year} tteck. All rights reserved. |{" "}
-      <Link className="hover:underline" href="/terms-of-use">
+      <Link
+        className="hover:underline"
+        href="/terms-of-use"
+        data-umami-event="Terms of Use"
+      >
         Terms of Use
       </Link>
     </div>
