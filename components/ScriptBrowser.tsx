@@ -17,6 +17,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [selectedScript, setSelectedScript] = useState<string | null>(null);
 
   useEffect(() => {
     if (items) {
@@ -78,6 +79,10 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
         };
   }, [searchTerm, expandedItems]);
 
+  const handleSelected = (title: string) => {
+    setSelectedScript(title);
+  };
+
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
@@ -110,7 +115,12 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
-                      className="flex cursor-pointer items-center justify-between gap-1 text-muted-foreground"
+                      className={`flex cursor-pointer items-center justify-between gap-1 text-muted-foreground ${
+                        selectedScript === script.title
+                          ? "font-semibold dark:text-white"
+                          : ""
+                      }`}
+                      onClick={() => handleSelected(script.title)}
                     >
                       {script.title}{" "}
                       <Badge
