@@ -8,32 +8,25 @@ import {
 } from "@/components/ui/card";
 import { pb } from "@/lib/pocketbase";
 import { useEffect, useState } from "react";
-import { Script } from "@/lib/types";
+import { Category, Script } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { extractDate } from "@/lib/time";
 
-export default function MostViewedScripts() {
+export default function MostViewedScripts({items} : {items: Category[]}) {
   const [latestScripts, setLatestScripts] = useState<Script[]>([]);
 
-  async function getLatestScripts() {
-    try {
-      const res = await pb.collection("proxmox_scripts").getList(1, 3, {
-        sort: "mostViewedPosition",
-        filter: "isMostViewed = true",
-      });
-      setLatestScripts(res.items as unknown as Script[]);
-    } catch (error) {
-      console.error("Error fetching scripts:", error);
-    }
-  }
-
-
-
   useEffect(() => {
-    getLatestScripts();
-  }, []);
+    if (items) {
+      const scripts = items.flatMap((category) => category.expand.items);
+      const mostViewedScripts = scripts.filter((item) => item.isMostViewed);
+      const sortedScripts = mostViewedScripts.sort((a, b) => {
+        return a.mostViewedPosition - b.mostViewedPosition;
+      });
+      setLatestScripts(sortedScripts.slice(0, 3));
+    }
+  }, [items]);
 
   return (
     <div className="">

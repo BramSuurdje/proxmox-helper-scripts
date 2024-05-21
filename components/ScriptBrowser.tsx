@@ -9,14 +9,19 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
-import { pb } from "@/lib/pocketbase";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
 
-const ScriptBrowser = () => {
+const ScriptBrowser = ({ items }: { items: Category[] }) => {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (items) {
+      setLinks(items);
+    }
+  }, [items]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -30,24 +35,6 @@ const ScriptBrowser = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
-
-  const fetchLinks = async () => {
-    try {
-      // you can also fetch all records at once via getFullList
-      const res = await pb.collection("categories").getFullList({
-        expand: "items",
-        sort: "order",
-        requestKey: "desktop",
-      });
-      setLinks(res as unknown as Category[]);
-    } catch (error) {
-      console.error("Error fetching links:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchLinks();
   }, []);
 
   const handleSearch = (value: string) => {

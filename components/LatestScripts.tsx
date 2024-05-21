@@ -8,27 +8,24 @@ import {
 } from "@/components/ui/card";
 import { pb } from "@/lib/pocketbase";
 import { useEffect, useState } from "react";
-import { Script } from "@/lib/types";
+import { Category, Script } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { extractDate } from "@/lib/time";
 
-function LatestScripts() {
+function LatestScripts({items } : {items: Category[]}) {
   const [latestScripts, setLatestScripts] = useState<Script[]>([]);
 
-  async function getLatestScripts() {
-    const res = await pb.collection("proxmox_scripts").getList(1, 3, {
-      sort: "-created",
-      requestKey: "latest_scripts",
-    });
-
-    setLatestScripts(res.items as unknown as Script[]);
-  }
-
   useEffect(() => {
-    getLatestScripts();
-  }, []);
+    if (items) {
+      const scripts = items.flatMap((category) => category.expand.items);
+      const sortedScripts = scripts.sort((a, b) => {
+        return new Date(b.created).getTime() - new Date(a.created).getTime();
+      });
+      setLatestScripts(sortedScripts.slice(0, 3));
+    }
+  }, [items]);
 
   return (
     <div className="">

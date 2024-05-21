@@ -30,6 +30,7 @@ export type Script = {
   updated: string;
   website: string;
   isMostViewed: boolean;
+  mostViewedPosition: number;
 };
 
 export interface Category {

@@ -8,28 +8,25 @@ import { toast } from "sonner";
 import { Clipboard, Info, X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { Script } from "@/lib/types";
-import { useSearchParams  } from "next/navigation";
+import { Category, Script } from "@/lib/types";
+import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LatestScripts from "./LatestScripts";
 import MostViewedScripts from "./MostViewedScripts";
 
-function ScriptItem() {
+function ScriptItem({ items }: { items: Category[] }) {
   const [item, setItem] = useState<Script | null>(null);
   const id = useSearchParams().get("id");
 
-  const getItem = async () => {
-    const res = await pb.collection('proxmox_scripts').getFirstListItem(`title="${id}"`);
-    setItem(res as unknown as Script);
-  };
-
   useEffect(() => {
-    if (id) {
-      getItem();
-    } else {
-      setItem(null);
+    if (items) {
+      const script = items
+        .map((category) => category.expand.items)
+        .flat()
+        .find((script) => script.title === id);
+      setItem(script || null);
     }
-  }, [id]);
+  }, [id, items]);
 
   function handleCopy(type: string, value: any) {
     navigator.clipboard.writeText(value);
@@ -42,7 +39,13 @@ function ScriptItem() {
       amountOfScriptsCopied = (parseInt(amountOfScriptsCopied) + 1).toString();
       localStorage.setItem("amountOfScriptsCopied", amountOfScriptsCopied);
 
-      if (parseInt(amountOfScriptsCopied) === 3 || parseInt(amountOfScriptsCopied) === 10 || parseInt(amountOfScriptsCopied) === 25 || parseInt(amountOfScriptsCopied) === 50 || parseInt(amountOfScriptsCopied) === 100) {
+      if (
+        parseInt(amountOfScriptsCopied) === 3 ||
+        parseInt(amountOfScriptsCopied) === 10 ||
+        parseInt(amountOfScriptsCopied) === 25 ||
+        parseInt(amountOfScriptsCopied) === 50 ||
+        parseInt(amountOfScriptsCopied) === 100
+      ) {
         setTimeout(() => {
           toast.info(
             <div className="flex flex-col gap-3">
@@ -75,7 +78,6 @@ function ScriptItem() {
       </div>,
     );
   }
-
 
   function closeScript() {
     // remove the id from the url and reset the state
@@ -384,8 +386,8 @@ function ScriptItem() {
       )}
       {item ? null : (
         <div className="flex w-full flex-col gap-5">
-          <LatestScripts />
-          <MostViewedScripts />
+          <LatestScripts items={items} />
+          <MostViewedScripts items={items} />
         </div>
       )}
     </Suspense>
