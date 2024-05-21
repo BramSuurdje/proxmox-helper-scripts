@@ -23,6 +23,21 @@ pnpm install
 bun install
 ```
 
+After that, run the docker container to host your own pocketbase instance
+
+```bash
+docker compose up -d
+```
+
+Head over to localhost:8080 and register with random details (will be overwritten later)
+After that, apply the `pb_backup.zip` that is shipped in the repo.
+
+you will be logged out from your pocketbase instance and you can then login again wit the following details
+email: `example@example.com`
+password: `changeme123`
+
+finally you need to rename `example.env` to `.env`
+
 Then, run the development server:
 
 ```bash
