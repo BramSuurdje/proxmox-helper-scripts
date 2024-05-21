@@ -16,6 +16,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
     if (items) {
@@ -49,6 +50,34 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
     );
   }, [links, searchTerm]);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const expanded = filteredLinks.map((category) => category.catagoryName);
+      setExpandedItems(expanded);
+    } else {
+      setExpandedItems([]);
+    }
+  }, [searchTerm, filteredLinks]);
+
+  const handleAccordionChange = (value: string[]) => {
+    setExpandedItems(value);
+  };
+
+  const accordionProps = useMemo(() => {
+    return searchTerm
+      ? {
+          type: "multiple" as const,
+          value: expandedItems,
+          onValueChange: handleAccordionChange,
+        }
+      : {
+          type: "single" as const,
+          collapsible: true,
+          value: expandedItems[0],
+          onValueChange: (value: string) => handleAccordionChange([value]),
+        };
+  }, [searchTerm, expandedItems]);
+
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
@@ -59,15 +88,17 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
         onChange={(e) => handleSearch(e.target.value)}
         ref={inputRef}
       />
-      <Accordion type={searchTerm ? "multiple" : "single"} collapsible>
+      <Accordion {...accordionProps}>
         {filteredLinks.map((category) => (
           <AccordionItem
             key={category.collectionId}
             value={category.catagoryName}
-            className={`sm:text-md flex flex-col gap-2`}
+            className="sm:text-md flex flex-col gap-2"
           >
             <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent
+              data-state={expandedItems.includes(category.catagoryName) ? "open" : "closed"}
+            >
               {category.expand.items
                 .filter((script) =>
                   script.title.toLowerCase().includes(searchTerm.toLowerCase()),
