@@ -78,7 +78,7 @@ export default function RootLayout({
                 <Toaster richColors />
               </div>
             </div>
-            {/* <Footer /> */}
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
