@@ -8,17 +8,25 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
+import { X } from "lucide-react";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
 
-const ScriptBrowser = ({ items }: { items: Category[] }) => {
+const ScriptBrowser = ({
+  items,
+  selectedScript,
+  setSelectedScript,
+}: {
+  items: Category[];
+  selectedScript: string | null;
+  setSelectedScript: (script: string | null) => void;
+}) => {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  const [selectedScript, setSelectedScript] = useState<string | null>(null);
 
   useEffect(() => {
     if (items) {
@@ -31,6 +39,9 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
       if (event.key === "/") {
         inputRef.current?.focus();
         event.preventDefault();
+      }
+      if (event.key === "Escape") {
+        handleSearch("");
       }
     };
 
@@ -87,13 +98,33 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
-      <Input
-        className="mb-5"
-        type="text"
-        placeholder="Type '/' to search"
-        onChange={(e) => handleSearch(e.target.value)}
-        ref={inputRef}
-      />
+      <div className="relative">
+        <div className="flex items-center mb-1">
+          <Input
+            className="flex-grow"
+            type="text"
+            placeholder="Type '/' to search"
+            onChange={(e) => handleSearch(e.target.value)}
+            ref={inputRef}
+            value={searchTerm}
+          />
+          {searchTerm && (
+            <X
+              className="w-4 h-4 cursor-pointer ml-2"
+              onClick={() => handleSearch("")}
+              style={{
+                position: 'absolute',
+                right: '0.5rem'
+              }}
+            />
+          )}
+        </div>
+        {searchTerm ? (
+          <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">Press 'Esc' to clear the search</p>
+        ) : (
+          <p className="text-xs text-neutral-500 mb-1">&nbsp;</p>
+        )}
+      </div>
       <Accordion {...accordionProps}>
         {filteredLinks.map((category) => (
           <AccordionItem

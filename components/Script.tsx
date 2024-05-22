@@ -14,7 +14,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LatestScripts from "./LatestScripts";
 import MostViewedScripts from "./MostViewedScripts";
 
-function ScriptItem({ items }: { items: Category[] }) {
+function ScriptItem({
+  items,
+  selectedScript,
+  setSelectedScript,
+}: {
+  items: Category[];
+  selectedScript: string | null;
+  setSelectedScript: (script: string | null) => void;
+}) {
   const [item, setItem] = useState<Script | null>(null);
   const id = useSearchParams().get("id");
 
@@ -82,7 +90,7 @@ function ScriptItem({ items }: { items: Category[] }) {
   function closeScript() {
     // remove the id from the url and reset the state
     window.history.pushState({}, document.title, window.location.pathname);
-    setItem(null);
+    setSelectedScript(null);
   }
 
   function descriptionCodeBlock(description: string) {
