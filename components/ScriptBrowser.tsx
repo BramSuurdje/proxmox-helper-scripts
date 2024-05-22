@@ -98,7 +98,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
           <AccordionItem
             key={category.collectionId}
             value={category.catagoryName}
-            className="sm:text-md flex flex-col gap-2"
+            className="sm:text-md flex flex-col"
           >
             <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
             <AccordionContent
