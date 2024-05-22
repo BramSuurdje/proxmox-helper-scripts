@@ -6,7 +6,7 @@ Feel free to fork the project or post feedback in the [Discussion tab](https://g
 
 ## Todo
 
-- [ ] Fix issue with accordions not expanding when searching
+- [X] Fix issue with accordions not expanding when searching
 - [X] When no item is selected, display popular scripts, etc.
 
 ## How to Contribute
