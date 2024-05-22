@@ -115,7 +115,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
-                      className={`py-1 px-2 hover:rounded-lg hover:bg-neutral-50 hover:dark:bg-neutral-800 hover:dark:bg-neutral-700 flex cursor-pointer items-center justify-between gap-1 text-muted-foreground ${
+                      className={`py-1 hover:rounded-lg hover:bg-neutral-50 hover:dark:bg-neutral-800 hover:dark:bg-neutral-700 flex cursor-pointer items-center justify-between gap-1 text-muted-foreground ${
                         selectedScript === script.title
                           ? "rounded-lg font-semibold dark:text-white bg-neutral-100 dark:bg-neutral-900"
                           : ""
