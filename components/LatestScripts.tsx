@@ -6,26 +6,38 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { pb } from "@/lib/pocketbase";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Category, Script } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { extractDate } from "@/lib/time";
 
-function LatestScripts({items } : {items: Category[]}) {
-  const [latestScripts, setLatestScripts] = useState<Script[]>([]);
+const ITEMS_PER_PAGE = 3;
 
-  useEffect(() => {
-    if (items) {
-      const scripts = items.flatMap((category) => category.expand.items);
-      const sortedScripts = scripts.sort((a, b) => {
-        return new Date(b.created).getTime() - new Date(a.created).getTime();
-      });
-      setLatestScripts(sortedScripts.slice(0, 3));
-    }
+function LatestScripts({ items }: { items: Category[] }) {
+  const [page, setPage] = useState(1);
+
+  const latestScripts = useMemo(() => {
+    if (!items) return [];
+    const scripts = items.flatMap((category) => category.expand.items || []);
+    return scripts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
   }, [items]);
+
+  const goToNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const goToPreviousPage = () => {
+    setPage((prevPage) => prevPage - 1);
+  };
+
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const endIndex = page * ITEMS_PER_PAGE;
+
+  if (!items) {
+    return null;
+  }
 
   return (
     <div className="">
@@ -33,7 +45,7 @@ function LatestScripts({items } : {items: Category[]}) {
         Newest Scripts
       </h2>
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
-        {latestScripts.map((item) => (
+        {latestScripts.slice(startIndex, endIndex).map((item) => (
           <Card
             key={item.id}
             className=" min-w-[250px] flex-1 flex-grow animate-fade-up "
@@ -71,6 +83,10 @@ function LatestScripts({items } : {items: Category[]}) {
             </CardFooter>
           </Card>
         ))}
+      </div>
+      <div className="p-2 flex justify-end gap-1 animate-fade-up">
+        {page > 1 && <Button onClick={goToPreviousPage} variant="outline">Previous</Button>}
+        {endIndex < latestScripts.length && <Button onClick={goToNextPage} variant="outline">{page === 1 ? "More.." : "Next"}</Button>}
       </div>
     </div>
   );
