@@ -127,6 +127,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
                       {script.logo && (
                         <Image
                           src={script.logo}
+                          priority
                           alt={script.title}
                           width={16}
                           height={16}

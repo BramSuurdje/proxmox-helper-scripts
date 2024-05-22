@@ -147,7 +147,7 @@ function ScriptItem({ items }: { items: Category[] }) {
                     width={400}
                     height={400}
                     alt={item.title}
-                    priority={true}
+                    priority
                   />
                   <div className="ml-4 flex flex-col justify-between">
                     <div className="flex h-full w-full flex-col justify-between">
