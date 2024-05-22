@@ -1,13 +1,10 @@
 # Proxmox Helper Scripts
 
-Official re-design of the [Proxmox helper script website](https://tteck.github.io/Proxmox/).
+# Update: since making the repo public. tteck has run away with the website and has ended all communication. if you want to use the most up to date website with the best features/security. you can use the site that is linked to the repo. thank you!
+
+Official re-design of the [Proxmox VE helper-script website](https://tteck.github.io/Proxmox/).
 
 Feel free to fork the project or post feedback in the [Discussion tab](https://github.com/BramSuurdje/proxmox-helper-scripts/discussions). Your feedback is always welcome.
-
-## Todo
-
-- [X] Fix issue with accordions not expanding when searching
-- [X] When no item is selected, display popular scripts, etc.
 
 ## How to Contribute
 
