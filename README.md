@@ -2,7 +2,7 @@
 
 # Update: since making the repo public. tteck has run away with the website and has ceased all communication. For the most up-to-date website with the best features and security, please use the site linked to the repository. Thank you.
 
-Official re-design of the [Proxmox VE helper-script website](https://tteck.github.io/Proxmox/).
+Official re-design of the Proxmox VE helper-script website.
 
 Feel free to fork the project or post feedback in the [Discussion tab](https://github.com/BramSuurdje/proxmox-helper-scripts/discussions). Your feedback is always welcome.
 
