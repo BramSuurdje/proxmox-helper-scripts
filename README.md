@@ -1,6 +1,6 @@
 # Proxmox Helper Scripts
 
-# Update: since making the repo public. tteck has run away with the website and has ended all communication. if you want to use the most up to date website with the best features/security. you can use the site that is linked to the repo. thank you!
+# Update: since making the repo public. tteck has run away with the website and has ceased all communication. For the most up-to-date website with the best features and security, please use the site linked to the repository. Thank you.
 
 Official re-design of the [Proxmox VE helper-script website](https://tteck.github.io/Proxmox/).
 
