@@ -14,12 +14,19 @@ import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
 
-const ScriptBrowser = ({ items }: { items: Category[] }) => {
+const ScriptBrowser = ({
+  items,
+  selectedScript,
+  setSelectedScript,
+}: {
+  items: Category[];
+  selectedScript: string | null;
+  setSelectedScript: (script: string | null) => void;
+}) => {
   const [links, setLinks] = useState<Category[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  const [selectedScript, setSelectedScript] = useState<string | null>(null);
 
   useEffect(() => {
     if (items) {
