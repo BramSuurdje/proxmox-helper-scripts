@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
@@ -122,16 +123,29 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
                       }`}
                       onClick={() => handleSelected(script.title)}
                     >
-                      {script.title}{" "}
+                      {script.logo && (
+                        <Image
+                          src={script.logo}
+                          alt={script.title}
+                          width={16}
+                          height={16}
+                          className="rounded-full animate-fade mr-1"
+                        />
+                      )}
+                      <span className="flex items-center gap-2">
+                        {script.title}
+                      </span>
                       <Badge
                         className={clsx(
-                          "w-[37.69px] justify-center text-center",
+                          "ml-auto w-[37.69px] justify-center text-center",
                           {
                             "border-primary/75 text-primary/75":
                               script.item_type === "VM",
                             "border-yellow-500/75 text-yellow-500/75":
                               script.item_type === "LXC",
-                            hidden: !["VM", "LXC"].includes(script.item_type),
+                            "border-none":
+                              script.item_type === "",
+                            hidden: !["VM", "LXC", ""].includes(script.item_type),
                           },
                         )}
                       >
