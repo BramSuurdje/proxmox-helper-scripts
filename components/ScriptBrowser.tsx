@@ -120,7 +120,7 @@ const ScriptBrowser = ({
           )}
         </div>
         {searchTerm ? (
-          <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">Press 'Esc' to clear the search</p>
+          <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">Press &apos;Esc&apos; to clear the search</p>
         ) : (
           <p className="text-xs text-neutral-500 mb-1">&nbsp;</p>
         )}
