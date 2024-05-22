@@ -385,7 +385,7 @@ function ScriptItem({ items }: { items: Category[] }) {
         </div>
       )}
       {item ? null : (
-        <div className="flex w-full flex-col gap-5">
+        <div className="flex w-full flex-col">
           <LatestScripts items={items} />
           <MostViewedScripts items={items} />
         </div>
