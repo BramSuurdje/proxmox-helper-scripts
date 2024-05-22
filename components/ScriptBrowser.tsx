@@ -131,7 +131,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
                           alt={script.title}
                           width={16}
                           height={16}
-                          className="rounded-full animate-fade mr-1"
+                          className="rounded-full mr-1"
                         />
                       )}
                       <span className="flex items-center gap-2">

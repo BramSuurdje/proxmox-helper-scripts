@@ -3,9 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import React from "react";
-import { title } from "process";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -78,7 +76,6 @@ export default function RootLayout({
                 <Toaster richColors />
               </div>
             </div>
-            <Footer />
           </div>
         </ThemeProvider>
       </body>
