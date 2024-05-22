@@ -103,6 +103,7 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
             <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
             <AccordionContent
               data-state={expandedItems.includes(category.catagoryName) ? "open" : "closed"}
+              className="pb-2 pt-0"
             >
               {category.expand.items
                 .filter((script) =>
