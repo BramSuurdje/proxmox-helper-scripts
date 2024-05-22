@@ -98,26 +98,27 @@ const ScriptBrowser = ({ items }: { items: Category[] }) => {
           <AccordionItem
             key={category.collectionId}
             value={category.catagoryName}
-            className="sm:text-md flex flex-col gap-2"
+            className="sm:text-md flex flex-col"
           >
             <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
             <AccordionContent
               data-state={expandedItems.includes(category.catagoryName) ? "open" : "closed"}
+              className="pb-2 pt-0"
             >
               {category.expand.items
                 .filter((script) =>
                   script.title.toLowerCase().includes(searchTerm.toLowerCase()),
                 )
                 .map((script, index) => (
-                  <p key={index} className="py-1">
+                  <p key={index}>
                     <Link
                       href={{
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
-                      className={`flex cursor-pointer items-center justify-between gap-1 text-muted-foreground ${
+                      className={`py-1 px-1 hover:rounded-lg hover:bg-neutral-50 hover:dark:bg-neutral-800 hover:dark:bg-neutral-700 flex cursor-pointer items-center justify-between gap-1 text-muted-foreground ${
                         selectedScript === script.title
-                          ? "font-semibold dark:text-white"
+                          ? "rounded-lg font-semibold dark:text-white bg-neutral-100 dark:bg-neutral-900"
                           : ""
                       }`}
                       onClick={() => handleSelected(script.title)}
