@@ -186,16 +186,34 @@ function Navbar() {
           <div className="hidden gap-2 sm:flex">
             {[
               {
-                href: "https://ko-fi.com/bramsuurdje",
+                href: "https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md",
+                event: "Contributing",
+                icon: <LuGitPullRequestDraft className="mr-2 h-4 w-4" />,
+                text: "Contribute",
+              },
+              {
+                href: "https://github.com/tteck/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md",
+                event: "Guides",
+                icon: <LuBookOpenCheck className="mr-2 h-4 w-4" />,
+                text: "Guides",
+              },
+              {
+                href: "https://github.com/tteck/Proxmox/blob/main/CHANGELOG.md",
+                event: "Change Log",
+                icon: <LuClipboardSignature className="mr-2 h-4 w-4" />,
+                text: "Changelog",
+              },
+              {
+                href: "https://ko-fi.com/proxmoxhelperscripts",
                 event: "ko-fi",
                 icon: <Coffee className="mr-2 h-4 w-4" />,
                 text: "Buy me a coffee",
               },
               {
                 href: "https://github.com/tteck/Proxmox",
-                event: "Helper-scripts",
+                event: "View on GitHub",
                 icon: <FaGithub className="mr-2 h-4 w-4" />,
-                text: "View Proxmox VE Helper-Scripts on GitHub",
+                text: "View on Github",
               },
             ].map(({ href, event, icon, text }) => (
               <Button key={event} variant="ghost" asChild>
