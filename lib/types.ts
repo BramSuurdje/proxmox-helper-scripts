@@ -20,7 +20,7 @@ export type Script = {
   documentation: string;
   hasAlpineScript: boolean;
   id: string;
-  installCommand: string;
+  installcommand: string;
   isUpdateable: boolean;
   item_type: string;
   logo: string;
