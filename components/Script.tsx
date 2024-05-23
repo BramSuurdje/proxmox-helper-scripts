@@ -38,7 +38,14 @@ function ScriptItem({
 
   const findInstallCommandKey = (obj: any): string | null => {
     for (const key in obj) {
-      if (typeof obj[key] === 'string' && obj[key].includes('https://github.com/tteck/Proxmox/') && !obj[key].includes("alpine")) {
+      if (
+        typeof obj[key] === "string" &&
+        obj[key].includes("https://github.com/tteck/Proxmox/") &&
+        !obj[key].includes("alpine") &&
+        !obj[key].includes("discussion") &&
+        !obj[key].includes("alert") &&
+        !obj[key].includes("2>/dev/null")
+      ) {
         return key;
       }
     }
