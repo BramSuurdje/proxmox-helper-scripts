@@ -1,7 +1,7 @@
 'use client'
 import { pb } from "@/lib/pocketbase";
 import Image from "next/image";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
@@ -36,7 +36,24 @@ function ScriptItem({
     }
   }, [id, items]);
 
-  function handleCopy(type: string, value: any) {
+  const findInstallCommandKey = (obj: any): string | null => {
+    for (const key in obj) {
+      if (typeof obj[key] === 'string' && obj[key].includes('https://github.com/tteck/Proxmox/') && !obj[key].includes("alpine")) {
+        return key;
+      }
+    }
+    return null;
+  };
+
+  const installCommand = useMemo(() => {
+    if (item) {
+      const key = findInstallCommandKey(item);
+      return key ? item[key as keyof Script] : null;
+    }
+    return null;
+  }, [item]);
+
+  const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);
 
     let amountOfScriptsCopied = localStorage.getItem("amountOfScriptsCopied");
@@ -85,15 +102,15 @@ function ScriptItem({
         <span>Copied {type} to clipboard</span>
       </div>,
     );
-  }
+  };
 
-  function closeScript() {
+  const closeScript = () => {
     // remove the id from the url and reset the state
     window.history.pushState({}, document.title, window.location.pathname);
     setSelectedScript(null);
-  }
+  };
 
-  function descriptionCodeBlock(description: string) {
+  const descriptionCodeBlock = (description: string) => {
     const pattern = /`([^`]*)`/g;
     const parts = description.split(pattern);
 
@@ -115,17 +132,18 @@ function ScriptItem({
     });
 
     return formattedDescription;
-  }
+  };
 
   const [width, setWidth] = useState<number>(
     typeof window !== "undefined" ? window.innerWidth : 0,
   );
 
-  function handleWindowSizeChange() {
+  const handleWindowSizeChange = () => {
     if (typeof window !== "undefined") {
       setWidth(window.innerWidth);
     }
-  }
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("resize", handleWindowSizeChange);
@@ -311,11 +329,11 @@ function ScriptItem({
                           variant="secondary"
                           size={"sm"}
                           onClick={() =>
-                            handleCopy("install command", item.installcommand)
+                            handleCopy("install command", installCommand)
                           }
                         >
-                          {!isMobile && item.installcommand
-                            ? item.installcommand
+                          {!isMobile && installCommand
+                            ? installCommand
                             : "Copy install command"}
                         </Button>
                       </TabsContent>
@@ -377,11 +395,11 @@ function ScriptItem({
                         variant="secondary"
                         size={"sm"}
                         onClick={() =>
-                          handleCopy("install command", item.installcommand)
+                          handleCopy("install command", installCommand)
                         }
                       >
-                        {!isMobile && item.installcommand
-                          ? item.installcommand
+                        {!isMobile && installCommand
+                          ? installCommand
                           : "Copy install command"}
                       </Button>
                     </>
@@ -400,6 +418,6 @@ function ScriptItem({
       )}
     </Suspense>
   );
-};
+}
 
 export default ScriptItem;
