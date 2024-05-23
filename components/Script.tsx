@@ -311,11 +311,11 @@ function ScriptItem({
                           variant="secondary"
                           size={"sm"}
                           onClick={() =>
-                            handleCopy("install command", item.installCommand)
+                            handleCopy("install command", item.installcommand)
                           }
                         >
-                          {!isMobile && item.installCommand
-                            ? item.installCommand
+                          {!isMobile && item.installcommand
+                            ? item.installcommand
                             : "Copy install command"}
                         </Button>
                       </TabsContent>
@@ -377,11 +377,11 @@ function ScriptItem({
                         variant="secondary"
                         size={"sm"}
                         onClick={() =>
-                          handleCopy("install command", item.installCommand)
+                          handleCopy("install command", item.installcommand)
                         }
                       >
-                        {!isMobile && item.installCommand
-                          ? item.installCommand
+                        {!isMobile && item.installcommand
+                          ? item.installcommand
                           : "Copy install command"}
                       </Button>
                     </>
