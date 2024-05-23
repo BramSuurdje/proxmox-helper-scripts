@@ -42,7 +42,7 @@ function ScriptItem({
         typeof obj[key] === "string" &&
         obj[key].includes("https://github.com/tteck/Proxmox/") &&
         !obj[key].includes("alpine") &&
-        !obj[key].includes("discussion") &&
+        !obj[key].includes("discussions") &&
         !obj[key].includes("alert") &&
         !obj[key].includes("2>/dev/null")
       ) {
