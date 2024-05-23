@@ -57,8 +57,8 @@ export default function RootLayout({
       <head>
         <script
           defer
-          src="https://analytics.pvehs.com/script.js"
-          data-website-id="c43f9685-6302-4359-a049-2936ccc6b7ca"
+          src="https://analytics.bramsuurd.nl/script.js"
+          data-website-id="7e29b1b6-8b7f-4e97-a5a5-9f335d67b683"
         ></script>
       </head>
       <body className={inter.className}>
