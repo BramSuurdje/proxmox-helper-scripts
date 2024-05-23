@@ -21,7 +21,7 @@ export default function Page() {
           sort: "order",
           requestKey: "desktop",
         });
-        if (!res) {
+        if (res.length === 0) {
           throw new Error("Empty response");
         }
       } catch (error) {
@@ -31,7 +31,7 @@ export default function Page() {
           sort: "order",
           requestKey: "desktop",
         });
-        if (!res) {
+        if (res.length === 0) {
           throw new Error("Empty response");
         }
       }
