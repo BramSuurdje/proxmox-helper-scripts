@@ -2,7 +2,7 @@
 import ScriptItem from "@/components/Script";
 import ScriptBrowser from "@/components/ScriptBrowser";
 import Particles from "@/components/ui/particles";
-import { pb } from "@/lib/pocketbase";
+import { pb, pbBackup } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { useEffect, useState } from "react";
 
@@ -13,17 +13,27 @@ export default function Page() {
 
   const fetchLinks = async () => {
     try {
-      setIsLoading(true)
-      const res = await pb.collection("categories").getFullList({
-        expand: "items",
-        sort: "order",
-        requestKey: "desktop",
-      });
+      setIsLoading(true);
+      let res;
+      try {
+        res = await pb.collection("categories").getFullList({
+          expand: "items",
+          sort: "order",
+          requestKey: "desktop",
+        });
+      } catch (error) {
+        console.error("Error fetching links from pb:", error);
+        res = await pbBackup.collection("categories").getFullList({
+          expand: "items",
+          sort: "order",
+          requestKey: "desktop",
+        });
+      }
       setLinks(res as unknown as Category[]);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching links:", error);
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
