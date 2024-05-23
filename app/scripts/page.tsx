@@ -21,6 +21,9 @@ export default function Page() {
           sort: "order",
           requestKey: "desktop",
         });
+        if (!res) {
+          throw new Error("Empty response");
+        }
       } catch (error) {
         console.error("Error fetching links from pb:", error);
         res = await pbBackup.collection("categories").getFullList({
@@ -28,6 +31,9 @@ export default function Page() {
           sort: "order",
           requestKey: "desktop",
         });
+        if (!res) {
+          throw new Error("Empty response");
+        }
       }
       setLinks(res as unknown as Category[]);
       setIsLoading(false);
