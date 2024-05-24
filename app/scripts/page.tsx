@@ -1,7 +1,6 @@
 'use client'
 import ScriptItem from "@/components/Script";
 import ScriptBrowser from "@/components/ScriptBrowser";
-import Particles from "@/components/ui/particles";
 import { pb, pbBackup } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { useEffect, useState } from "react";
@@ -51,10 +50,6 @@ export default function Page() {
     <>
       {!isLoading ? (
         <>
-          <Particles
-            className="animate-fade-in absolute  inset-0 -z-10"
-            quantity={100}
-          />
           <div className="min-h-screen mb-3">
             <div className="mt-20 flex  sm:px-7 xl:px-0">
               <div className="hidden sm:flex">
