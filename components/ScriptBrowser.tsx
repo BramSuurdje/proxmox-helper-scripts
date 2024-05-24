@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { X, EyeOff, Eye } from "lucide-react";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
@@ -27,6 +27,14 @@ const ScriptBrowser = ({
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [showLogos, setShowLogos] = useState<boolean>(() => {
+    const saved = localStorage.getItem('showLogos');
+    return saved ? JSON.parse(saved) : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('showLogos', JSON.stringify(showLogos));
+  }, [showLogos]);
 
   useEffect(() => {
     if (items) {
@@ -122,7 +130,10 @@ const ScriptBrowser = ({
         {searchTerm ? (
           <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">Press &apos;Esc&apos; to clear the search</p>
         ) : (
-          <p className="text-xs text-neutral-500 mb-1">&nbsp;</p>
+          <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">
+          <a className="cursor-pointer" onClick={() => setShowLogos(!showLogos)}>
+            {showLogos ? <><EyeOff className="inline-block align-text-bottom mr-1 w-4 h-4" />Hide Logos</> : <><Eye className="inline-block align-text-bottom mr-1 w-4 h-4" />Show Logos</>}
+          </a></p>
         )}
       </div>
       <Accordion {...accordionProps}>
@@ -155,7 +166,7 @@ const ScriptBrowser = ({
                       }`}
                       onClick={() => handleSelected(script.title)}
                     >
-                      {script.logo && (
+                      {showLogos && script.logo && (
                         <Image
                           src={script.logo}
                           priority
