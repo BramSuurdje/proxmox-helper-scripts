@@ -204,7 +204,7 @@ function Navbar() {
                 text: "Changelog",
               },
               {
-                href: "https://ko-fi.com/proxmoxhelperscripts",
+                href: "https://ko-fi.com/bramsuurdje",
                 event: "ko-fi",
                 icon: <Coffee className="mr-2 h-4 w-4" />,
                 text: "Buy me a coffee",
