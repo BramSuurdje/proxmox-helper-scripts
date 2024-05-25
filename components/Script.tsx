@@ -173,8 +173,8 @@ function ScriptItem({
                 <X onClick={closeScript} className="cursor-pointer" />
 
               </div>
-              <Separator className="mt-5 w-full min-w-max" />
-              <div className="mt-5 flex justify-between">
+              <Separator className="mt-3 w-full min-w-max" />
+              <div className="mt-4 flex justify-between">
                 <div className="flex">
                   <Image
                     className="h-32 w-32 rounded-lg bg-accent object-contain p-3"
@@ -302,7 +302,7 @@ function ScriptItem({
                   )}
                 </div>
                 {/* <Separator className="mt-5" /> */}
-                <div className="mt-6 border rounded-lg p-4 bg-neutral-900">
+                <div className="mt-6 border rounded-lg p-4 dark:bg-neutral-900 bg-neutral-300">
                   <h2 className="text-lg font-semibold">
                     How to {item.item_type ? "install" : "use"}
                   </h2>
