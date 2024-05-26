@@ -167,13 +167,13 @@ function ScriptItem({
       {item && (
         <div className="mr-7 mt-0 flex w-full min-w-fit">
           <div className="flex w-full min-w-fit">
-            <div className="flex w-full flex-col border rounded-lg p-4">
+            <div className="flex w-full flex-col animate-fade">
               <div className="flex min-w-max items-center justify-between">
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
 
               </div>
-              <Separator className="mt-3 w-full min-w-max" />
+              <div className="border rounded-lg p-4 mt-2">
               <div className="mt-4 flex justify-between">
                 <div className="flex">
                   <Image
@@ -271,7 +271,6 @@ function ScriptItem({
                   </div>
                 </div>
               </div>
-              {/* <Separator className="mt-5 w-full min-w-max" /> */}
               <div>
                 <div className="mt-5">
                   <h2 className="max-w-prose text-lg font-semibold">
@@ -301,7 +300,7 @@ function ScriptItem({
                     </div>
                   )}
                 </div>
-                {/* <Separator className="mt-5" /> */}
+
                 <div className="mt-6 border rounded-lg p-4 dark:bg-neutral-900 bg-neutral-300">
                   <h2 className="text-lg font-semibold">
                     How to {item.item_type ? "install" : "use"}
@@ -413,6 +412,7 @@ function ScriptItem({
                       </Button>
                     </>
                   )}
+                </div>
                 </div>
               </div>
             </div>
