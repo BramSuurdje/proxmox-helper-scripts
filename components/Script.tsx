@@ -167,12 +167,12 @@ function ScriptItem({
       {item && (
         <div className="mr-7 mt-0 flex w-full min-w-fit">
           <div className="flex w-full min-w-fit">
-            <div className="flex w-full flex-col animate-fade">
+            <div className="flex w-full animate-fade flex-col">
               <div className="flex min-w-max items-center justify-between">
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
-              <div className="border rounded-lg p-4 mt-2">
+              <div className="mt-2 rounded-lg border p-4">
                 <div className="mt-4 flex justify-between">
                   <div className="flex">
                     <Image
@@ -186,7 +186,9 @@ function ScriptItem({
                     <div className="ml-4 flex flex-col justify-between">
                       <div className="flex h-full w-full flex-col justify-between">
                         <div>
-                          <h1 className="text-lg font-semibold">{item.title}</h1>
+                          <h1 className="text-lg font-semibold">
+                            {item.title}
+                          </h1>
                           <p className="w-full text-sm text-muted-foreground">
                             Date added: {extractDate(item.created)}
                           </p>
@@ -238,7 +240,9 @@ function ScriptItem({
                           <Button
                             variant={"secondary"}
                             size={"sm"}
-                            onClick={() => handleCopy("interface", item.interface)}
+                            onClick={() =>
+                              handleCopy("interface", item.interface)
+                            }
                           >
                             {item.interface}
                           </Button>
@@ -314,7 +318,7 @@ function ScriptItem({
                     )}
                   </div>
 
-                  <div className="mt-6 border rounded-lg p-4 dark:bg-neutral-900 bg-neutral-300">
+                  <div className="mt-6 rounded-lg border dark:bg-blue-900/20 bg-blue-900/20 p-4">
                     <h2 className="text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>
@@ -362,8 +366,8 @@ function ScriptItem({
                           {item.hasAlpineScript && (
                             <>
                               <p className="mt-2 max-w-2xl text-sm">
-                                As an alternative option, you can use Alpine Linux
-                                and the {item.title} package to create a{" "}
+                                As an alternative option, you can use Alpine
+                                Linux and the {item.title} package to create a{" "}
                                 {item.title} {item.item_type} container with
                                 faster creation time and minimal system resource
                                 usage. You are also obliged to adhere to updates
@@ -381,7 +385,10 @@ function ScriptItem({
                                 variant={"secondary"}
                                 size={"sm"}
                                 onClick={() =>
-                                  handleCopy("install command", item.alpineScript)
+                                  handleCopy(
+                                    "install command",
+                                    item.alpineScript,
+                                  )
                                 }
                               >
                                 {!isMobile && item.alpineScript
@@ -403,8 +410,8 @@ function ScriptItem({
                             </p>
                             {item.isUpdateable && (
                               <p className="text-sm">
-                                To Update {item.title}, run the command below (or
-                                type update) in the LXC Console.
+                                To Update {item.title}, run the command below
+                                (or type update) in the LXC Console.
                               </p>
                             )}
                           </>

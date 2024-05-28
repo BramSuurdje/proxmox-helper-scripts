@@ -107,7 +107,7 @@ const ScriptBrowser = ({
     <div className="flex min-w-72 flex-col sm:max-w-72">
       <h1 className="mb-5 text-xl font-bold">Scripts</h1>
       <div className="relative">
-        <div className="flex items-center mb-1">
+        <div className="mb-1 flex items-center">
           <Input
             className="flex-grow"
             type="text"
@@ -118,22 +118,38 @@ const ScriptBrowser = ({
           />
           {searchTerm && (
             <X
-              className="w-4 h-4 cursor-pointer ml-2"
+              className="ml-2 h-4 w-4 cursor-pointer"
               onClick={() => handleSearch("")}
               style={{
-                position: 'absolute',
-                right: '0.5rem'
+                position: "absolute",
+                right: "0.5rem",
               }}
             />
           )}
         </div>
         {searchTerm ? (
-          <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">Press &apos;Esc&apos; to clear the search</p>
+          <p className="mb-1 ml-2 animate-fade-left text-xs text-muted-foreground">
+            Press &apos;Esc&apos; to clear the search
+          </p>
         ) : (
-          <p className="text-xs text-neutral-500 mb-1 ml-2 animate-fade-left">
-          <a className="cursor-pointer" onClick={() => setShowLogos(!showLogos)}>
-            {showLogos ? <><EyeOff className="inline-block align-text-bottom mr-1 w-4 h-4" />Hide Logos</> : <><Eye className="inline-block align-text-bottom mr-1 w-4 h-4" />Show Logos</>}
-          </a></p>
+          <p className="mb-1 ml-2 animate-fade-left text-xs text-muted-foreground">
+            <a
+              className="cursor-pointer"
+              onClick={() => setShowLogos(!showLogos)}
+            >
+              {showLogos ? (
+                <>
+                  <EyeOff className="mr-1 inline-block h-4 w-4 align-text-bottom" />
+                  Hide Logos
+                </>
+              ) : (
+                <>
+                  <Eye className="mr-1 inline-block h-4 w-4 align-text-bottom" />
+                  Show Logos
+                </>
+              )}
+            </a>
+          </p>
         )}
       </div>
       <Accordion {...accordionProps}>
@@ -145,7 +161,11 @@ const ScriptBrowser = ({
           >
             <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
             <AccordionContent
-              data-state={expandedItems.includes(category.catagoryName) ? "open" : "closed"}
+              data-state={
+                expandedItems.includes(category.catagoryName)
+                  ? "open"
+                  : "closed"
+              }
               className="pb-2 pt-0"
             >
               {category.expand.items
@@ -159,9 +179,9 @@ const ScriptBrowser = ({
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
-                      className={`py-1 px-1 hover:rounded-lg hover:bg-neutral-50 hover:dark:bg-neutral-800 hover:dark:bg-neutral-700 flex cursor-pointer items-center justify-between gap-1 text-muted-foreground ${
+                      className={`hover:dark:bg-blue-900/20 flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-blue-300/20 hover:bg-neutral-50 ${
                         selectedScript === script.title
-                          ? "rounded-lg font-semibold dark:text-white bg-neutral-100 dark:bg-neutral-900"
+                          ? "bg-blue-300/20 rounded-lg font-semibold dark:bg-blue-900/20 dark:text-white"
                           : ""
                       }`}
                       onClick={() => handleSelected(script.title)}
@@ -173,7 +193,7 @@ const ScriptBrowser = ({
                           alt={script.title}
                           width={16}
                           height={16}
-                          className="rounded-full mr-1"
+                          className="mr-1 rounded-full"
                         />
                       )}
                       <span className="flex items-center gap-2">
@@ -187,9 +207,10 @@ const ScriptBrowser = ({
                               script.item_type === "VM",
                             "border-yellow-500/75 text-yellow-500/75":
                               script.item_type === "LXC",
-                            "border-none":
-                              script.item_type === "",
-                            hidden: !["VM", "LXC", ""].includes(script.item_type),
+                            "border-none": script.item_type === "",
+                            hidden: !["VM", "LXC", ""].includes(
+                              script.item_type,
+                            ),
                           },
                         )}
                       >
