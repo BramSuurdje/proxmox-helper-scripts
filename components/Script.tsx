@@ -245,7 +245,7 @@ function ScriptItem({
                         </Button>
                       </div>
                       )}
-                      {item.interface != 0 && (
+                      {item.interface && (
                       <div className="flex items-center justify-end">
                         <h2 className="mr-2 text-end text-lg font-semibold">
                           Interface:
