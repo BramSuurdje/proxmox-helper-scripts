@@ -1,3 +1,5 @@
+import { StringToBoolean } from "class-variance-authority/types";
+
 export type ScriptProps = {
   scriptID: string;
 };
@@ -31,6 +33,7 @@ export type Script = {
   website: string;
   isMostViewed: boolean;
   mostViewedPosition: number;
+  interface: string;
 };
 
 export interface Category {

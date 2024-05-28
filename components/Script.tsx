@@ -230,7 +230,7 @@ function ScriptItem({
                   </div>
                 </div>
                 <div className="hidden flex-col justify-between gap-2 sm:flex">
-                  <div>
+                  <div className="flex flex-col gap-2">
                     {item.port !== 0 && (
                       <div className="flex items-center justify-end">
                         <h2 className="mr-2 text-end text-lg font-semibold">
@@ -244,7 +244,21 @@ function ScriptItem({
                           {item.port}
                         </Button>
                       </div>
-                    )}
+                      )}
+                      {item.interface != 0 && (
+                      <div className="flex items-center justify-end">
+                        <h2 className="mr-2 text-end text-lg font-semibold">
+                          Interface:
+                        </h2>{" "}
+                        <Button
+                          variant={"secondary"}
+                          size={"sm"}
+                          onClick={() => handleCopy("interface", item.interface)}
+                        >
+                          {item.interface}
+                        </Button>
+                      </div>
+                      )}
                   </div>
                   <div className="flex justify-end gap-2">
                     {item.website && (
