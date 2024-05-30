@@ -128,11 +128,11 @@ const ScriptBrowser = ({
           )}
         </div>
         {searchTerm ? (
-          <p className="mb-1 ml-2 animate-fade-left text-xs text-muted-foreground">
+          <p className="mb-1 ml-2 text-xs text-muted-foreground">
             Press &apos;Esc&apos; to clear the search
           </p>
         ) : (
-          <p className="mb-1 ml-2 animate-fade-left text-xs text-muted-foreground">
+          <p className="mb-1 ml-2 text-xs text-muted-foreground">
             <a
               className="cursor-pointer"
               onClick={() => setShowLogos(!showLogos)}

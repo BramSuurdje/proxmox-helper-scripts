@@ -41,14 +41,14 @@ function LatestScripts({ items }: { items: Category[] }) {
 
   return (
     <div className="">
-      <h2 className="mb-2 animate-fade-up text-lg font-semibold ">
+      <h2 className="mb-2 text-lg font-semibold ">
         Newest Scripts
       </h2>
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.slice(startIndex, endIndex).map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] flex-1 flex-grow animate-fade-up "
+            className=" min-w-[250px] flex-1 flex-grow "
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
@@ -84,7 +84,7 @@ function LatestScripts({ items }: { items: Category[] }) {
           </Card>
         ))}
       </div>
-      <div className="p-2 flex justify-end gap-1 animate-fade-up">
+      <div className="p-2 flex justify-end gap-1">
         {page > 1 && <Button onClick={goToPreviousPage} variant="outline">Previous</Button>}
         {endIndex < latestScripts.length && <Button onClick={goToNextPage} variant="outline">{page === 1 ? "More.." : "Next"}</Button>}
       </div>

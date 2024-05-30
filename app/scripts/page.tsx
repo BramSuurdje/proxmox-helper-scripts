@@ -71,7 +71,7 @@ export default function Page() {
         </>
       ) : (
         <div className="flex justify-center items-center h-screen">
-          <div className="animate-pulse"></div>
+          <div className=""></div>
         </div>
       )}
     </>
