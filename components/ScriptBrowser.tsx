@@ -105,7 +105,16 @@ const ScriptBrowser = ({
 
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
-      <h1 className="mb-5 text-xl font-bold">Scripts</h1>
+      <div className="mb-5 flex items-center justify-between">
+        <h1 className=" text-xl font-bold">Scripts</h1>
+        <p className="text-xs text-muted-foreground">
+          {links.reduce(
+            (acc, category) => acc + category.expand.items.length,
+            0,
+          )}{" "}
+          Total scripts
+        </p>
+      </div>
       <div className="relative">
         <div className="mb-1 flex items-center">
           <Input
@@ -179,9 +188,9 @@ const ScriptBrowser = ({
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
-                      className={`hover:dark:bg-blue-900/20 flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-blue-300/20 hover:bg-neutral-50 ${
+                      className={`flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-blue-300/20 hover:bg-neutral-50 hover:dark:bg-blue-900/20 ${
                         selectedScript === script.title
-                          ? "bg-blue-300/20 rounded-lg font-semibold dark:bg-blue-900/20 dark:text-white"
+                          ? "rounded-lg bg-blue-300/20 font-semibold dark:bg-blue-900/20 dark:text-white"
                           : ""
                       }`}
                       onClick={() => handleSelected(script.title)}
