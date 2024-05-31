@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "../public/logo.png";
@@ -11,7 +11,7 @@ import {
   LuBookOpenCheck,
   LuClipboardSignature,
 } from "react-icons/lu";
-import { Coffee, Menu } from "lucide-react";
+import { Coffee, Menu, MessageSquareText } from "lucide-react";
 import {
   Sheet,
   SheetClose,
@@ -27,7 +27,6 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
 import { Category } from "@/lib/types";
 import { pb } from "@/lib/pocketbase";
 import { Badge } from "./ui/badge";
@@ -183,8 +182,14 @@ function Navbar() {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="hidden gap-2 sm:flex">
+          <div className="hidden sm:flex">
             {[
+              {
+                href: "https://github.com/tteck/Proxmox/discussions",
+                event: "Discussions",
+                icon: <MessageSquareText className="mr-2 h-4 w-4" />,
+                text: "Discussions",
+              },
               {
                 href: "https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md",
                 event: "Contributing",
