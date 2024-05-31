@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard, Info, X, Code } from "lucide-react";
+import { Clipboard, Info, X, Code, Globe, BookOpenText, ExternalLink } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Category, Script } from "@/lib/types";
@@ -270,34 +270,42 @@ function ScriptItem({
                       {item.website && (
                         <Button variant="outline" asChild>
                           <Link target="_blank" href={item.website}>
-                            Website
+                            <span className="flex items-center gap-2">
+                              <Globe className="h-4 w-4" /> Website
+                            </span>
                           </Link>
                         </Button>
                       )}
                       {item.documentation && (
                         <Button variant="outline" asChild>
                           <Link target="_blank" href={item.documentation}>
-                            Documentation
+                            <span className="flex items-center gap-2">
+                              <BookOpenText className="h-4 w-4" />
+                              Documentation
+                            </span>
                           </Link>
                         </Button>
                       )}
                       {item.post_install && (
                         <Button variant="outline" asChild>
                           <Link target="_blank" href={item.post_install}>
-                            Post Install
+                            <span className="flex items-center gap-2">
+                              <ExternalLink className="h-4 w-4" />
+                              Post Install
+                            </span>
                           </Link>
                         </Button>
-                      )}      
+                      )}
                       {sourceUrl && (
                         <Button variant="outline" asChild>
                           <Link target="_blank" href={sourceUrl[1]}>
                             <span className="flex items-center gap-2">
-                            <Code className="h-4 w-4" /> 
-                            Source Code
+                              <Code className="h-4 w-4" />
+                              Source Code
                             </span>
                           </Link>
                         </Button>
-                      )}                 
+                      )}
                     </div>
                   </div>
                 </div>
@@ -331,7 +339,7 @@ function ScriptItem({
                     )}
                   </div>
 
-                  <div className="mt-6 rounded-lg border dark:bg-blue-900/20 bg-blue-900/20 p-4">
+                  <div className="mt-6 rounded-lg border bg-blue-900/20 p-4 dark:bg-blue-900/20">
                     <h2 className="text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>
