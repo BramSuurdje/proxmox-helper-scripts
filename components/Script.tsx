@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard, Info, X } from "lucide-react";
+import { Clipboard, Info, X, Code } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Category, Script } from "@/lib/types";
@@ -59,6 +59,9 @@ function ScriptItem({
     }
     return null;
   }, [item]);
+
+  const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
+  const sourceUrl = typeof installCommand === 'string' ? installCommand.match(pattern) : null;
 
   const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);
@@ -284,7 +287,17 @@ function ScriptItem({
                             Post Install
                           </Link>
                         </Button>
-                      )}                      
+                      )}      
+                      {sourceUrl && (
+                        <Button variant="outline" asChild>
+                          <Link target="_blank" href={sourceUrl[1]}>
+                            <span className="flex items-center gap-2">
+                            <Code className="h-4 w-4" /> 
+                            Source Code
+                            </span>
+                          </Link>
+                        </Button>
+                      )}                 
                     </div>
                   </div>
                 </div>
