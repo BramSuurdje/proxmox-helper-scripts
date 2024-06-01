@@ -86,7 +86,9 @@ function Navbar() {
   };
 
   function setVisited() {
-    localStorage.setItem("hasVisitedHomePage", "false");
+    if (typeof window !== "undefined") {
+      localStorage.setItem("hasVisitedHomePage", "false");
+    }
   }
 
   return (

@@ -3,16 +3,24 @@ import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-if (localStorage.getItem("hasVisitedHomePage") === "true") {
-  window.location.href = "/scripts";
-}
-
-function setVisited() {
-  localStorage.setItem("hasVisitedHomePage", "true");
-}
+import { useEffect } from "react";
 
 export default function LandingPage() {
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      localStorage.getItem("hasVisitedHomePage") === "true"
+    ) {
+      window.location.href = "/scripts";
+    }
+  }, []);
+
+  function setVisited() {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("hasVisitedHomePage", "true");
+    }
+  }
+
   return (
     <div className="flex justify-center">
       <div className="relative flex h-screen w-full flex-col items-center justify-center bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
