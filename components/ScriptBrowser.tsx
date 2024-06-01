@@ -168,7 +168,14 @@ const ScriptBrowser = ({
             value={category.catagoryName}
             className="sm:text-md flex flex-col"
           >
-            <AccordionTrigger>{category.catagoryName}</AccordionTrigger>
+            <AccordionTrigger>
+              <div className="w-full flex justify-between items-center mr-2">
+                {category.catagoryName}{" "}
+                <span className=" text-xs text-muted-foreground">
+                  {category.expand.items.length}
+                </span>
+              </div>{" "}
+            </AccordionTrigger>
             <AccordionContent
               data-state={
                 expandedItems.includes(category.catagoryName)
