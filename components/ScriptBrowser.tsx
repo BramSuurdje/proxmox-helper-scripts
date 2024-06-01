@@ -170,8 +170,8 @@ const ScriptBrowser = ({
           >
             <AccordionTrigger>
               <div className="w-full flex justify-between items-center mr-2">
-                {category.catagoryName}{" "}
-                <span className=" text-xs text-muted-foreground">
+                <span className="hover:underline">{category.catagoryName}{" "}</span>
+                <span className=" text-xs text-muted-foreground hover:no-underline">
                   {category.expand.items.length}
                 </span>
               </div>{" "}
