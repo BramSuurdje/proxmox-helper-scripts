@@ -4,6 +4,14 @@ import { Typewriter } from "react-simple-typewriter";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+if (localStorage.getItem("hasVisitedHomePage") === "true") {
+  window.location.href = "/scripts";
+}
+
+function setVisited() {
+  localStorage.setItem("hasVisitedHomePage", "true");
+}
+
 export default function LandingPage() {
   return (
     <div className="flex justify-center">
@@ -32,7 +40,7 @@ export default function LandingPage() {
             Your Homelab
           </p>
           <div className="flex gap-2 py-4">
-            <Button asChild variant={"secondary"}>
+            <Button asChild variant={"secondary"} onClick={setVisited}>
               <Link href="/scripts">Browse Scripts</Link>
             </Button>
           </div>

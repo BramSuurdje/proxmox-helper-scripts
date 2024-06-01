@@ -85,6 +85,10 @@ function Navbar() {
     }
   };
 
+  function setVisited() {
+    localStorage.setItem("hasVisitedHomePage", "false");
+  }
+
   return (
     <>
       <div
@@ -93,7 +97,7 @@ function Navbar() {
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
-          <h2 className="font-semibold ">
+          <h2 className="font-semibold " onClick={setVisited}>
             <Link
               href="/"
               className=" flex flex-row-reverse items-center gap-2 sm:flex-row"
