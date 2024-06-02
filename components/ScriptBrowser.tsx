@@ -31,6 +31,7 @@ const ScriptBrowser = ({
     const saved = localStorage.getItem('showLogos');
     return saved ? JSON.parse(saved) : true;
   });
+  const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
 
   useEffect(() => {
     localStorage.setItem('showLogos', JSON.stringify(showLogos));
@@ -79,6 +80,24 @@ const ScriptBrowser = ({
       setExpandedItems([]);
     }
   }, [searchTerm, filteredLinks]);
+
+  useEffect(() => {
+    const matchingScripts = links
+      .flatMap(category => category.expand.items)
+      .filter(script => script.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    if (matchingScripts.length === 1) {
+      const scriptTitle = matchingScripts[0].title;
+      setSelectedScript(scriptTitle);
+
+      const linkElement = linkRefs.current[scriptTitle];
+      if (linkElement) {
+        linkElement.click();
+      }
+    } else {
+      setSelectedScript(null);
+    }
+  }, [searchTerm, links, setSelectedScript]);
 
   const handleAccordionChange = (value: string[]) => {
     setExpandedItems(value);
@@ -201,6 +220,7 @@ const ScriptBrowser = ({
                           : ""
                       }`}
                       onClick={() => handleSelected(script.title)}
+                      ref={(el) => { linkRefs.current[script.title] = el; }}
                     >
                       {showLogos && script.logo && (
                         <Image
