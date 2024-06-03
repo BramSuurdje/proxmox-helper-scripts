@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
-import { X, EyeOff, Eye } from "lucide-react";
+import { X, EyeOff, Eye, Star } from "lucide-react";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
@@ -234,6 +234,9 @@ const ScriptBrowser = ({
                       )}
                       <span className="flex items-center gap-2">
                         {script.title}
+                        {script.isMostViewed && (
+                        <Star className="text-yellow-500 w-3 h-3"></Star>
+                        )}
                       </span>
                       <Badge
                         className={clsx(

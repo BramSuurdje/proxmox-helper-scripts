@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LatestScripts from "./LatestScripts";
 import MostViewedScripts from "./MostViewedScripts";
+import RecentlyUpdatedScripts from "./RecentlyUpdatedScripts";
 
 function ScriptItem({
   items,
@@ -52,16 +53,40 @@ function ScriptItem({
     return null;
   };
 
+   const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
+
   const installCommand = useMemo(() => {
     if (item) {
-      const key = findInstallCommandKey(item);
-      return key ? item[key as keyof Script] : null;
+      const keys = Object.keys(item);
+      for (const key of keys) {
+        const value = item[key as keyof Script];
+        if (typeof value === "string" && pattern.test(value) && 
+            !value.includes("alpine") && !value.includes("discussions") && !value.includes("2>/dev/null")) {
+          return value;
+        }
+      }
     }
     return null;
   }, [item]);
 
-  const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
-  const sourceUrl = typeof installCommand === 'string' ? installCommand.match(pattern) : null;
+  const sourceUrl = useMemo(() => {
+    if (installCommand) {
+      const match = installCommand.match(pattern);
+      return match ? match[0] : null;
+    }
+    return null;
+  }, [installCommand]);
+
+  // const installCommand = useMemo(() => {
+  //   if (item) {
+  //     const key = findInstallCommandKey(item);
+  //     return key ? item[key as keyof Script] : null;
+  //   }
+  //   return null;
+  // }, [item]);
+
+  // const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
+  // const sourceUrl = typeof installCommand === 'string' ? installCommand.match(pattern) : null;
 
   const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);
@@ -298,7 +323,7 @@ function ScriptItem({
                       )}
                       {sourceUrl && (
                         <Button variant="outline" asChild>
-                          <Link target="_blank" href={sourceUrl[1]}>
+                          <Link target="_blank" href={sourceUrl}>
                             <span className="flex items-center gap-2">
                               <Code className="h-4 w-4" />
                               Source Code
@@ -460,9 +485,10 @@ function ScriptItem({
           </div>
         </div>
       )}
-      {item ? null : (
+      {id ? null : (
         <div className="flex w-full flex-col">
-          <LatestScripts items={items} />
+          <LatestScripts items={items} />          
+          <RecentlyUpdatedScripts items={items} />
           <MostViewedScripts items={items} />
         </div>
       )}
