@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import { X, EyeOff, Eye, Star } from "lucide-react";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
@@ -99,6 +99,22 @@ const ScriptBrowser = ({
     }
   }, [searchTerm, links, setSelectedScript]);
 
+  const handleSelected = useCallback((title: string) => {
+    setSelectedScript(title);
+  }, [setSelectedScript]);
+
+  useEffect(() => {
+    if (selectedScript) {
+      const category = links.find(category =>
+        category.expand.items.some(script => script.title === selectedScript)
+      );
+      if (category) {
+        setExpandedItems(prev => Array.from(new Set([...prev, category.catagoryName])));
+        handleSelected(selectedScript);
+      }
+    }
+  }, [selectedScript, links, handleSelected]);
+
   const handleAccordionChange = (value: string[]) => {
     setExpandedItems(value);
   };
@@ -117,10 +133,6 @@ const ScriptBrowser = ({
           onValueChange: (value: string) => handleAccordionChange([value]),
         };
   }, [searchTerm, expandedItems]);
-
-  const handleSelected = (title: string) => {
-    setSelectedScript(title);
-  };
 
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">

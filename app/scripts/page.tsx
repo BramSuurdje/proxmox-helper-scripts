@@ -1,10 +1,10 @@
 'use client';
 import ScriptItem from "@/components/Script";
 import ScriptBrowser from "@/components/ScriptBrowser";
-import { Button } from "@/components/ui/button";
 import { pb, pbBackup } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { useEffect, useState, useCallback } from "react";
+import CacheControls from "@/components/CacheControls";
 
 export default function Page() {
   const [links, setLinks] = useState<Category[]>([]);
@@ -12,6 +12,7 @@ export default function Page() {
   const [selectedScript, setSelectedScript] = useState<string | null>(null);
   const [cacheExpiryTime, setCacheExpiryTime] = useState<Date | null>(null);
   const [isCacheEnabled, setIsCacheEnabled] = useState<boolean>(true);
+  const [showCacheControls, setShowCacheControls] = useState<boolean>(true);
 
   const fetchLinks = useCallback(async (forceUpdate: boolean = false) => {
     try {
@@ -93,7 +94,7 @@ export default function Page() {
       setIsCacheEnabled(cacheEnabled === "true");
     }
     fetchLinks();
-  }, [fetchLinks, isCacheEnabled]);
+  }, [fetchLinks]);
 
   const handleForceUpdate = () => {
     fetchLinks(true);
@@ -103,6 +104,16 @@ export default function Page() {
     const newCacheState = !isCacheEnabled;
     setIsCacheEnabled(newCacheState);
     localStorage.setItem("isCacheEnabled", String(newCacheState));
+  };
+
+  const handleScriptSelect = (script: string | null) => {
+    if (!selectedScript && script) {
+      setShowCacheControls(false);
+      setTimeout(() => {
+        setShowCacheControls(true);
+      }, 50);
+    }
+    setSelectedScript(script);
   };
 
   return (
@@ -115,50 +126,22 @@ export default function Page() {
                 <ScriptBrowser
                   items={links}
                   selectedScript={selectedScript}
-                  setSelectedScript={setSelectedScript}
+                  setSelectedScript={handleScriptSelect}
                 />
               </div>
               <div className="mx-7 w-full sm:mx-0 sm:ml-7">
                 <ScriptItem
                   items={links}
                   selectedScript={selectedScript}
-                  setSelectedScript={setSelectedScript}
+                  setSelectedScript={handleScriptSelect}
                 />
-                {links.length > 0 && (
-                  <div className="mt-4 animate-fade-left">
-                    {isCacheEnabled ? (
-                      <>
-                        <p className="text-xs text-muted-foreground">
-                          The scripts are cached in your browser to optimize performance. Use the button below
-                          to re-poll the server for changes.
-                        </p>
-                        {cacheExpiryTime && (
-                          <p className="text-xs text-muted-foreground">
-                            Cache will expire automatically at {cacheExpiryTime.toLocaleTimeString()}
-                          </p>
-                        )}
-                        <div className="flex space-x-2 px-2 py-4">
-                          <Button variant="outline" onClick={handleForceUpdate}>
-                            Reload via API
-                          </Button>
-                          <Button variant="outline" onClick={toggleCache}>
-                            Disable Cache
-                          </Button>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="mt-4">
-                        <p className="text-xs text-muted-foreground">
-                          The cache is disabled. All data will be fetched from the server.
-                        </p>
-                        <div className="flex space-x-2 px-2 py-4">
-                          <Button variant="outline" onClick={toggleCache}>
-                            Enable Cache
-                          </Button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                {links.length > 0 && showCacheControls && (
+                  <CacheControls
+                    isCacheEnabled={isCacheEnabled}
+                    toggleCache={toggleCache}
+                    handleForceUpdate={handleForceUpdate}
+                    cacheExpiryTime={cacheExpiryTime}
+                  />
                 )}
               </div>
             </div>

@@ -25,7 +25,8 @@ function ScriptItem({
   setSelectedScript: (script: string | null) => void;
 }) {
   const [item, setItem] = useState<Script | null>(null);
-  const id = useSearchParams().get("id");
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
 
   useEffect(() => {
     if (items) {
@@ -34,8 +35,12 @@ function ScriptItem({
         .flat()
         .find((script) => script.title === id);
       setItem(script || null);
+
+      if (script) {
+        setSelectedScript(script.title);
+      }
     }
-  }, [id, items]);
+  }, [id, items, setSelectedScript]);
 
   const pattern = useMemo(() => /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/, []);
 
