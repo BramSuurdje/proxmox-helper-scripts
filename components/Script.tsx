@@ -37,37 +37,21 @@ function ScriptItem({
     }
   }, [id, items]);
 
-  const findInstallCommandKey = (obj: any): string | null => {
-    for (const key in obj) {
-      if (
-        typeof obj[key] === "string" &&
-        obj[key].includes("https://github.com/tteck/Proxmox/") &&
-        !obj[key].includes("alpine") &&
-        !obj[key].includes("discussions") &&
-        !obj[key].includes("alert") &&
-        !obj[key].includes("2>/dev/null")
-      ) {
-        return key;
-      }
-    }
-    return null;
-  };
-
-   const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
+  const pattern = useMemo(() => /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/, []);
 
   const installCommand = useMemo(() => {
     if (item) {
       const keys = Object.keys(item);
       for (const key of keys) {
         const value = item[key as keyof Script];
-        if (typeof value === "string" && pattern.test(value) && 
+        if (typeof value === "string" && pattern.test(value) &&
             !value.includes("alpine") && !value.includes("discussions") && !value.includes("2>/dev/null")) {
           return value;
         }
       }
     }
     return null;
-  }, [item]);
+  }, [item, pattern]);
 
   const sourceUrl = useMemo(() => {
     if (installCommand) {
@@ -75,7 +59,7 @@ function ScriptItem({
       return match ? match[0] : null;
     }
     return null;
-  }, [installCommand]);
+  }, [installCommand, pattern]);
 
   // const installCommand = useMemo(() => {
   //   if (item) {
@@ -487,7 +471,7 @@ function ScriptItem({
       )}
       {id ? null : (
         <div className="flex w-full flex-col">
-          <LatestScripts items={items} />          
+          <LatestScripts items={items} />
           <RecentlyUpdatedScripts items={items} />
           <MostViewedScripts items={items} />
         </div>
