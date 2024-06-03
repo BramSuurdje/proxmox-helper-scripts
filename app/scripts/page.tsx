@@ -4,31 +4,35 @@ import ScriptBrowser from "@/components/ScriptBrowser";
 import { Button } from "@/components/ui/button";
 import { pb, pbBackup } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export default function Page() {
   const [links, setLinks] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedScript, setSelectedScript] = useState<string | null>(null);
   const [cacheExpiryTime, setCacheExpiryTime] = useState<Date | null>(null);
+  const [isCacheEnabled, setIsCacheEnabled] = useState<boolean>(true);
 
-  const fetchLinks = async (forceUpdate: boolean = false) => {
+  const fetchLinks = useCallback(async (forceUpdate: boolean = false) => {
     try {
       setIsLoading(true);
       let res;
-      const cachedLinks = localStorage.getItem("scripts");
-      const cacheTime = localStorage.getItem("cacheTime");
 
-      if (!forceUpdate && cachedLinks && cacheTime) {
-        const now = new Date().getTime();
-        const timeDiff = Math.abs(now - Number(cacheTime));
-        const diffInMinutes = Math.floor(timeDiff / 1000 / 60);
+      if (isCacheEnabled) {
+        const cachedLinks = localStorage.getItem("scripts");
+        const cacheTime = localStorage.getItem("cacheTime");
 
-        if (diffInMinutes < 30) {
-          setLinks(JSON.parse(cachedLinks));
-          setCacheExpiryTime(new Date(Number(cacheTime) + 30 * 60 * 1000));
-          setIsLoading(false);
-          return;
+        if (!forceUpdate && cachedLinks && cacheTime) {
+          const now = new Date().getTime();
+          const timeDiff = Math.abs(now - Number(cacheTime));
+          const diffInMinutes = Math.floor(timeDiff / 1000 / 60);
+
+          if (diffInMinutes < 30) {
+            setLinks(JSON.parse(cachedLinks));
+            setCacheExpiryTime(new Date(Number(cacheTime) + 30 * 60 * 1000));
+            setIsLoading(false);
+            return;
+          }
         }
       }
 
@@ -68,24 +72,37 @@ export default function Page() {
         }
       });
 
-      localStorage.setItem("scripts", JSON.stringify(res));
-      const newCacheTime = new Date().getTime();
-      localStorage.setItem("cacheTime", String(newCacheTime));
-      setCacheExpiryTime(new Date(newCacheTime + 30 * 60 * 1000));
+      if (isCacheEnabled) {
+        localStorage.setItem("scripts", JSON.stringify(res));
+        const newCacheTime = new Date().getTime();
+        localStorage.setItem("cacheTime", String(newCacheTime));
+        setCacheExpiryTime(new Date(newCacheTime + 30 * 60 * 1000));
+      }
+
       setLinks(res as unknown as Category[]);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching links:", error);
       setIsLoading(false);
     }
-  };
+  }, [isCacheEnabled]);
 
   useEffect(() => {
+    const cacheEnabled = localStorage.getItem("isCacheEnabled");
+    if (cacheEnabled !== null) {
+      setIsCacheEnabled(cacheEnabled === "true");
+    }
     fetchLinks();
-  }, []);
+  }, [fetchLinks, isCacheEnabled]);
 
   const handleForceUpdate = () => {
     fetchLinks(true);
+  };
+
+  const toggleCache = () => {
+    const newCacheState = !isCacheEnabled;
+    setIsCacheEnabled(newCacheState);
+    localStorage.setItem("isCacheEnabled", String(newCacheState));
   };
 
   return (
@@ -107,22 +124,42 @@ export default function Page() {
                   selectedScript={selectedScript}
                   setSelectedScript={setSelectedScript}
                 />
-                <div className="mt-4">
-                  <p className="text-xs text-muted-foreground">
-                    The scripts are cached in your browser to optimize performance. Use the button below
-                    to re-poll the server for changes.
-                  </p>
-                  {cacheExpiryTime && (
-                    <p className="text-xs text-muted-foreground">
-                      Cache will expire automatically at {cacheExpiryTime.toLocaleTimeString()}
-                    </p>
-                  )}
-                  <div className="px-2 py-4">
-                    <Button variant="outline" onClick={handleForceUpdate}>
-                      Reload via API
-                    </Button>
+                {links.length > 0 && (
+                  <div className="mt-4 animate-fade-left">
+                    {isCacheEnabled ? (
+                      <>
+                        <p className="text-xs text-muted-foreground">
+                          The scripts are cached in your browser to optimize performance. Use the button below
+                          to re-poll the server for changes.
+                        </p>
+                        {cacheExpiryTime && (
+                          <p className="text-xs text-muted-foreground">
+                            Cache will expire automatically at {cacheExpiryTime.toLocaleTimeString()}
+                          </p>
+                        )}
+                        <div className="flex space-x-2 px-2 py-4">
+                          <Button variant="outline" onClick={handleForceUpdate}>
+                            Reload via API
+                          </Button>
+                          <Button variant="outline" onClick={toggleCache}>
+                            Disable Cache
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="mt-4">
+                        <p className="text-xs text-muted-foreground">
+                          The cache is disabled. All data will be fetched from the server.
+                        </p>
+                        <div className="flex space-x-2 px-2 py-4">
+                          <Button variant="outline" onClick={toggleCache}>
+                            Enable Cache
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
