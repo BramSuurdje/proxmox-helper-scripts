@@ -61,17 +61,6 @@ function ScriptItem({
     return null;
   }, [installCommand, pattern]);
 
-  // const installCommand = useMemo(() => {
-  //   if (item) {
-  //     const key = findInstallCommandKey(item);
-  //     return key ? item[key as keyof Script] : null;
-  //   }
-  //   return null;
-  // }, [item]);
-
-  // const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
-  // const sourceUrl = typeof installCommand === 'string' ? installCommand.match(pattern) : null;
-
   const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);
 
