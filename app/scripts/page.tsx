@@ -15,25 +15,35 @@ export default function Page() {
       setIsLoading(true);
       let res;
       try {
-        res = await pb.collection("categories").getFullList({
+        res = await (pb.collection("categories").getFullList({
           expand: "items",
           sort: "order",
           requestKey: "desktop",
-        });
+        }) as Promise<Category[]>);
         if (res.length === 0) {
           throw new Error("Empty response");
         }
       } catch (error) {
         console.error("Error fetching links from pb:", error);
-        res = await pbBackup.collection("categories").getFullList({
+        res = await (pbBackup.collection("categories").getFullList({
           expand: "items",
           sort: "order",
           requestKey: "desktop",
-        });
+        }) as Promise<Category[]>);
         if (res.length === 0) {
           throw new Error("Empty response");
         }
       }
+      res = res.sort((a: Category, b: Category) => {
+        if (a.catagoryName === "Proxmox VE Tools" && b.catagoryName !== "Proxmox VE Tools") {
+          return -1;
+        } else if (a.catagoryName !== "Proxmox VE Tools" && b.catagoryName === "Proxmox VE Tools") {
+          return 1;
+        } else {
+          return a.catagoryName.localeCompare(b.catagoryName);
+        }
+      });
+
       setLinks(res as unknown as Category[]);
       setIsLoading(false);
     } catch (error) {
