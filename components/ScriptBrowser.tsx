@@ -137,7 +137,7 @@ const ScriptBrowser = ({
       <div className="relative">
         <div className="mb-1 flex items-center">
           <Input
-            className="flex-grow"
+            className="flex-grow bg-accent/30"
             type="text"
             placeholder="Type '/' to search"
             onChange={(e) => handleSearch(e.target.value)}
@@ -156,11 +156,11 @@ const ScriptBrowser = ({
           )}
         </div>
         {searchTerm ? (
-          <p className="mb-1 ml-2 text-xs text-muted-foreground">
+          <p className="mb-4 ml-2 text-xs text-muted-foreground">
             Press &apos;Esc&apos; to clear the search
           </p>
         ) : (
-          <p className="mb-1 ml-2 text-xs text-muted-foreground">
+          <p className="mb-4 ml-2 text-xs text-muted-foreground">
             <a
               className="cursor-pointer"
               onClick={() => setShowLogos(!showLogos)}

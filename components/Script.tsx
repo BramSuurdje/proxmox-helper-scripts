@@ -184,11 +184,11 @@ function ScriptItem({
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
-              <div className="mt-2 rounded-lg border p-4">
+              <div className="mt-2 rounded-lg border p-4 bg-accent/20">
                 <div className="mt-4 flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-32 w-32 rounded-lg bg-accent object-contain p-3"
+                      className="h-32 w-32 rounded-lg bg-accent/60 object-contain p-3"
                       src={item.logo}
                       width={400}
                       height={400}
@@ -348,7 +348,7 @@ function ScriptItem({
                     )}
                   </div>
 
-                  <div className="mt-6 rounded-lg border bg-blue-900/20 p-4 dark:bg-blue-900/20">
+                  <div className="mt-6 rounded-lg border bg-accent/50 p-4">
                     <h2 className="text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>

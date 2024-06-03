@@ -50,7 +50,7 @@ function LatestScripts({ items }: { items: Category[] }) {
         {latestScripts.slice(startIndex, endIndex).map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] flex-1 flex-grow "
+            className=" min-w-[250px] flex-1 flex-grow bg-accent/30"
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
