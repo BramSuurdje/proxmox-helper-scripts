@@ -12,7 +12,6 @@ export default function Page() {
   const [selectedScript, setSelectedScript] = useState<string | null>(null);
   const [cacheExpiryTime, setCacheExpiryTime] = useState<Date | null>(null);
   const [isCacheEnabled, setIsCacheEnabled] = useState<boolean>(true);
-  const [showCacheControls, setShowCacheControls] = useState<boolean>(true);
 
   const fetchLinks = useCallback(async (forceUpdate: boolean = false) => {
     try {
@@ -81,9 +80,10 @@ export default function Page() {
       }
 
       setLinks(res as unknown as Category[]);
-      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching links:", error);
+      setIsLoading(false);
+    } finally {
       setIsLoading(false);
     }
   }, [isCacheEnabled]);
@@ -100,20 +100,17 @@ export default function Page() {
     fetchLinks(true);
   };
 
-  const toggleCache = () => {
+  const toggleCache = async () => {
     const newCacheState = !isCacheEnabled;
     setIsCacheEnabled(newCacheState);
     localStorage.setItem("isCacheEnabled", String(newCacheState));
-  };
 
-  const handleScriptSelect = (script: string | null) => {
-    if (!selectedScript && script) {
-      setShowCacheControls(false);
-      setTimeout(() => {
-        setShowCacheControls(true);
-      }, 50);
+    if (!newCacheState) {
+      localStorage.removeItem("scripts");
+      localStorage.removeItem("cacheTime");
+    } else {
+      await fetchLinks(true);
     }
-    setSelectedScript(script);
   };
 
   return (
@@ -126,26 +123,28 @@ export default function Page() {
                 <ScriptBrowser
                   items={links}
                   selectedScript={selectedScript}
-                  setSelectedScript={handleScriptSelect}
+                  setSelectedScript={setSelectedScript}
                 />
               </div>
               <div className="mx-7 w-full sm:mx-0 sm:ml-7">
                 <ScriptItem
                   items={links}
                   selectedScript={selectedScript}
-                  setSelectedScript={handleScriptSelect}
+                  setSelectedScript={setSelectedScript}
                 />
-                {links.length > 0 && showCacheControls && (
-                  <CacheControls
-                    isCacheEnabled={isCacheEnabled}
-                    toggleCache={toggleCache}
-                    handleForceUpdate={handleForceUpdate}
-                    cacheExpiryTime={cacheExpiryTime}
-                  />
-                )}
               </div>
             </div>
           </div>
+          {links.length > 0 && (
+            <div className="mb-10 flex justify-center">
+              <CacheControls
+                isCacheEnabled={isCacheEnabled}
+                toggleCache={toggleCache}
+                handleForceUpdate={handleForceUpdate}
+                cacheExpiryTime={cacheExpiryTime}
+              />
+            </div>
+          )}
         </>
       ) : (
         <div className="flex h-screen items-center justify-center">
