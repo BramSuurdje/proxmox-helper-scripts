@@ -5,6 +5,7 @@ import { pb, pbBackup } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { useEffect, useState, useCallback } from "react";
 import CacheControls from "@/components/CacheControls";
+import { toast } from "sonner";
 
 export default function Page() {
   const [links, setLinks] = useState<Category[]>([]);
@@ -98,6 +99,7 @@ export default function Page() {
 
   const handleForceUpdate = () => {
     fetchLinks(true);
+    toast.success("Cache has been refreshed!");
   };
 
   const toggleCache = async () => {
@@ -108,8 +110,10 @@ export default function Page() {
     if (!newCacheState) {
       localStorage.removeItem("scripts");
       localStorage.removeItem("cacheTime");
+      toast.warning("Cache has been disabled!");
     } else {
       await fetchLinks(true);
+      toast.info("Cache has been enabled!");
     }
   };
 
