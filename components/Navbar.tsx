@@ -28,7 +28,6 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { Category } from "@/lib/types";
-import { pb } from "@/lib/pocketbase";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
 
@@ -72,18 +71,17 @@ function Navbar() {
     }
   }, [shouldFocusInput]);
 
-  const fetchLinks = async () => {
-    if (links.length > 0) return;
-    try {
-      const res = await pb.collection("categories").getFullList({
-        expand: "items",
-        requestKey: "navbar",
-      });
-      setLinks(res as unknown as Category[]);
-    } catch (error) {
-      console.error("Error fetching links:", error);
+  useEffect(() => {
+    const cacheKey = "scripts";
+
+    const cachedLinks = localStorage.getItem(cacheKey);
+
+    if (cachedLinks) {
+      setLinks(JSON.parse(cachedLinks));
+    } else {
+      console.error("No cached links found in localStorage.");
     }
-  };
+  }, []);
 
   function setVisited() {
     if (typeof window !== "undefined") {
@@ -110,11 +108,7 @@ function Navbar() {
           </h2>
           <div className="flex items-center sm:hidden">
             <Sheet>
-              <SheetTrigger
-                onClick={async () => {
-                  await fetchLinks();
-                }}
-              >
+              <SheetTrigger>
                 <Menu className="h-8 w-8" />
               </SheetTrigger>
               <SheetContent
