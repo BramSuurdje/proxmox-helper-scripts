@@ -269,7 +269,7 @@ function ScriptItem({
                         </div>
                       )}
                     </div>
-                    <div className="flex justify-end gap-2 flex-wrap">
+                    <div className="flex flex-wrap justify-end gap-2">
                       {item.website && (
                         <Button variant="outline" asChild>
                           <Link target="_blank" href={item.website}>
@@ -328,13 +328,13 @@ function ScriptItem({
                           {descriptionCodeBlock(item.alert1)}
                         </p>
                         {item.alert2 && (
-                          <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 text-sm">
+                          <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
                             <Info className="min-w-42 h-4 min-h-4 w-4" />
                             {descriptionCodeBlock(item.alert2)}
                           </p>
                         )}
                         {item.alert3 && (
-                          <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 text-sm">
+                          <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
                             <Info className="h-4 min-h-4 w-4 min-w-4" />
                             {descriptionCodeBlock(item.alert3)}
                           </p>
