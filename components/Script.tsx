@@ -36,11 +36,11 @@ function ScriptItem({
         .find((script) => script.title === id);
       setItem(script || null);
 
-      if (script) {
+      if (script && !selectedScript) {
         setSelectedScript(script.title);
       }
     }
-  }, [id, items, setSelectedScript]);
+  }, [id, items, setSelectedScript, selectedScript]);
 
   const pattern = useMemo(() => /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/, []);
 
