@@ -182,7 +182,7 @@ function ScriptItem({
                 <div className="flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-32 w-32 rounded-lg bg-accent/60 object-contain p-3"
+                      className="h-32 w-32 rounded-lg bg-accent/60 shadow-md object-contain p-3"
                       src={item.logo}
                       width={400}
                       height={400}
