@@ -323,7 +323,7 @@ function ScriptItem({
                     </p>
                     {item.alert1 && (
                       <div className="mt-4 flex flex-col gap-2">
-                        <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 text-sm">
+                        <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
                           <Info className="h-4 min-h-4 w-4 min-w-4" />
                           {descriptionCodeBlock(item.alert1)}
                         </p>
