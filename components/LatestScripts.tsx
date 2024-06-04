@@ -42,9 +42,27 @@ function LatestScripts({ items }: { items: Category[] }) {
   return (
     <div className="">
       {latestScripts.length > 0 && (
-        <h2 className="mb-2 text-lg font-semibold">
-          Newest Scripts
-        </h2>
+        <div className="flex w-full items-center justify-between">
+          <h2 className="text-lg font-semibold">Newest Scripts</h2>
+          <div className="flex items-center justify-end gap-1">
+            {page > 1 && (
+              <div
+                className="cursor-pointer text-sm font-semibold p-2 select-none"
+                onClick={goToPreviousPage}
+              >
+                Previous
+              </div>
+            )}
+            {endIndex < latestScripts.length && (
+              <div
+                onClick={goToNextPage}
+                className=" cursor-pointer text-sm font-semibold p-2 select-none"
+              >
+                {page === 1 ? "More.." : "Next"}
+              </div>
+            )}
+          </div>
+        </div>
       )}
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.slice(startIndex, endIndex).map((item) => (
@@ -85,10 +103,6 @@ function LatestScripts({ items }: { items: Category[] }) {
             </CardFooter>
           </Card>
         ))}
-      </div>
-      <div className="p-2 flex justify-end gap-1">
-        {page > 1 && <Button onClick={goToPreviousPage} variant="outline">Previous</Button>}
-        {endIndex < latestScripts.length && <Button onClick={goToNextPage} variant="outline">{page === 1 ? "More.." : "Next"}</Button>}
       </div>
     </div>
   );
