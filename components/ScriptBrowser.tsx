@@ -8,8 +8,8 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
-import { X, EyeOff, Eye } from "lucide-react";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { X, EyeOff, Eye, Star } from "lucide-react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
@@ -99,6 +99,22 @@ const ScriptBrowser = ({
     }
   }, [searchTerm, links, setSelectedScript]);
 
+  const handleSelected = useCallback((title: string) => {
+    setSelectedScript(title);
+  }, [setSelectedScript]);
+
+  useEffect(() => {
+    if (selectedScript) {
+      const category = links.find(category =>
+        category.expand.items.some(script => script.title === selectedScript)
+      );
+      if (category) {
+        setExpandedItems(prev => Array.from(new Set([...prev, category.catagoryName])));
+        handleSelected(selectedScript);
+      }
+    }
+  }, [selectedScript, links, handleSelected]);
+
   const handleAccordionChange = (value: string[]) => {
     setExpandedItems(value);
   };
@@ -118,10 +134,6 @@ const ScriptBrowser = ({
         };
   }, [searchTerm, expandedItems]);
 
-  const handleSelected = (title: string) => {
-    setSelectedScript(title);
-  };
-
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
       <div className="mb-5 flex items-center justify-between">
@@ -137,7 +149,7 @@ const ScriptBrowser = ({
       <div className="relative">
         <div className="mb-1 flex items-center">
           <Input
-            className="flex-grow"
+            className="flex-grow bg-accent/30"
             type="text"
             placeholder="Type '/' to search"
             onChange={(e) => handleSearch(e.target.value)}
@@ -156,11 +168,11 @@ const ScriptBrowser = ({
           )}
         </div>
         {searchTerm ? (
-          <p className="mb-1 ml-2 text-xs text-muted-foreground">
+          <p className="mb-4 ml-2 text-xs text-muted-foreground">
             Press &apos;Esc&apos; to clear the search
           </p>
         ) : (
-          <p className="mb-1 ml-2 text-xs text-muted-foreground">
+          <p className="mb-4 ml-2 text-xs text-muted-foreground">
             <a
               className="cursor-pointer"
               onClick={() => setShowLogos(!showLogos)}
@@ -234,6 +246,9 @@ const ScriptBrowser = ({
                       )}
                       <span className="flex items-center gap-2">
                         {script.title}
+                        {script.isMostViewed && (
+                        <Star className="text-yellow-500 w-3 h-3"></Star>
+                        )}
                       </span>
                       <Badge
                         className={clsx(

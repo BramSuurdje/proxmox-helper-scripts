@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LatestScripts from "./LatestScripts";
 import MostViewedScripts from "./MostViewedScripts";
+import RecentlyUpdatedScripts from "./RecentlyUpdatedScripts";
 
 function ScriptItem({
   items,
@@ -24,7 +25,8 @@ function ScriptItem({
   setSelectedScript: (script: string | null) => void;
 }) {
   const [item, setItem] = useState<Script | null>(null);
-  const id = useSearchParams().get("id");
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
 
   useEffect(() => {
     if (items) {
@@ -33,35 +35,36 @@ function ScriptItem({
         .flat()
         .find((script) => script.title === id);
       setItem(script || null);
-    }
-  }, [id, items]);
 
-  const findInstallCommandKey = (obj: any): string | null => {
-    for (const key in obj) {
-      if (
-        typeof obj[key] === "string" &&
-        obj[key].includes("https://github.com/tteck/Proxmox/") &&
-        !obj[key].includes("alpine") &&
-        !obj[key].includes("discussions") &&
-        !obj[key].includes("alert") &&
-        !obj[key].includes("2>/dev/null")
-      ) {
-        return key;
+      if (script && !selectedScript) {
+        setSelectedScript(script.title);
       }
     }
-    return null;
-  };
+  }, [id, items, setSelectedScript, selectedScript]);
+
+  const pattern = useMemo(() => /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/, []);
 
   const installCommand = useMemo(() => {
     if (item) {
-      const key = findInstallCommandKey(item);
-      return key ? item[key as keyof Script] : null;
+      const keys = Object.keys(item);
+      for (const key of keys) {
+        const value = item[key as keyof Script];
+        if (typeof value === "string" && pattern.test(value) &&
+            !value.includes("alpine") && !value.includes("discussions") && !value.includes("2>/dev/null")) {
+          return value;
+        }
+      }
     }
     return null;
-  }, [item]);
+  }, [item, pattern]);
 
-  const pattern = /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/;
-  const sourceUrl = typeof installCommand === 'string' ? installCommand.match(pattern) : null;
+  const sourceUrl = useMemo(() => {
+    if (installCommand) {
+      const match = installCommand.match(pattern);
+      return match ? match[0] : null;
+    }
+    return null;
+  }, [installCommand, pattern]);
 
   const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);
@@ -175,11 +178,11 @@ function ScriptItem({
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
-              <div className="mt-2 rounded-lg border p-4">
+              <div className="mt-2 rounded-lg border p-4 bg-accent/20">
                 <div className="mt-4 flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-32 w-32 rounded-lg bg-accent object-contain p-3"
+                      className="h-32 w-32 rounded-lg bg-accent/60 object-contain p-3"
                       src={item.logo}
                       width={400}
                       height={400}
@@ -298,7 +301,7 @@ function ScriptItem({
                       )}
                       {sourceUrl && (
                         <Button variant="outline" asChild>
-                          <Link target="_blank" href={sourceUrl[1]}>
+                          <Link target="_blank" href={sourceUrl}>
                             <span className="flex items-center gap-2">
                               <Code className="h-4 w-4" />
                               Source Code
@@ -339,7 +342,7 @@ function ScriptItem({
                     )}
                   </div>
 
-                  <div className="mt-6 rounded-lg border bg-blue-900/20 p-4 dark:bg-blue-900/20">
+                  <div className="mt-6 rounded-lg border bg-accent/50 p-4">
                     <h2 className="text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>
@@ -460,9 +463,10 @@ function ScriptItem({
           </div>
         </div>
       )}
-      {item ? null : (
+      {id ? null : (
         <div className="flex w-full flex-col">
           <LatestScripts items={items} />
+          <RecentlyUpdatedScripts items={items} />
           <MostViewedScripts items={items} />
         </div>
       )}

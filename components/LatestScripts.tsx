@@ -41,19 +41,21 @@ function LatestScripts({ items }: { items: Category[] }) {
 
   return (
     <div className="">
-      <h2 className="mb-2 text-lg font-semibold ">
-        Newest Scripts
-      </h2>
+      {latestScripts.length > 0 && (
+        <h2 className="mb-2 text-lg font-semibold">
+          Newest Scripts
+        </h2>
+      )}
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
         {latestScripts.slice(startIndex, endIndex).map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] flex-1 flex-grow "
+            className=" min-w-[250px] flex-1 flex-grow bg-accent/30"
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <div className="flex max-h-16 min-h-16 min-w-16 max-w-16 items-center justify-center rounded-lg bg-accent p-1">
-                  <Image src={item.logo} height={40} width={40} alt=""></Image>
+                  <Image src={item.logo} height={40} width={40} alt="" />
                 </div>
                 <h3 className="text-xl">
                   {item.title} {item.item_type}
