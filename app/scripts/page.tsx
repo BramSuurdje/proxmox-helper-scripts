@@ -77,7 +77,7 @@ export default function Page() {
         localStorage.setItem("scripts", JSON.stringify(res));
         const newCacheTime = new Date().getTime();
         localStorage.setItem("cacheTime", String(newCacheTime));
-        setCacheExpiryTime(new Date(newCacheTime + 30 * 60 * 1000));
+        setCacheExpiryTime(new Date(newCacheTime + 1440 * 60 * 1000));
       }
 
       setLinks(res as unknown as Category[]);
