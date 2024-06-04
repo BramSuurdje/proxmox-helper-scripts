@@ -30,7 +30,7 @@ export default function Page() {
 
           if (diffInMinutes < 30) {
             setLinks(JSON.parse(cachedLinks));
-            setCacheExpiryTime(new Date(Number(cacheTime) + 30 * 60 * 1000));
+            setCacheExpiryTime(new Date(Number(cacheTime) + 1440 * 60 * 1000));
             setIsLoading(false);
             return;
           }

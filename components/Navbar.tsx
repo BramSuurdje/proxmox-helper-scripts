@@ -113,13 +113,15 @@ function Navbar() {
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
-          <h2 className="font-semibold " onClick={setVisited}>
+          <h2 className="cursor-pointer font-semibold" onClick={setVisited}>
             <Link
               href="/"
               className=" flex flex-row-reverse items-center gap-2 sm:flex-row"
             >
               <Image height={18} width={18} alt="logo" src={logo} />
-              <span className="">Proxmox VE Helper-Scripts</span>
+              <span>
+                Proxmox VE Helper-Scripts
+              </span>
             </Link>
           </h2>
           <div className="flex items-center sm:hidden">

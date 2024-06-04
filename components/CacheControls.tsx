@@ -25,7 +25,8 @@ const CacheControls: React.FC<CacheControlsProps> = ({
             </p>
             {cacheExpiryTime && (
               <p className="text-xs text-muted-foreground">
-                Cache will expire automatically at{" "}
+                Cache will expire automatically on{" "}
+                {cacheExpiryTime.toLocaleDateString()} at{" "}
                 {cacheExpiryTime.toLocaleTimeString()}
               </p>
             )}
@@ -36,31 +37,31 @@ const CacheControls: React.FC<CacheControlsProps> = ({
           </p>
         )}
       </div>
-<div className="flex justify-center space-x-2 py-4">
-  {isCacheEnabled ? (
-    <>
-      <Button variant="outline" onClick={handleForceUpdate}>
-        <span className="flex items-center space-x-2">
-          <DatabaseBackup className="w-4 h-4"/>
-          <span>Reload via API</span>
-        </span>
-      </Button>
-      <Button variant="outline" onClick={toggleCache}>
-        <span className="flex items-center space-x-2">
-          <Database className="w-4 h-4"/>
-          <span>Disable Cache</span>
-        </span>
-      </Button>
-    </>
-  ) : (
-    <Button variant="outline" onClick={toggleCache}>
-      <span className="flex items-center space-x-2">
-        <DatabaseZap className="w-4 h-4"/>
-        <span>Enable Cache</span>
-      </span>
-    </Button>
-  )}
-</div>
+      <div className="flex justify-center space-x-2 py-4">
+        {isCacheEnabled ? (
+          <>
+            <Button variant="outline" onClick={handleForceUpdate}>
+              <span className="flex items-center space-x-2">
+                <DatabaseBackup className="h-4 w-4" />
+                <span>Reload via API</span>
+              </span>
+            </Button>
+            <Button variant="outline" onClick={toggleCache}>
+              <span className="flex items-center space-x-2">
+                <Database className="h-4 w-4" />
+                <span>Disable Cache</span>
+              </span>
+            </Button>
+          </>
+        ) : (
+          <Button variant="outline" onClick={toggleCache}>
+            <span className="flex items-center space-x-2">
+              <DatabaseZap className="h-4 w-4" />
+              <span>Enable Cache</span>
+            </span>
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
