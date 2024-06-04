@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/accordion";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
+import { pb } from "@/lib/pocketbase";
 import clsx from "clsx";
 
 function Navbar() {
@@ -72,16 +73,31 @@ function Navbar() {
   }, [shouldFocusInput]);
 
   useEffect(() => {
-    const cacheKey = "scripts";
+    const loadLinksFromCache = () => {
+      const cacheKey = "scripts";
+      const cachedLinks = localStorage.getItem(cacheKey);
 
-    const cachedLinks = localStorage.getItem(cacheKey);
+      if (cachedLinks) {
+        setLinks(JSON.parse(cachedLinks));
+      } else {
+        fetchLinks();
+      }
+    };
 
-    if (cachedLinks) {
-      setLinks(JSON.parse(cachedLinks));
-    } else {
-      console.error("No cached links found in localStorage.");
-    }
+    loadLinksFromCache();
   }, []);
+
+  const fetchLinks = async () => {
+    try {
+      const res = await pb.collection("categories").getFullList({
+        expand: "items",
+        requestKey: "navbar",
+      });
+      setLinks(res as unknown as Category[]);
+    } catch (error) {
+      console.error("Error fetching links:", error);
+    }
+  };
 
   function setVisited() {
     if (typeof window !== "undefined") {
