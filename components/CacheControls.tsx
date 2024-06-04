@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { DatabaseBackup, Database, DatabaseZap } from "lucide-react";
 
 interface CacheControlsProps {
   isCacheEnabled: boolean;
@@ -35,22 +36,31 @@ const CacheControls: React.FC<CacheControlsProps> = ({
           </p>
         )}
       </div>
-      <div className="flex justify-center space-x-2 py-4">
-        {isCacheEnabled ? (
-          <>
-            <Button variant="outline" onClick={handleForceUpdate}>
-              Reload via API
-            </Button>
-            <Button variant="outline" onClick={toggleCache}>
-              Disable Cache
-            </Button>
-          </>
-        ) : (
-          <Button variant="outline" onClick={toggleCache}>
-            Enable Cache
-          </Button>
-        )}
-      </div>
+<div className="flex justify-center space-x-2 py-4">
+  {isCacheEnabled ? (
+    <>
+      <Button variant="outline" onClick={handleForceUpdate}>
+        <span className="flex items-center space-x-2">
+          <DatabaseBackup className="w-4 h-4"/>
+          <span>Reload via API</span>
+        </span>
+      </Button>
+      <Button variant="outline" onClick={toggleCache}>
+        <span className="flex items-center space-x-2">
+          <Database className="w-4 h-4"/>
+          <span>Disable Cache</span>
+        </span>
+      </Button>
+    </>
+  ) : (
+    <Button variant="outline" onClick={toggleCache}>
+      <span className="flex items-center space-x-2">
+        <DatabaseZap className="w-4 h-4"/>
+        <span>Enable Cache</span>
+      </span>
+    </Button>
+  )}
+</div>
     </div>
   );
 };
