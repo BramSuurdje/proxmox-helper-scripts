@@ -136,9 +136,9 @@ const ScriptBrowser = ({
 
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
-      <div className="mb-5 flex items-center justify-between">
-        <h1 className=" text-xl font-bold">Scripts</h1>
-        <p className="text-xs text-muted-foreground">
+      <div className="mb-2 flex items-end justify-between">
+        <h1 className=" text-xl font-bold">Categories</h1>
+        <p className="text-xs text-muted-foreground italic">
           {links.reduce(
             (acc, category) => acc + category.expand.items.length,
             0,
@@ -168,11 +168,11 @@ const ScriptBrowser = ({
           )}
         </div>
         {searchTerm ? (
-          <p className="mb-4 ml-2 text-xs text-muted-foreground">
+          <p className="mb-2 ml-2 text-xs text-muted-foreground">
             Press &apos;Esc&apos; to clear the search
           </p>
         ) : (
-          <p className="mb-4 ml-2 text-xs text-muted-foreground">
+          <p className="mb-2 ml-2 text-xs text-muted-foreground">
             <a
               className="cursor-pointer"
               onClick={() => setShowLogos(!showLogos)}
@@ -200,9 +200,11 @@ const ScriptBrowser = ({
             className="sm:text-md flex flex-col"
           >
             <AccordionTrigger className="hover:underline">
-              <div className="w-full flex justify-between items-center mr-2">
-                <span className="hover:underline">{category.catagoryName}{" "}</span>
-                <span className=" text-xs text-muted-foreground hover:no-underline py-1 px-2 rounded-full bg-gray-200 dark:bg-blue-800/20">
+              <div className="mr-2 flex w-full items-center justify-between">
+                <span className="hover:underline">
+                  {category.catagoryName}{" "}
+                </span>
+                <span className=" rounded-full bg-gray-200 px-2 py-1 text-xs text-muted-foreground hover:no-underline dark:bg-blue-800/20">
                   {category.expand.items.length}
                 </span>
               </div>{" "}
@@ -232,7 +234,9 @@ const ScriptBrowser = ({
                           : ""
                       }`}
                       onClick={() => handleSelected(script.title)}
-                      ref={(el) => { linkRefs.current[script.title] = el; }}
+                      ref={(el) => {
+                        linkRefs.current[script.title] = el;
+                      }}
                     >
                       {showLogos && script.logo && (
                         <Image
@@ -247,7 +251,7 @@ const ScriptBrowser = ({
                       <span className="flex items-center gap-2">
                         {script.title}
                         {script.isMostViewed && (
-                        <Star className="text-yellow-500 w-3 h-3"></Star>
+                          <Star className="h-3 w-3 text-yellow-500"></Star>
                         )}
                       </span>
                       <Badge
