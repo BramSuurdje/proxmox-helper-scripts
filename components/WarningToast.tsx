@@ -9,14 +9,14 @@ export default function WarningToast() {
     if (toastShown.current) return;
     toastShown.current = true;
 
-    const count = sessionStorage.getItem("toastCount");
+    const count = localStorage.getItem("toastCount");
     if (count === null) {
-      sessionStorage.setItem("toastCount", "1");
+      localStorage.setItem("toastCount", "1");
       setTimeout(showWarningToast, 1000);
     } else {
       const visitCount = parseInt(count, 10);
-      if (visitCount < 3) {
-        sessionStorage.setItem("toastCount", (visitCount + 1).toString());
+      if (visitCount < 2) {
+        localStorage.setItem("toastCount", (visitCount + 1).toString());
         setTimeout(showWarningToast, 1000);
       }
     }
