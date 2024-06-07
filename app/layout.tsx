@@ -75,7 +75,13 @@ export default function RootLayout({
               <div className="w-full max-w-7xl ">
                 {children}
                 <Toaster richColors />
-                <WarningToast />
+                <WarningToast
+                  toastName="toast.pve8.1.warning"
+                  toastDuration={5000}
+                  timeoutDuration={1000}
+                  message="Starting from July 2024, the scripts in the repository will require Proxmox Virtual Environment 8.1 or newer."
+                  amountOfVisits={2}
+                />
               </div>
             </div>
           </div>

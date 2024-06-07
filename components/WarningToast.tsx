@@ -1,34 +1,46 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { toast } from "sonner";
 
-export default function WarningToast() {
+interface WarningToastProps {
+  toastName: string;
+  timeoutDuration: number;
+  toastDuration: number;
+  message: string;
+  amountOfVisits: number;
+}
+
+export default function WarningToast({
+  toastName,
+  timeoutDuration,
+  toastDuration,
+  message,
+  amountOfVisits,
+}: WarningToastProps) {
   const toastShown = useRef(false);
+
+  const showWarningToast = useCallback(() => {
+    toast.warning(message, {
+      duration: toastDuration,
+    });
+  }, [message, toastDuration]);
 
   useEffect(() => {
     if (toastShown.current) return;
     toastShown.current = true;
 
-    const count = localStorage.getItem("toastCount");
+    const count = localStorage.getItem(toastName);
     if (count === null) {
-      localStorage.setItem("toastCount", "1");
-      setTimeout(showWarningToast, 1000);
+      localStorage.setItem(toastName, "1");
+      setTimeout(showWarningToast, timeoutDuration);
     } else {
       const visitCount = parseInt(count, 10);
-      if (visitCount < 2) {
-        localStorage.setItem("toastCount", (visitCount + 1).toString());
-        setTimeout(showWarningToast, 1000);
+      if (visitCount < amountOfVisits) {
+        localStorage.setItem(toastName, (visitCount + 1).toString());
+        setTimeout(showWarningToast, timeoutDuration);
       }
     }
-  }, []);
-
-  const showWarningToast : any = () => {
-    toast.warning(
-      "Starting from July 2024, the scripts in the repository will require Proxmox Virtual Environment 8.1 or newer.", {
-        duration: 5000,
-      }
-    );
-  };
+  }, [toastName, timeoutDuration, amountOfVisits, showWarningToast]);
 
   return null;
 }
