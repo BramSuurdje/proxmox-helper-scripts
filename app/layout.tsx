@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import React from "react";
+import WarningToast from "@/components/WarningToast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -74,6 +75,7 @@ export default function RootLayout({
               <div className="w-full max-w-7xl ">
                 {children}
                 <Toaster richColors />
+                <WarningToast />
               </div>
             </div>
           </div>
