@@ -58,12 +58,23 @@ function ScriptItem({
   }, [item, pattern]);
 
   const sourceUrl = useMemo(() => {
+    const transformUrlToInstallScript = (url: string) => {
+      if (url.includes("/misc/") || url.includes("/vm/")) {
+        return url;
+      } else if (url.includes("/ct/")) {
+        return url.replace("/ct/", "/install/").replace(/\.sh$/, "-install.sh");
+      }
+      return url;
+    };
+
     if (installCommand) {
       const match = installCommand.match(pattern);
-      return match ? match[0] : null;
+      return match ? transformUrlToInstallScript(match[0]) : null;
     }
     return null;
   }, [installCommand, pattern]);
+
+
 
   const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);
