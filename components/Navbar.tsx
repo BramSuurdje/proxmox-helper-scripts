@@ -31,6 +31,7 @@ import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import { pb } from "@/lib/pocketbase";
 import clsx from "clsx";
+import { useRouter } from "next/navigation"
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,6 +39,7 @@ function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [shouldFocusInput, setShouldFocusInput] = useState(false);
+    const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,10 +101,14 @@ function Navbar() {
     }
   };
 
-  function setVisited() {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("hasVisitedHomePage", "false");
-    }
+  const removeCookieAndRedirect = () => {
+    removeCookie();
+    router.push("/");
+  };
+
+  function removeCookie() {
+    document.cookie =
+      "visited=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
 
   return (
@@ -113,8 +119,8 @@ function Navbar() {
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
-          <h2 className="cursor-pointer font-semibold" onClick={setVisited}>
-            <Link
+          <h2 className="cursor-pointer font-semibold" onClick={removeCookieAndRedirect}>
+            <a
               href="/"
               className=" flex flex-row-reverse items-center gap-2 sm:flex-row"
             >
@@ -122,7 +128,7 @@ function Navbar() {
               <span>
                 Proxmox VE Helper-Scripts
               </span>
-            </Link>
+            </a>
           </h2>
           <div className="flex items-center sm:hidden">
             <Sheet>
