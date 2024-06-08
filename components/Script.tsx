@@ -343,10 +343,12 @@ function ScriptItem({
                     )}
                   </div>
 
-                  <div className="mt-4 rounded-lg border bg-accent/50 p-4">
-                    <h2 className="text-lg font-semibold">
+                  <div className="mt-4 rounded-lg border bg-accent/50">
+                    <h2 className="py-2 px-4 text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>
+                    <Separator className="w-full"></Separator>
+                    <div className="p-4">
                     {item.hasAlpineScript ? (
                       <Tabs
                         defaultValue="default"
@@ -460,6 +462,7 @@ function ScriptItem({
                         </Button>
                       </>
                     )}
+                    </div>
                   </div>
                 </div>
               </div>
