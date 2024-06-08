@@ -1,5 +1,4 @@
 'use client'
-import { pb } from "@/lib/pocketbase";
 import Image from "next/image";
 import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";

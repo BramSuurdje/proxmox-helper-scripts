@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState, useMemo } from "react";
-import { Category, Script } from "@/lib/types";
+import { useState, useMemo } from "react";
+import { Category } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";

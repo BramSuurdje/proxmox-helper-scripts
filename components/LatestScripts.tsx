@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useMemo, useState } from "react";
-import { Category, Script } from "@/lib/types";
+import { Category } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
