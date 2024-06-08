@@ -315,12 +315,14 @@ function ScriptItem({
                 <Separator className="mt-4" />
                 <div>
                   <div className="mt-4">
-                    <h2 className="max-w-prose text-lg font-semibold">
+                    <div className="p-2">
+                    <h2 className="max-w-prose text-lg font-semibold mb-2">
                       Description
                     </h2>
                     <p className="text-sm">
                       {descriptionCodeBlock(item.description)}
                     </p>
+                    </div>
                     {item.alert1 && (
                       <div className="mt-4 flex flex-col gap-2">
                         <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
