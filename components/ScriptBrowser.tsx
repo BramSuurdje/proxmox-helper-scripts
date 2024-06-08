@@ -222,7 +222,7 @@ const ScriptBrowser = ({
                   ? "open"
                   : "closed"
               }
-              className="pb-2 pt-0"
+              className="pt-0"
             >
               {category.expand.items
                 .filter((script) =>
