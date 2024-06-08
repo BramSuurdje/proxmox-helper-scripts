@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard, Info, X, Code, Globe, BookOpenText, ExternalLink } from "lucide-react";
+import { Clipboard, Info, X, Code, Globe, BookOpenText, ExternalLink, Copy } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Category, Script } from "@/lib/types";
@@ -419,6 +419,7 @@ function ScriptItem({
                                 {!isMobile && item.alpineScript
                                   ? item.alpineScript
                                   : "Copy install command"}
+                                  <Copy></Copy>
                               </Button>
                             </>
                           )}
@@ -454,6 +455,8 @@ function ScriptItem({
                           {!isMobile && installCommand
                             ? installCommand
                             : "Copy install command"}
+                            <span className="p-2"></span>
+                            <Copy className="w-4"></Copy>
                         </Button>
                       </>
                     )}

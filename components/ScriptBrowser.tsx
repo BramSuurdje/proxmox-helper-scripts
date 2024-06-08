@@ -192,19 +192,28 @@ const ScriptBrowser = ({
           </p>
         )}
       </div>
+      <div className="rounded-lg">
       <Accordion {...accordionProps}>
         {filteredLinks.map((category) => (
           <AccordionItem
             key={category.collectionId}
             value={category.catagoryName}
-            className="sm:text-md flex flex-col"
+            className={clsx(
+              'sm:text-md flex flex-col border-none px-2',
+              { 'bg-accent/30 rounded-lg': expandedItems.includes(category.catagoryName) && expandedItems.length <= 1 }
+            )}
           >
-            <AccordionTrigger className="hover:underline">
+            <AccordionTrigger
+              className={clsx(
+                'transition ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-accent duration-250 rounded-lg',
+                { '': expandedItems.includes(category.catagoryName) }
+              )}
+            >
               <div className="mr-2 flex w-full items-center justify-between">
-                <span className="hover:underline">
+                <span className="ml-2">
                   {category.catagoryName}{" "}
                 </span>
-                <span className=" rounded-full bg-gray-200 px-2 py-1 text-xs text-muted-foreground hover:no-underline dark:bg-blue-800/20">
+                <span className="rounded-full bg-gray-200 px-2 py-1 text-xs text-muted-foreground hover:no-underline dark:bg-blue-800/20">
                   {category.expand.items.length}
                 </span>
               </div>{" "}
@@ -228,9 +237,9 @@ const ScriptBrowser = ({
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
-                      className={`flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-blue-300/20 hover:bg-neutral-50 hover:dark:bg-blue-900/20 ${
+                      className={`flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-accent/60 hover:dark:bg-accent/20 ${
                         selectedScript === script.title
-                          ? "rounded-lg bg-blue-300/20 font-semibold dark:bg-blue-900/20 dark:text-white"
+                          ? "rounded-lg bg-accent font-semibold dark:bg-accent/30 dark:text-white"
                           : ""
                       }`}
                       onClick={() => handleSelected(script.title)}
@@ -278,6 +287,7 @@ const ScriptBrowser = ({
           </AccordionItem>
         ))}
       </Accordion>
+    </div>
     </div>
   );
 };
