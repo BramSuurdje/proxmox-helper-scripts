@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard, Info, X, Code, Globe, BookOpenText, ExternalLink } from "lucide-react";
+import { Clipboard, Info, X, Code, Globe, BookOpenText, ExternalLink, Copy } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Category, Script } from "@/lib/types";
@@ -315,12 +315,14 @@ function ScriptItem({
                 <Separator className="mt-4" />
                 <div>
                   <div className="mt-4">
-                    <h2 className="max-w-prose text-lg font-semibold">
+                    <div className="p-2">
+                    <h2 className="max-w-prose text-lg font-semibold mb-2">
                       Description
                     </h2>
                     <p className="text-sm">
                       {descriptionCodeBlock(item.description)}
                     </p>
+                    </div>
                     {item.alert1 && (
                       <div className="mt-4 flex flex-col gap-2">
                         <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
@@ -343,10 +345,12 @@ function ScriptItem({
                     )}
                   </div>
 
-                  <div className="mt-4 rounded-lg border bg-accent/50 p-4">
-                    <h2 className="text-lg font-semibold">
+                  <div className="mt-4 rounded-lg border bg-accent/50">
+                    <h2 className="py-2 px-4 text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>
+                    <Separator className="w-full"></Separator>
+                    <div className="p-4">
                     {item.hasAlpineScript ? (
                       <Tabs
                         defaultValue="default"
@@ -419,6 +423,7 @@ function ScriptItem({
                                 {!isMobile && item.alpineScript
                                   ? item.alpineScript
                                   : "Copy install command"}
+                                  <Copy></Copy>
                               </Button>
                             </>
                           )}
@@ -454,9 +459,12 @@ function ScriptItem({
                           {!isMobile && installCommand
                             ? installCommand
                             : "Copy install command"}
+                            <span className="p-2"></span>
+                            <Copy className="w-4"></Copy>
                         </Button>
                       </>
                     )}
+                    </div>
                   </div>
                 </div>
               </div>
