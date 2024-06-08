@@ -197,7 +197,7 @@ const ScriptBrowser = ({
             key={category.collectionId}
             value={category.catagoryName}
             className={clsx(
-              'sm:text-md flex flex-col border-none px-2',
+              'sm:text-md flex flex-col border-none',
               { 'bg-accent/30 rounded-lg': expandedItems.includes(category.catagoryName) && expandedItems.length <= 1 }
             )}
           >
@@ -208,7 +208,7 @@ const ScriptBrowser = ({
               )}
             >
               <div className="mr-2 flex w-full items-center justify-between">
-                <span className="ml-2">
+                <span className="">
                   {category.catagoryName}{" "}
                 </span>
                 <span className="rounded-full bg-gray-200 px-2 py-1 text-xs text-muted-foreground hover:no-underline dark:bg-blue-800/20">
