@@ -208,7 +208,7 @@ const ScriptBrowser = ({
               )}
             >
               <div className="mr-2 flex w-full items-center justify-between">
-                <span className="">
+                <span className="pl-2">
                   {category.catagoryName}{" "}
                 </span>
                 <span className="rounded-full bg-gray-200 px-2 py-1 text-xs text-muted-foreground hover:no-underline dark:bg-blue-800/20">
