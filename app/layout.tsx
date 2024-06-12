@@ -87,7 +87,7 @@ export default function RootLayout({
                   toastName="toast.feedback"
                   toastDuration={7500}
                   timeoutDuration={12500}
-                  message="Think the site is missing something? feel free to give feedback! it helps us improve the website."
+                  message="Think the site is missing something? Feel free to give feedback! It helps us improve the website."
                   amountOfVisits={1}
                   toastButtonMessage="Give Feedback 🌟"
                 />
