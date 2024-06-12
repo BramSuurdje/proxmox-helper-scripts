@@ -4,12 +4,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import React from "react";
-import WarningToast from "@/components/WarningToast";
+import { InfoToastWithButton, WarningToast } from "@/components/WarningToast";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "proxmox VE Helper-Scripts | Scripts for Streamlining Your Homelab with Proxmox VE",
+  title:
+    "proxmox VE Helper-Scripts | Scripts for Streamlining Your Homelab with Proxmox VE",
   generator: "Next.js",
   applicationName: "Proxmox VE Helper-Scripts",
   referrer: "origin-when-cross-origin",
@@ -25,8 +26,7 @@ export const metadata = {
   authors: [{ name: "tteck" }, { name: "Bram" }],
   creator: "tteck, Bram Suurd",
   publisher: "tteck, Bram Suurd",
-  description:
-    "Scripts for Streamlining Your Homelab with Proxmox VE",
+  description: "Scripts for Streamlining Your Homelab with Proxmox VE",
   favicon: "/app/favicon.ico",
   formatDetection: {
     email: false,
@@ -81,6 +81,15 @@ export default function RootLayout({
                   timeoutDuration={1000}
                   message="Starting from July 2024, the scripts in the repository will require Proxmox Virtual Environment 8.1 or newer."
                   amountOfVisits={2}
+                  toastButtonMessage=""
+                />
+                <InfoToastWithButton
+                  toastName="toast.feedback"
+                  toastDuration={7500}
+                  timeoutDuration={12500}
+                  message="Feel like the site is missing something? feel free to give feedback! it helps us improve the site."
+                  amountOfVisits={1}
+                  toastButtonMessage="Give Feedback 🌟"
                 />
               </div>
             </div>
