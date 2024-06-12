@@ -86,8 +86,8 @@ export default function RootLayout({
                 <InfoToastWithButton
                   toastName="toast.feedback"
                   toastDuration={7500}
-                  timeoutDuration={12500}
-                  message="Feel like the site is missing something? feel free to give feedback! it helps us improve the site."
+                  timeoutDuration={2000}
+                  message="Think the site is missing something? feel free to give feedback! it helps us improve the website."
                   amountOfVisits={1}
                   toastButtonMessage="Give Feedback 🌟"
                 />

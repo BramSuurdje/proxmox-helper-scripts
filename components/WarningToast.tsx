@@ -61,7 +61,7 @@ export function InfoToastWithButton({
   const showWarningToast = useCallback(() => {
     toast.info(
             <div className="flex flex-col gap-3">
-              <p className="lg">
+              <p className="lg text-black dark:text-white">
                 {message}
               </p>
               <div>
