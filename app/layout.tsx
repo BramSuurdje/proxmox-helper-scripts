@@ -58,8 +58,8 @@ export default function RootLayout({
       <head>
         <script
           defer
-          src="https://analytics.bramsuurd.nl/script.js"
-          data-website-id="7e29b1b6-8b7f-4e97-a5a5-9f335d67b683"
+          src={process.env.NEXT_PUBLIC_ANALYTICS_URL}
+          data-website-id={process.env.NEXT_PUBLIC_ANALYTICS_TOKEN}
         ></script>
       </head>
       <body className={inter.className}>
