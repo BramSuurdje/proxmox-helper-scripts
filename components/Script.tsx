@@ -485,7 +485,7 @@ function ScriptItem({
       {id ? null : (
         <div className="flex w-full flex-col gap-5">
           <LatestScripts items={items} />
-          <RecentlyUpdatedScripts items={items} />
+          {/* <RecentlyUpdatedScripts items={items} /> */}
           <MostViewedScripts items={items} />
         </div>
       )}

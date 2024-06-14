@@ -49,7 +49,7 @@ export default function MostViewedScripts({ items }: { items: Category[] }) {
             Most Viewed Scripts
           </h2>
           <p className="mb-2 text-sm text-muted-foreground">
-            This data, unfortunately, is not directly influenced by interacting with the website.
+            This data, unfortunately, is not directly influenced by interacting with the website. (yet)
           </p>
         </>
       )}
