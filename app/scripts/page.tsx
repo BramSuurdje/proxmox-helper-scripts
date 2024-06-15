@@ -48,14 +48,7 @@ export default function Page() {
         }
       } catch (error) {
         console.error("Error fetching links from pb:", error);
-        res = await (pbBackup.collection("categories").getFullList({
-          expand: "items",
-          sort: "order",
-          requestKey: "desktop",
-        }) as Promise<Category[]>);
-        if (res.length === 0) {
-          throw new Error("Empty response");
-        }
+        throw error;
       }
       res = res.sort((a: Category, b: Category) => {
         if (
