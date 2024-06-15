@@ -1,10 +1,19 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Clipboard, Info, X, Code, Globe, BookOpenText, ExternalLink, Copy } from "lucide-react";
+import {
+  Clipboard,
+  Info,
+  X,
+  Code,
+  Globe,
+  BookOpenText,
+  ExternalLink,
+  Copy,
+} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Category, Script } from "@/lib/types";
@@ -41,15 +50,24 @@ function ScriptItem({
     }
   }, [id, items, setSelectedScript, selectedScript]);
 
-  const pattern = useMemo(() => /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/, []);
+  const pattern = useMemo(
+    () =>
+      /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/,
+    [],
+  );
 
   const installCommand = useMemo(() => {
     if (item) {
       const keys = Object.keys(item);
       for (const key of keys) {
         const value = item[key as keyof Script];
-        if (typeof value === "string" && pattern.test(value) &&
-            !value.includes("alpine") && !value.includes("discussions") && !value.includes("2>/dev/null")) {
+        if (
+          typeof value === "string" &&
+          pattern.test(value) &&
+          !value.includes("alpine") &&
+          !value.includes("discussions") &&
+          !value.includes("2>/dev/null")
+        ) {
           return value;
         }
       }
@@ -73,8 +91,6 @@ function ScriptItem({
     }
     return null;
   }, [installCommand, pattern]);
-
-
 
   const handleCopy = (type: string, value: any) => {
     navigator.clipboard.writeText(value);

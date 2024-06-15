@@ -45,11 +45,10 @@ export default function MostViewedScripts({ items }: { items: Category[] }) {
     <div className="">
       {mostViewedScripts.length > 0 && (
         <>
-          <h2 className="text-lg font-semibold">
-            Most Viewed Scripts
-          </h2>
+          <h2 className="text-lg font-semibold">Most Viewed Scripts</h2>
           <p className="mb-2 text-sm text-muted-foreground">
-            This data, unfortunately, is not directly influenced by interacting with the website. (yet)
+            This data, unfortunately, is not directly influenced by interacting
+            with the website. (yet)
           </p>
         </>
       )}
@@ -93,9 +92,17 @@ export default function MostViewedScripts({ items }: { items: Category[] }) {
           </Card>
         ))}
       </div>
-      <div className="p-2 flex justify-end gap-1">
-        {page > 1 && <Button onClick={goToPreviousPage} variant="outline">Previous</Button>}
-        {endIndex < mostViewedScripts.length && <Button onClick={goToNextPage} variant="outline">{page === 1 ? "More.." : "Next"}</Button>}
+      <div className="flex justify-end gap-1 p-2">
+        {page > 1 && (
+          <Button onClick={goToPreviousPage} variant="outline">
+            Previous
+          </Button>
+        )}
+        {endIndex < mostViewedScripts.length && (
+          <Button onClick={goToNextPage} variant="outline">
+            {page === 1 ? "More.." : "Next"}
+          </Button>
+        )}
       </div>
     </div>
   );

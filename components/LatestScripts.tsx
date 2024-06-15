@@ -21,7 +21,9 @@ function LatestScripts({ items }: { items: Category[] }) {
   const latestScripts = useMemo(() => {
     if (!items) return [];
     const scripts = items.flatMap((category) => category.expand.items || []);
-    return scripts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+    return scripts.sort(
+      (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime(),
+    );
   }, [items]);
 
   const goToNextPage = () => {
@@ -47,7 +49,7 @@ function LatestScripts({ items }: { items: Category[] }) {
           <div className="flex items-center justify-end gap-1">
             {page > 1 && (
               <div
-                className="cursor-pointer text-sm font-semibold p-2 select-none"
+                className="cursor-pointer select-none p-2 text-sm font-semibold"
                 onClick={goToPreviousPage}
               >
                 Previous
@@ -56,7 +58,7 @@ function LatestScripts({ items }: { items: Category[] }) {
             {endIndex < latestScripts.length && (
               <div
                 onClick={goToNextPage}
-                className=" cursor-pointer text-sm font-semibold p-2 select-none"
+                className=" cursor-pointer select-none p-2 text-sm font-semibold"
               >
                 {page === 1 ? "More.." : "Next"}
               </div>

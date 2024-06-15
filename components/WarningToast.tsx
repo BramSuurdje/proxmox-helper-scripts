@@ -54,30 +54,28 @@ export function InfoToastWithButton({
   toastDuration,
   message,
   amountOfVisits,
-  toastButtonMessage
+  toastButtonMessage,
 }: WarningToastProps) {
   const toastShown = useRef(false);
 
   const showWarningToast = useCallback(() => {
     toast.info(
-            <div className="flex flex-col gap-3">
-              <p className="lg text-black dark:text-white">
-                {message}
-              </p>
-              <div>
-                <Button className="text-white">
-                  <Link
-                    href="https://insigh.to/b/proxmox-ve-helper-scripts"
-                    data-umami-event="Give Feedback"
-                    target="_blank"
-                  >
-                    {toastButtonMessage}
-                  </Link>
-                </Button>
-              </div>
-            </div>,
-            { duration: toastDuration },
-          );
+      <div className="flex flex-col gap-3">
+        <p className="lg text-black dark:text-white">{message}</p>
+        <div>
+          <Button className="text-white">
+            <Link
+              href="https://insigh.to/b/proxmox-ve-helper-scripts"
+              data-umami-event="Give Feedback"
+              target="_blank"
+            >
+              {toastButtonMessage}
+            </Link>
+          </Button>
+        </div>
+      </div>,
+      { duration: toastDuration },
+    );
   }, [message, toastDuration, toastButtonMessage]);
 
   useEffect(() => {

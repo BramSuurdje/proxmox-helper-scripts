@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import ScriptItem from "@/components/ScriptItem";
 import ScriptBrowser from "@/components/ScriptBrowser";
 import { pb } from "@/lib/pocketbase";
@@ -14,73 +14,78 @@ export default function Page() {
   const [cacheExpiryTime, setCacheExpiryTime] = useState<Date | null>(null);
   const [isCacheEnabled, setIsCacheEnabled] = useState<boolean>(true);
 
-  const fetchLinks = useCallback(async (forceUpdate: boolean = false) => {
-    try {
-      setIsLoading(true);
-      let res;
+  const fetchLinks = useCallback(
+    async (forceUpdate: boolean = false) => {
+      try {
+        setIsLoading(true);
+        let res;
 
-      if (isCacheEnabled) {
-        const cachedLinks = localStorage.getItem("scripts");
-        const cacheTime = localStorage.getItem("cacheTime");
+        if (isCacheEnabled) {
+          const cachedLinks = localStorage.getItem("scripts");
+          const cacheTime = localStorage.getItem("cacheTime");
 
-        if (!forceUpdate && cachedLinks && cacheTime) {
-          const now = new Date().getTime();
-          const timeDiff = Math.abs(now - Number(cacheTime));
-          const diffInMinutes = Math.floor(timeDiff / 1000 / 60);
+          if (!forceUpdate && cachedLinks && cacheTime) {
+            const now = new Date().getTime();
+            const timeDiff = Math.abs(now - Number(cacheTime));
+            const diffInMinutes = Math.floor(timeDiff / 1000 / 60);
 
-          if (diffInMinutes < 30) {
-            setLinks(JSON.parse(cachedLinks));
-            setCacheExpiryTime(new Date(Number(cacheTime) + 1440 * 60 * 1000));
-            setIsLoading(false);
-            return;
+            if (diffInMinutes < 30) {
+              setLinks(JSON.parse(cachedLinks));
+              setCacheExpiryTime(
+                new Date(Number(cacheTime) + 1440 * 60 * 1000),
+              );
+              setIsLoading(false);
+              return;
+            }
           }
         }
-      }
 
-      try {
-        res = await (pb.collection("categories").getFullList({
-          expand: "items",
-          sort: "order",
-          requestKey: "desktop",
-        }) as Promise<Category[]>);
-        if (res.length === 0) {
-          throw new Error("Empty response");
+        try {
+          res = await (pb.collection("categories").getFullList({
+            expand: "items",
+            sort: "order",
+            requestKey: "desktop",
+          }) as Promise<Category[]>);
+          if (res.length === 0) {
+            throw new Error("Empty response");
+          }
+        } catch (error) {
+          console.error("Error fetching links from pb:", error);
+          throw error;
         }
+        res = res.sort((a: Category, b: Category) => {
+          if (
+            a.catagoryName === "Proxmox VE Tools" &&
+            b.catagoryName !== "Proxmox VE Tools"
+          ) {
+            return -1;
+          } else if (
+            a.catagoryName !== "Proxmox VE Tools" &&
+            b.catagoryName === "Proxmox VE Tools"
+          ) {
+            return 1;
+          } else {
+            return a.catagoryName.localeCompare(b.catagoryName);
+          }
+        });
+
+        if (isCacheEnabled) {
+          localStorage.setItem("scripts", JSON.stringify(res));
+          const newCacheTime = new Date().getTime();
+          localStorage.setItem("cacheTime", String(newCacheTime));
+          setCacheExpiryTime(new Date(newCacheTime + 1440 * 60 * 1000));
+        }
+
+        setLinks(res as unknown as Category[]);
       } catch (error) {
-        console.error("Error fetching links from pb:", error);
-        throw error;
+        console.error("Error fetching links:", error);
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
       }
-      res = res.sort((a: Category, b: Category) => {
-        if (
-          a.catagoryName === "Proxmox VE Tools" &&
-          b.catagoryName !== "Proxmox VE Tools"
-        ) {
-          return -1;
-        } else if (
-          a.catagoryName !== "Proxmox VE Tools" &&
-          b.catagoryName === "Proxmox VE Tools"
-        ) {
-          return 1;
-        } else {
-          return a.catagoryName.localeCompare(b.catagoryName);
-        }
-      });
-
-      if (isCacheEnabled) {
-        localStorage.setItem("scripts", JSON.stringify(res));
-        const newCacheTime = new Date().getTime();
-        localStorage.setItem("cacheTime", String(newCacheTime));
-        setCacheExpiryTime(new Date(newCacheTime + 1440 * 60 * 1000));
-      }
-
-      setLinks(res as unknown as Category[]);
-    } catch (error) {
-      console.error("Error fetching links:", error);
-      setIsLoading(false);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [isCacheEnabled]);
+    },
+    [isCacheEnabled],
+  );
 
   useEffect(() => {
     const cacheEnabled = localStorage.getItem("isCacheEnabled");

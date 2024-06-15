@@ -12,10 +12,10 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]"></div>
         <div className="flex animate-fade-up flex-col items-center justify-center">
           <Image src="/logo.png" alt="proxmox" width={150} height={150} />
-          <h1 className="relative z-20 bg-gradient-to-b from-[#0080C4] to-[#004c75] bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-5xl text-center sm:text-left">
+          <h1 className="relative z-20 bg-gradient-to-b from-[#0080C4] to-[#004c75] bg-clip-text py-4 text-center text-4xl font-bold text-transparent sm:text-left sm:text-5xl">
             Proxmox VE Helper-Scripts
           </h1>
-          <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-xl text-center sm:text-left">
+          <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-center text-xl sm:text-left">
             Proxmox VE Scripts for{" "}
             <Typewriter
               words={[

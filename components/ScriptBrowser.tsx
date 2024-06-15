@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Accordion,
   AccordionItem,
@@ -9,7 +9,13 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import { X, EyeOff, Eye, Star } from "lucide-react";
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -29,13 +35,13 @@ const ScriptBrowser = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [showLogos, setShowLogos] = useState<boolean>(() => {
-    const saved = localStorage.getItem('showLogos');
+    const saved = localStorage.getItem("showLogos");
     return saved ? JSON.parse(saved) : true;
   });
   const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
 
   useEffect(() => {
-    localStorage.setItem('showLogos', JSON.stringify(showLogos));
+    localStorage.setItem("showLogos", JSON.stringify(showLogos));
   }, [showLogos]);
 
   useEffect(() => {
@@ -84,8 +90,10 @@ const ScriptBrowser = ({
 
   useEffect(() => {
     const matchingScripts = links
-      .flatMap(category => category.expand.items)
-      .filter(script => script.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      .flatMap((category) => category.expand.items)
+      .filter((script) =>
+        script.title.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
 
     if (matchingScripts.length === 1) {
       const scriptTitle = matchingScripts[0].title;
@@ -100,17 +108,22 @@ const ScriptBrowser = ({
     }
   }, [searchTerm, links, setSelectedScript]);
 
-  const handleSelected = useCallback((title: string) => {
-    setSelectedScript(title);
-  }, [setSelectedScript]);
+  const handleSelected = useCallback(
+    (title: string) => {
+      setSelectedScript(title);
+    },
+    [setSelectedScript],
+  );
 
   useEffect(() => {
     if (selectedScript) {
-      const category = links.find(category =>
-        category.expand.items.some(script => script.title === selectedScript)
+      const category = links.find((category) =>
+        category.expand.items.some((script) => script.title === selectedScript),
       );
       if (category) {
-        setExpandedItems(prev => Array.from(new Set([...prev, category.catagoryName])));
+        setExpandedItems((prev) =>
+          Array.from(new Set([...prev, category.catagoryName])),
+        );
         handleSelected(selectedScript);
       }
     }
@@ -266,10 +279,8 @@ const ScriptBrowser = ({
                           className={clsx(
                             "ml-auto w-[37.69px] justify-center text-center",
                             {
-                              "text-primary/75":
-                                script.item_type === "VM",
-                              "text-yellow-500/75":
-                                script.item_type === "LXC",
+                              "text-primary/75": script.item_type === "VM",
+                              "text-yellow-500/75": script.item_type === "LXC",
                               "border-none": script.item_type === "",
                               hidden: !["VM", "LXC", ""].includes(
                                 script.item_type,

@@ -10,7 +10,7 @@ First, install the dependencies:
 
 ```bash
 npm install
-# or 
+# or
 yarn install
 # or
 pnpm install

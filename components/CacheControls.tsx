@@ -17,7 +17,7 @@ const CacheControls: React.FC<CacheControlsProps> = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <Separator className="w-screen"/>
+      <Separator className="w-screen" />
       <div className="mt-6 grid animate-fade-up grid-cols-1 gap-4 px-4">
         <div className="text-center">
           {isCacheEnabled ? (

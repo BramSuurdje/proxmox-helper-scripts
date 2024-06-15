@@ -5,4 +5,3 @@ export function extractDate(dateString: string): string {
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
-
