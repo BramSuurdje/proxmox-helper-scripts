@@ -1,7 +1,7 @@
 'use client';
-import ScriptItem from "@/components/Script";
+import ScriptItem from "@/components/ScriptItem";
 import ScriptBrowser from "@/components/ScriptBrowser";
-import { pb, pbBackup } from "@/lib/pocketbase";
+import { pb } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { useEffect, useState, useCallback } from "react";
 import CacheControls from "@/components/CacheControls";
