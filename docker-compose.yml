@@ -1,8 +1,0 @@
-services:
-  pocketbase:
-    build: .
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./pb_data:/pb/pb_data
-    restart: unless-stopped
