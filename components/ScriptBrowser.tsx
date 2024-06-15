@@ -266,9 +266,9 @@ const ScriptBrowser = ({
                           className={clsx(
                             "ml-auto w-[37.69px] justify-center text-center",
                             {
-                              "border-primary/75 text-primary/75":
+                              "text-primary/75":
                                 script.item_type === "VM",
-                              "border-yellow-500/75 text-yellow-500/75":
+                              "text-yellow-500/75":
                                 script.item_type === "LXC",
                               "border-none": script.item_type === "",
                               hidden: !["VM", "LXC", ""].includes(
