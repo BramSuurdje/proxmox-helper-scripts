@@ -192,7 +192,7 @@ function ScriptItem({
                 <div className="flex justify-between">
                   <div className="flex">
                     <Image
-                      className="h-32 w-32 rounded-lg bg-accent/60 shadow-md object-contain p-3"
+                      className="h-32 w-32 rounded-lg bg-accent/60 object-contain p-3 shadow-md"
                       src={item.logo}
                       width={400}
                       height={400}
@@ -326,12 +326,12 @@ function ScriptItem({
                 <div>
                   <div className="mt-4">
                     <div className="p-2">
-                    <h2 className="max-w-prose text-lg font-semibold mb-2">
-                      Description
-                    </h2>
-                    <p className="text-sm">
-                      {descriptionCodeBlock(item.description)}
-                    </p>
+                      <h2 className="mb-2 max-w-prose text-lg font-semibold">
+                        Description
+                      </h2>
+                      <p className="text-sm">
+                        {descriptionCodeBlock(item.description)}
+                      </p>
                     </div>
                     {item.alert1 && (
                       <div className="mt-4 flex flex-col gap-2">
@@ -356,21 +356,96 @@ function ScriptItem({
                   </div>
 
                   <div className="mt-4 rounded-lg border bg-accent/50">
-                    <h2 className="py-2 px-4 text-lg font-semibold">
+                    <h2 className="px-4 py-2 text-lg font-semibold">
                       How to {item.item_type ? "install" : "use"}
                     </h2>
                     <Separator className="w-full"></Separator>
                     <div className="p-4">
-                    {item.hasAlpineScript ? (
-                      <Tabs
-                        defaultValue="default"
-                        className="mt-2 w-full max-w-4xl"
-                      >
-                        <TabsList>
-                          <TabsTrigger value="default">Default</TabsTrigger>
-                          <TabsTrigger value="alpine">Alpine Linux</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="default">
+                      {item.hasAlpineScript ? (
+                        <Tabs
+                          defaultValue="default"
+                          className="mt-2 w-full max-w-4xl"
+                        >
+                          <TabsList>
+                            <TabsTrigger value="default">Default</TabsTrigger>
+                            <TabsTrigger value="alpine">
+                              Alpine Linux
+                            </TabsTrigger>
+                          </TabsList>
+                          <TabsContent value="default">
+                            {item.item_type && (
+                              <>
+                                <p className="text-sm">
+                                  To create a new Proxmox VE {item.title}{" "}
+                                  {item.item_type}, run the command below in the
+                                  Proxmox VE Shell.
+                                </p>
+                                {item.isUpdateable && (
+                                  <p className="text-sm">
+                                    To Update {item.title}, run the command
+                                    below (or type update) in the LXC Console.
+                                  </p>
+                                )}
+                              </>
+                            )}
+                            <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
+                              click to copy
+                            </p>
+                            <Button
+                              variant="secondary"
+                              size={"sm"}
+                              onClick={() =>
+                                handleCopy("install command", installCommand)
+                              }
+                            >
+                              {!isMobile && installCommand
+                                ? installCommand
+                                : "Copy install command"}
+                              <span className="p-2"></span>
+                              <Copy className="w-4"></Copy>
+                            </Button>
+                          </TabsContent>
+                          <TabsContent value="alpine">
+                            {item.hasAlpineScript && (
+                              <>
+                                <p className="mt-2 max-w-2xl text-sm">
+                                  As an alternative option, you can use Alpine
+                                  Linux and the {item.title} package to create a{" "}
+                                  {item.title} {item.item_type} container with
+                                  faster creation time and minimal system
+                                  resource usage. You are also obliged to adhere
+                                  to updates provided by the package maintainer.
+                                </p>
+                                <p className="mt-2 flex text-sm">
+                                  To create a new Proxmox VE Alpine-{item.title}{" "}
+                                  {item.item_type}, run the command below in the
+                                  Proxmox VE Shell
+                                </p>
+                                <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
+                                  click to copy
+                                </p>
+                                <Button
+                                  variant={"secondary"}
+                                  size={"sm"}
+                                  onClick={() =>
+                                    handleCopy(
+                                      "install command",
+                                      item.alpineScript,
+                                    )
+                                  }
+                                >
+                                  {!isMobile && item.alpineScript
+                                    ? item.alpineScript
+                                    : "Copy install command"}
+                                  <span className="p-2"></span>
+                                  <Copy className="w-4"></Copy>
+                                </Button>
+                              </>
+                            )}
+                          </TabsContent>
+                        </Tabs>
+                      ) : (
+                        <>
                           {item.item_type && (
                             <>
                               <p className="text-sm">
@@ -399,81 +474,11 @@ function ScriptItem({
                             {!isMobile && installCommand
                               ? installCommand
                               : "Copy install command"}
-                          </Button>
-                        </TabsContent>
-                        <TabsContent value="alpine">
-                          {item.hasAlpineScript && (
-                            <>
-                              <p className="mt-2 max-w-2xl text-sm">
-                                As an alternative option, you can use Alpine
-                                Linux and the {item.title} package to create a{" "}
-                                {item.title} {item.item_type} container with
-                                faster creation time and minimal system resource
-                                usage. You are also obliged to adhere to updates
-                                provided by the package maintainer.
-                              </p>
-                              <p className="mt-2 flex text-sm">
-                                To create a new Proxmox VE Alpine-{item.title}{" "}
-                                {item.item_type}, run the command below in the
-                                Proxmox VE Shell
-                              </p>
-                              <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
-                                click to copy
-                              </p>
-                              <Button
-                                variant={"secondary"}
-                                size={"sm"}
-                                onClick={() =>
-                                  handleCopy(
-                                    "install command",
-                                    item.alpineScript,
-                                  )
-                                }
-                              >
-                                {!isMobile && item.alpineScript
-                                  ? item.alpineScript
-                                  : "Copy install command"}
-                                  <Copy></Copy>
-                              </Button>
-                            </>
-                          )}
-                        </TabsContent>
-                      </Tabs>
-                    ) : (
-                      <>
-                        {item.item_type && (
-                          <>
-                            <p className="text-sm">
-                              To create a new Proxmox VE {item.title}{" "}
-                              {item.item_type}, run the command below in the
-                              Proxmox VE Shell.
-                            </p>
-                            {item.isUpdateable && (
-                              <p className="text-sm">
-                                To Update {item.title}, run the command below
-                                (or type update) in the LXC Console.
-                              </p>
-                            )}
-                          </>
-                        )}
-                        <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
-                          click to copy
-                        </p>
-                        <Button
-                          variant="secondary"
-                          size={"sm"}
-                          onClick={() =>
-                            handleCopy("install command", installCommand)
-                          }
-                        >
-                          {!isMobile && installCommand
-                            ? installCommand
-                            : "Copy install command"}
                             <span className="p-2"></span>
                             <Copy className="w-4"></Copy>
-                        </Button>
-                      </>
-                    )}
+                          </Button>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
