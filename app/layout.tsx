@@ -9,8 +9,7 @@ import { InfoToastWithButton, WarningToast } from "@/components/WarningToast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title:
-    "proxmox VE Helper-Scripts | Scripts for Streamlining Your Homelab with Proxmox VE",
+  title: "Proxmox VE Helper-Scripts",
   generator: "Next.js",
   applicationName: "Proxmox VE Helper-Scripts",
   referrer: "origin-when-cross-origin",
@@ -23,24 +22,26 @@ export const metadata = {
     "proxmox",
     "VE",
   ],
-  authors: [{ name: "tteck" }, { name: "Bram" }],
-  creator: "tteck, Bram Suurd",
-  publisher: "tteck, Bram Suurd",
-  description: "Scripts for Streamlining Your Homelab with Proxmox VE",
+  authors: { name: "Bram Suurd" },
+  creator: "Bram Suurd",
+  publisher: "Bram Suurd",
+  description:
+    "A Re-designed Front-end for the Proxmox VE Helper-Scripts Repository. Featuring all the scripts you need to streamline your homelab. With a modern and clean design.",
   favicon: "/app/favicon.ico",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://helper-scripts.com/"),
+  metadataBase: new URL("https://proxmox-helper-scripts.vercel.app/"),
   openGraph: {
     title: "Proxmox VE Helper-Scripts",
-    description: "Scripts for Streamlining Your Homelab with Proxmox VE",
+    description:
+      "A Re-designed Front-end for the Proxmox VE Helper-Scripts Repository. Featuring all the scripts you need to streamline your homelab. With a modern and clean design.",
     url: "/defaultimg.png",
     images: [
       {
-        url: "https://helper-scripts.com/defaultimg.png",
+        url: "https://proxmox-helper-scripts.vercel.app/defaultimg.png",
       },
     ],
     locale: "en_US",
