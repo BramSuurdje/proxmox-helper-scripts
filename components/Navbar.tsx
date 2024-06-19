@@ -234,12 +234,6 @@ function Navbar() {
                 text: "Changelog",
               },
               {
-                href: "https://ko-fi.com/proxmoxhelperscripts",
-                event: "ko-fi",
-                icon: <Coffee className="mr-2 h-4 w-4" />,
-                text: "Buy me a coffee",
-              },
-              {
                 href: "https://github.com/tteck/Proxmox",
                 event: "View on GitHub",
                 icon: <FaGithub className="mr-2 h-4 w-4" />,
