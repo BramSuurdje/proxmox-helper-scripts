@@ -19,9 +19,7 @@ import Link from "next/link";
 import { Category, Script } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import LatestScripts from "./LatestScripts";
-import MostViewedScripts from "./MostViewedScripts";
-import RecentlyUpdatedScripts from "./RecentlyUpdatedScripts";
+import { MostViewedScripts, LatestScripts, RecentlyUpdatedScripts } from "@/components/ScriptInfoBlocks"
 
 function ScriptItem({
   items,
