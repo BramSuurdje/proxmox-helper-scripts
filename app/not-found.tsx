@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { Button } from "@/components/ui/button";
 
 export default function NotFoundPage() {
@@ -12,10 +12,7 @@ export default function NotFoundPage() {
           Oops, the page you are looking for could not be found.
         </p>
       </div>
-      <Button
-        onClick={() => window.history.back()}
-        variant="secondary"
-      >
+      <Button onClick={() => window.history.back()} variant="secondary">
         Go Back
       </Button>
     </div>

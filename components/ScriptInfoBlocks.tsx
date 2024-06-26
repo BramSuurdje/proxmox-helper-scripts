@@ -86,7 +86,9 @@ export function LatestScripts({ items }: { items: Category[] }) {
               </p>
             </CardHeader>
             <CardContent>
-              <CardDescription className=" line-clamp-3 text-card-foreground">{item.description}</CardDescription>
+              <CardDescription className=" line-clamp-3 text-card-foreground">
+                {item.description}
+              </CardDescription>
             </CardContent>
             <CardFooter className="">
               <Button asChild variant="secondary">
@@ -165,7 +167,9 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
               </p>
             </CardHeader>
             <CardContent>
-              <CardDescription className=" line-clamp-3 text-card-foreground">{item.description}</CardDescription>
+              <CardDescription className=" line-clamp-3 text-card-foreground">
+                {item.description}
+              </CardDescription>
             </CardContent>
             <CardFooter className="">
               <Button asChild variant="secondary">
@@ -199,11 +203,7 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
   );
 }
 
-export function RecentlyUpdatedScripts({
-  items,
-}: {
-  items: Category[];
-}) {
+export function RecentlyUpdatedScripts({ items }: { items: Category[] }) {
   const [page, setPage] = useState(1);
 
   const updatedScripts = useMemo(() => {
@@ -276,7 +276,9 @@ export function RecentlyUpdatedScripts({
               </p>
             </CardHeader>
             <CardContent>
-              <CardDescription className=" line-clamp-3 text-card-foreground">{item.description}</CardDescription>
+              <CardDescription className=" line-clamp-3 text-card-foreground">
+                {item.description}
+              </CardDescription>
             </CardContent>
             <CardFooter className="">
               <Button asChild variant="secondary">
