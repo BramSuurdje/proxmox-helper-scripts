@@ -4,7 +4,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import React from "react";
-import { InfoToastWithButton, WarningToast } from "@/components/WarningToast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -76,14 +75,6 @@ export default function RootLayout({
               <div className="w-full max-w-7xl ">
                 {children}
                 <Toaster richColors />
-                <WarningToast
-                  toastName="toast.pve8.1.warning"
-                  toastDuration={5000}
-                  timeoutDuration={1000}
-                  message="Starting from July 2024, the scripts in the repository will require Proxmox Virtual Environment 8.1 or newer."
-                  amountOfVisits={2}
-                  toastButtonMessage=""
-                />
               </div>
             </div>
           </div>
