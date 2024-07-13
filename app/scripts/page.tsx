@@ -119,6 +119,7 @@ export default function Page() {
     <>
       {!isLoading ? (
         <>
+          <div className="absolute left-0 top-0 z-[-2] h-screen w-screen bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
           <div className="mb-3 min-h-screen">
             <div className="mt-20 flex sm:px-7 xl:px-0">
               <div className="hidden sm:flex">
