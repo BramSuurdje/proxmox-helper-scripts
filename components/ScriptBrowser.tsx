@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
-import { X, EyeOff, Eye, Star } from "lucide-react";
+import { X, EyeOff, Eye, Star, SlashIcon } from "lucide-react";
 import React, {
   useState,
   useEffect,
@@ -162,14 +162,21 @@ const ScriptBrowser = ({
       </div>
       <div className="relative">
         <div className="mb-1 flex items-center">
-          <Input
-            className="flex-grow bg-accent/30"
-            type="text"
-            placeholder="Search..."
-            onChange={(e) => handleSearch(e.target.value)}
-            ref={inputRef}
-            value={searchTerm}
-          />
+          <div className="relative w-full max-w-sm">
+            <Input
+              type="text"
+              placeholder="Search..."
+              className="rounded-md border border-input bg-background px-4 py-2 pr-10 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
+              onChange={(e) => handleSearch(e.target.value)}
+              ref={inputRef}
+              value={searchTerm}
+            />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2 text-muted-foreground">
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <span className="text-xs">/</span>
+              </kbd>
+            </div>
+          </div>
           {searchTerm && (
             <X
               className="ml-2 h-4 w-4 cursor-pointer"
@@ -181,27 +188,6 @@ const ScriptBrowser = ({
             />
           )}
         </div>
-        {searchTerm ? (
-          <div className="mb-2 ml-2 text-xs text-muted-foreground">
-            <p className="text-sm">
-              Press
-              <kbd className="m-1 inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
-                <span className="text-xs">esc</span>
-              </kbd>
-              to clear the search
-            </p>
-          </div>
-        ) : (
-          <div className="mb-2 ml-2 text-xs text-muted-foreground">
-            <p className="text-sm">
-              Press
-              <kbd className="m-1 inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
-                <span className="text-xs">/</span>
-              </kbd>
-              to search
-            </p>
-          </div>
-        )}
       </div>
       <div className="rounded-lg">
         <Accordion {...accordionProps}>
