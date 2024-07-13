@@ -101,6 +101,13 @@ function ScriptItem({
 
     if (amountOfScriptsCopied === null) {
       localStorage.setItem("amountOfScriptsCopied", "1");
+      setTimeout(() => {
+        toast.error(
+          "be careful when copying scripts from the internet. Always remember check the source!",
+          { duration: 8000 },
+        );
+      }
+      , 500);
     } else {
       amountOfScriptsCopied = (parseInt(amountOfScriptsCopied) + 1).toString();
       localStorage.setItem("amountOfScriptsCopied", amountOfScriptsCopied);
@@ -299,7 +306,7 @@ function ScriptItem({
                     </div>
                     <div className="flex flex-wrap justify-end gap-2">
                       {item.website && (
-                        <Button variant="outline" asChild>
+                        <Button variant="secondary" asChild>
                           <Link target="_blank" href={item.website}>
                             <span className="flex items-center gap-2">
                               <Globe className="h-4 w-4" /> Website
@@ -308,7 +315,7 @@ function ScriptItem({
                         </Button>
                       )}
                       {item.documentation && (
-                        <Button variant="outline" asChild>
+                        <Button variant="secondary" asChild>
                           <Link target="_blank" href={item.documentation}>
                             <span className="flex items-center gap-2">
                               <BookOpenText className="h-4 w-4" />
@@ -318,7 +325,7 @@ function ScriptItem({
                         </Button>
                       )}
                       {item.post_install && (
-                        <Button variant="outline" asChild>
+                        <Button variant="secondary" asChild>
                           <Link target="_blank" href={item.post_install}>
                             <span className="flex items-center gap-2">
                               <ExternalLink className="h-4 w-4" />
@@ -328,7 +335,7 @@ function ScriptItem({
                         </Button>
                       )}
                       {sourceUrl && (
-                        <Button variant="outline" asChild>
+                        <Button variant="secondary" asChild>
                           <Link target="_blank" href={sourceUrl}>
                             <span className="flex items-center gap-2">
                               <Code className="h-4 w-4" />
