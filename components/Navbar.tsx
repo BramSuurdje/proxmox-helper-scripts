@@ -207,7 +207,7 @@ function Navbar() {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="hidden sm:flex">
+          <div className="hidden sm:flex gap-1">
             {[
               {
                 href: "https://github.com/tteck/Proxmox/discussions",
