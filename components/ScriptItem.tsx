@@ -22,7 +22,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   MostViewedScripts,
   LatestScripts,
-  RecentlyUpdatedScripts,
 } from "@/components/ScriptInfoBlocks";
 
 function ScriptItem({

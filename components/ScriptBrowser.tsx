@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
-import { X, EyeOff, Eye, Star, SlashIcon } from "lucide-react";
+import { X, EyeOff, Eye, Star } from "lucide-react";
 import React, {
   useState,
   useEffect,
