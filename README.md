@@ -9,8 +9,8 @@
 
   <p align="center">Redesign of the [Proxmox VE Helper Scripts website](https://tteck.github.io/Proxmox/) . optimized for readablity and security</p>
 
-[!WARNING]
-always check the source code of the scripts before running them. Copying random scripts without understanding what they do can lead to data loss or other security issues.
+> [!WARNING]
+> always check the source code of the scripts before running them. Copying random scripts without understanding what they do can lead to data loss or other security issues.
 
 ## 👀 Why even use the Re-design?
 
