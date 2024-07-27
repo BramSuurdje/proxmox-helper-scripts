@@ -7,7 +7,7 @@
     <a href="https://github.com/BramSuurdje/proxmox-helper-scripts/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/BramSuurdje/proxmox-helper-scripts?style=for-the-badge&color=1A91FF" /></a>
   </p>
 
-  <p align="center">Redesign of the [Proxmox VE Helper Scripts website](https://tteck.github.io/Proxmox/). optimized for readablity and security</p>
+  <p align="center">Redesign of the [Proxmox VE Helper Scripts website](https://tteck.github.io/Proxmox/) . optimized for readablity and security</p>
 
 [!WARNING]
 always check the source code of the scripts before running them. Copying random scripts without understanding what they do can lead to data loss or other security issues.
