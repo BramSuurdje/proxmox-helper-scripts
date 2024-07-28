@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-    <p><img alt="User count" src="https://img.shields.io/badge/Weekly_Users-3000-blue?style=for-the-badge&color=1A91FF"/></p>
+    <a href="https://proxmox-helper-scripts.vercel.app/"><img alt="User count" src="https://img.shields.io/badge/Weekly_Users-3000-blue?style=for-the-badge&color=1A91FF"/></a>
     <a href="https://github.com/BramSuurdje/proxmox-helper-scripts/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/BramSuurdje/proxmox-helper-scripts?style=for-the-badge&logo=github&color=1A91FF"/></a>
     <a href="https://github.com/BramSuurdje/proxmox-helper-scripts/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/BramSuurdje/proxmox-helper-scripts?style=for-the-badge&color=1A91FF" /></a>
   </p>
