@@ -50,7 +50,12 @@ export default function Page() {
             throw new Error("Empty response");
           }
         } catch (error) {
-          console.error("Error fetching links from pb:", error);
+          const cachedLinks = localStorage.getItem("scripts");
+          if (cachedLinks) {
+            res = JSON.parse(cachedLinks);
+          } else {
+            throw error;
+          }
           throw error;
         }
         res = res.sort((a: Category, b: Category) => {
