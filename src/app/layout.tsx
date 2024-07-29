@@ -50,6 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script defer src={process.env.NEXT_PUBLIC_UMAMI_ANALYICS_URL} data-website-id={process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_ID}></script>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
