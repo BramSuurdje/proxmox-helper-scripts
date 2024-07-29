@@ -13,28 +13,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Scripts {
+model Script {
   id             String      @id @default(cuid())
   name           String
   slug           String      @unique
+  logo           String
   description    String
   installCommand String
-  alerts         Alerts[]
-  Categories     Categories? @relation(fields: [categoriesId], references: [id])
+  alerts         Alert[]
+  Categories     Category? @relation(fields: [categoriesId], references: [id])
   categoriesId   String?
 }
 
-model Categories {
+model Category {
   id      String    @id @default(cuid())
   name    String
   slug    String    @unique
-  scripts Scripts[]
+  scripts Script[]
 }
 
-model Alerts {
+model Alert {
   id           String   @id @default(cuid())
   alertContent String
   alertType    String
-  Scripts      Scripts? @relation(fields: [scriptsId], references: [id])
+  Scripts      Script? @relation(fields: [scriptsId], references: [id])
   scriptsId    String?
 }
