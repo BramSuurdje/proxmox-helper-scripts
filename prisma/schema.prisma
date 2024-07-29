@@ -12,3 +12,29 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Scripts {
+  id             String      @id @default(cuid())
+  name           String
+  slug           String      @unique
+  description    String
+  installCommand String
+  alerts         Alerts[]
+  Categories     Categories? @relation(fields: [categoriesId], references: [id])
+  categoriesId   String?
+}
+
+model Categories {
+  id      String    @id @default(cuid())
+  name    String
+  slug    String    @unique
+  scripts Scripts[]
+}
+
+model Alerts {
+  id           String   @id @default(cuid())
+  alertContent String
+  alertType    String
+  Scripts      Scripts? @relation(fields: [scriptsId], references: [id])
+  scriptsId    String?
+}
