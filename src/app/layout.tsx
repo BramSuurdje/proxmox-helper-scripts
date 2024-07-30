@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css"
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -61,9 +61,9 @@ export default function RootLayout({
           data-website-id={process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_ID}
         ></script>
       </head>
-      <body className={cn(inter.className, "bg-background text-foreground")}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={true}>
-          <div>
+      <body className={cn(inter.className, "bg-background text-foreground min-h-screen")}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+          <div className="flex flex-col min-h-screen">
             <Navbar />
             {children}
             <Footer />
