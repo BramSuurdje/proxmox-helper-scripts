@@ -23,6 +23,9 @@ model Script {
   alerts         Alert[]
   Categories     Category? @relation(fields: [categoriesId], references: [id])
   categoriesId   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
@@ -30,6 +33,9 @@ model Category {
   name    String
   slug    String    @unique
   scripts Script[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Alert {
@@ -38,4 +44,7 @@ model Alert {
   alertType    String
   Scripts      Script? @relation(fields: [scriptsId], references: [id])
   scriptsId    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
