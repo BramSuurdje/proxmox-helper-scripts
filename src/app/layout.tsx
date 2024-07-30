@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,9 +55,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script defer src={process.env.NEXT_PUBLIC_UMAMI_ANALYICS_URL} data-website-id={process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_ID}></script>
+        <script
+          defer
+          src={process.env.NEXT_PUBLIC_UMAMI_ANALYICS_URL}
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_ID}
+        ></script>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={cn(inter.className, "bg-background text-foreground")}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={true}>
+          <div>
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
