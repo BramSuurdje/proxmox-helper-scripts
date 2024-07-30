@@ -7,6 +7,13 @@ import { ModeToggle } from "./ModeToggle";
 import { StarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import NumberTicker from "./magicui/number-ticker";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandList,
+} from "./ui/command";
 
 export default async function Navbar() {
   let stars = 300; // Default value
@@ -27,8 +34,8 @@ export default async function Navbar() {
   }
 
   return (
-    <div className="my-3 flex w-full justify-center">
-      <div className="flex w-full max-w-7xl items-center justify-between gap-4 mx-6">
+    <div className="supports-backdrop-blur:bg-background/90 sticky left-0 top-0 z-50 flex w-full justify-center border-b border-border bg-background/40 py-3 backdrop-blur-lg">
+      <div className="mx-6 flex w-full max-w-7xl items-center justify-between gap-4">
         <Link href={"/"} className="flex items-center gap-2 font-semibold">
           <Image
             src="https://raw.githubusercontent.com/tteck/Proxmox/main/misc/images/logo.png"
@@ -61,6 +68,18 @@ export default async function Navbar() {
               />
             </div>
           </Link>
+          <Button
+            variant="outline"
+            className={cn(
+              "relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64",
+            )}
+          >
+            <span className="hidden lg:inline-flex">Search scripts...</span>
+            <span className="inline-flex lg:hidden">Search...</span>
+            <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          </Button>
           <Link href={""}>
             <Button variant="ghost" size="icon">
               <Icons.gitHub className="h-4 w-4" />
