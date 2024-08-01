@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
+import CurrentPage from "@/components/ui/current-page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,13 +58,14 @@ export default function RootLayout({
       <head>
         <script
           defer
-          src={process.env.NEXT_PUBLIC_UMAMI_ANALYICS_URL}
+          src="/analytics/script.js"
           data-website-id={process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_ID}
         ></script>
       </head>
       <body className={cn(inter.className, "bg-background text-foreground min-h-screen")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
           <div className="flex flex-col min-h-screen">
+            {process.env.NODE_ENV === "development" && <CurrentPage />}
             <Navbar />
             {children}
             <Footer />
