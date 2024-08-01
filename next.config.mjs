@@ -2,6 +2,7 @@
 const nextConfig = {
   // allow every domain for images
 
+  output: "standalone",
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,15 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/analytics/:path*",
+        destination: `https://${process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_URL}/:path*`,
+      },
+    ];
   },
 };
 
