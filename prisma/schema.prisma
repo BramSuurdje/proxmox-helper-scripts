@@ -17,9 +17,14 @@ model Script {
   id             String      @id @default(cuid())
   name           String
   slug           String      @unique
+  type           String
   logo           String
+  website        String
   description    String
   installCommand String
+  updateable    Boolean
+  port          Int?
+  interface     String?
   alerts         Alert[]
   Categories     Category? @relation(fields: [categoriesId], references: [id])
   categoriesId   String?
