@@ -1,19 +1,25 @@
-import { getCategoryScripts } from "@/lib/actions";
-import React from "react";
+import React from 'react'
+import Image from 'next/image'
+import { getCategoryScripts } from '@/lib/actions'
 
 export default async function Sidebar() {
-  const categories = await getCategoryScripts();
+  const categories = await getCategoryScripts()
 
-  return <div className="border-r border-border min-w-64 min-h-max">
-    <ul className="flex flex-col gap-4 p-4">
-      {categories.map((category) => (
-        <li key={category.id} className="flex gap-2 items-center">
-          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-            <span className="text-primary">{category.name[0]}</span>
+  return (
+    <div>
+      <div className='flex flex-col'>
+        {categories.map((category) => (
+          <div key={category.id}>
+            <h2 className='font-semibold'>{category.name}</h2>
+            {category.scripts.map((script) => (
+              <div key={script.id}>
+                <Image height={40} width={40} src={script.logo} alt={script.name} />
+                <h3>{script.name}</h3>
+              </div>
+            ))}
           </div>
-          <span className="font-semibold">{category.name}</span>
-        </li>
-      ))}
-    </ul>
-  </div>;
+        ))}
+      </div>
+    </div>
+  )
 }

@@ -34,8 +34,8 @@ export default async function Navbar() {
   }
 
   return (
-    <div className="supports-backdrop-blur:bg-background/90 sticky left-0 top-0 z-50 flex w-full justify-center border-b border-border bg-background/40 py-3 backdrop-blur-lg">
-      <div className="mx-6 flex w-full max-w-7xl items-center justify-between gap-4">
+    <div className="supports-backdrop-blur:bg-background/90 sticky left-0 top-0 z-40 flex w-full justify-center border-b border-border bg-background/40 py-3 backdrop-blur-lg">
+      <div className="mx-6 flex w-full max-w-8xl items-center justify-between gap-4">
         <Link href={"/"} className="flex items-center gap-2 font-semibold">
           <Image
             src="https://raw.githubusercontent.com/tteck/Proxmox/main/misc/images/logo.png"
@@ -49,7 +49,7 @@ export default async function Navbar() {
           <Link
             className={cn(
               buttonVariants(),
-              "hidden max-w-64 gap-2 overflow-hidden whitespace-pre md:flex",
+              "hidden h-10 max-w-64 gap-2 overflow-hidden whitespace-pre md:flex",
               "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2",
             )}
             target="_blank"
@@ -71,12 +71,12 @@ export default async function Navbar() {
           <Button
             variant="outline"
             className={cn(
-              "relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64",
+              "relative h-10 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64",
             )}
           >
             <span className="hidden lg:inline-flex">Search scripts...</span>
             <span className="inline-flex lg:hidden">Search...</span>
-            <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+            <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.55rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
