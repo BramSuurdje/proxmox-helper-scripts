@@ -21,7 +21,7 @@ const nextConfig = {
     return [
       {
         source: "/analytics/:path*",
-        destination: `${process.env.NEXT_PUBLIC_ANALYTICS_URL}/:path*`,
+        destination: `https://${process.env.NEXT_PUBLIC_ANALYTICS_URL}/:path*`,
       },
     ];
   },
