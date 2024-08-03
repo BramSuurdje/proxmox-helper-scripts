@@ -1,24 +1,30 @@
 "use client";
 import ScriptItem from "@/components/ScriptItem";
 import ScriptBrowser from "@/components/ScriptBrowser";
-import { pb } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { useEffect, useState, useCallback } from "react";
 
-const getFullList = async (): Promise<Category[]> => {
-  const response = await pb.collection("categories").getFullList({
-    expand: "items",
-    sort: "order",
-    requestKey: "desktop",
+const fetchCategories = async (): Promise<Category[]> => {
+  const response = await fetch("/api/categories", {
+    next: { revalidate: 60 * 60 * 24 },
   });
-  return response as unknown as Category[];
+  if (!response.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+  return response.json();
 };
 
 const sortCategories = (categories: Category[]): Category[] => {
   return categories.sort((a: Category, b: Category) => {
-    if (a.catagoryName === "Proxmox VE Tools" && b.catagoryName !== "Proxmox VE Tools") {
+    if (
+      a.catagoryName === "Proxmox VE Tools" &&
+      b.catagoryName !== "Proxmox VE Tools"
+    ) {
       return -1;
-    } else if (a.catagoryName !== "Proxmox VE Tools" && b.catagoryName === "Proxmox VE Tools") {
+    } else if (
+      a.catagoryName !== "Proxmox VE Tools" &&
+      b.catagoryName === "Proxmox VE Tools"
+    ) {
       return 1;
     } else {
       return a.catagoryName.localeCompare(b.catagoryName);
@@ -26,10 +32,13 @@ const sortCategories = (categories: Category[]): Category[] => {
   });
 };
 
-const fetchAndSortLinks = async (setLinks: (links: Category[]) => void, setIsLoading: (isLoading: boolean) => void) => {
+const fetchAndSortLinks = async (
+  setLinks: (links: Category[]) => void,
+  setIsLoading: (isLoading: boolean) => void,
+) => {
   try {
     setIsLoading(true);
-    const categories = await getFullList();
+    const categories = await fetchCategories();
     if (categories.length === 0) {
       throw new Error("Empty response");
     }
@@ -63,10 +72,18 @@ export default function Page() {
           <div className="mb-3 min-h-screen">
             <div className="mt-20 flex sm:px-7 xl:px-0">
               <div className="hidden sm:flex">
-                <ScriptBrowser items={links} selectedScript={selectedScript} setSelectedScript={setSelectedScript} />
+                <ScriptBrowser
+                  items={links}
+                  selectedScript={selectedScript}
+                  setSelectedScript={setSelectedScript}
+                />
               </div>
               <div className="mx-7 w-full sm:mx-0 sm:ml-7">
-                <ScriptItem items={links} selectedScript={selectedScript} setSelectedScript={setSelectedScript} />
+                <ScriptItem
+                  items={links}
+                  selectedScript={selectedScript}
+                  setSelectedScript={setSelectedScript}
+                />
               </div>
             </div>
           </div>
