@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/accordion";
 import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
-import { pb } from "@/lib/pocketbase";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { navBarLinks } from "@/config/siteConfig";
