@@ -59,7 +59,7 @@ export default function RootLayout({
       <head>
         <script
           defer
-          src={process.env.NEXT_PUBLIC_ANALYTICS_URL}
+          src="/analytics/script.js"
           data-website-id={process.env.NEXT_PUBLIC_ANALYTICS_TOKEN}
         ></script>
       </head>
