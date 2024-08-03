@@ -11,6 +11,7 @@ export default function Footer() {
           className="font-semibold underline-offset-2 duration-300 hover:underline"
           target="_blank"
           rel="noreferrer"
+          data-umami-event="View Bram Suurd on Github"
         >
           Bram Suurd
         </Link>
@@ -20,6 +21,7 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
           className="font-semibold underline-offset-2 duration-300 hover:underline "
+          data-umami-event="View Website Source Code on Github"
         >
           GitHub
         </Link>
