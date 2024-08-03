@@ -32,6 +32,7 @@ import { Badge } from "./ui/badge";
 import { pb } from "@/lib/pocketbase";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import { navBarLinks } from "@/config/siteConfig";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -208,38 +209,7 @@ function Navbar() {
             </Sheet>
           </div>
           <div className="hidden sm:flex gap-1">
-            {[
-              {
-                href: "https://github.com/tteck/Proxmox/discussions",
-                event: "Discussions",
-                icon: <MessageSquareText className="mr-2 h-4 w-4" />,
-                text: "Discussions",
-              },
-              {
-                href: "https://github.com/tteck/Proxmox/blob/main/.github/CONTRIBUTING.md",
-                event: "Contributing",
-                icon: <LuGitPullRequestDraft className="mr-2 h-4 w-4" />,
-                text: "Contribute",
-              },
-              {
-                href: "https://github.com/tteck/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md",
-                event: "Guides",
-                icon: <LuBookOpenCheck className="mr-2 h-4 w-4" />,
-                text: "Guides",
-              },
-              {
-                href: "https://github.com/tteck/Proxmox/blob/main/CHANGELOG.md",
-                event: "Change Log",
-                icon: <LuClipboardSignature className="mr-2 h-4 w-4" />,
-                text: "Changelog",
-              },
-              {
-                href: "https://github.com/tteck/Proxmox",
-                event: "View on GitHub",
-                icon: <FaGithub className="mr-2 h-4 w-4" />,
-                text: "View on Github",
-              },
-            ].map(({ href, event, icon, text }) => (
+            {navBarLinks.map(({ href, event, icon, text }) => (
               <Button key={event} variant="ghost" asChild>
                 <Link target="_blank" href={href} data-umami-event={event}>
                   {icon} {text}
