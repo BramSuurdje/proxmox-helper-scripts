@@ -207,11 +207,11 @@ function ScriptItem({
         <div className="mr-7 mt-0 flex w-full min-w-fit">
           <div className="flex w-full min-w-fit">
             <div className="flex w-full flex-col">
-              <div className="flex min-w-max items-center justify-between">
+              <div className="flex min-w-max h-[36px] items-center justify-between">
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>
-              <div className="mt-2 rounded-lg border bg-accent/20 p-4">
+              <div className="rounded-lg border bg-accent/20 p-4">
                 <div className="flex justify-between">
                   <div className="flex">
                     <Image
