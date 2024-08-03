@@ -4,7 +4,7 @@ import React from "react";
 export default function Footer() {
   return (
     <div className="supports-backdrop-blur:bg-background/90 mt-auto flex justify-center border-t border-border bg-background/40 py-6 backdrop-blur-lg">
-      <div className="max-w-7xl mx-6 w-full text-sm">
+      <div className="mx-6 w-full max-w-7xl text-sm">
         Build by{" "}
         <Link
           href="https://github.com/BramSuurdje"

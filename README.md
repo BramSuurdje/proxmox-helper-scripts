@@ -19,22 +19,28 @@
 ## 👀 Why even use the Re-design?
 
 ### Overview
+
 This repository contains a collection of helper scripts for Proxmox VE, designed to enhance and simplify the user experience. The scripts include various functionalities such as easier access to source code for improved security and a redesigned website for better script viewing.
 
 ### Features
+
 - **Script Source Access**: Easily access the source code of each script to review and enhance security.
 - **Redesigned Website**: Improved layout for easier script viewing.
 
 ## Getting Started
 
 ### Prerequisites
+
 - Proxmox VE installed
 
 ### Contributing
+
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) for more information.
 
 ### License
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ### Contact
+
 For questions or support, please open an issue on GitHub.

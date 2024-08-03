@@ -105,8 +105,7 @@ function ScriptItem({
           "be careful when copying scripts from the internet. Always remember check the source!",
           { duration: 8000 },
         );
-      }
-      , 500);
+      }, 500);
     } else {
       amountOfScriptsCopied = (parseInt(amountOfScriptsCopied) + 1).toString();
       localStorage.setItem("amountOfScriptsCopied", amountOfScriptsCopied);

@@ -15,7 +15,7 @@ export default function LandingPage() {
           <h1 className="relative z-20 bg-gradient-to-b from-[#0080C4] to-[#004c75] bg-clip-text py-4 text-center text-4xl font-bold text-transparent sm:text-left sm:text-5xl">
             Proxmox VE Helper-Scripts
           </h1>
-          <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 tracking-tight leading-loose bg-clip-text text-center text-xl sm:text-left">
+          <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-center text-xl leading-loose tracking-tight sm:text-left">
             Proxmox VE Scripts for{" "}
             <Typewriter
               words={[
