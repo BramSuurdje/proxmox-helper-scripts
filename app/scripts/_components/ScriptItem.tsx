@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import { toast } from "sonner";
 import {
   Clipboard,
@@ -22,7 +22,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   MostViewedScripts,
   LatestScripts,
-} from "@/components/ScriptInfoBlocks";
+} from "./ScriptInfoBlocks";
 
 function ScriptItem({
   items,
@@ -207,7 +207,7 @@ function ScriptItem({
         <div className="mr-7 mt-0 flex w-full min-w-fit">
           <div className="flex w-full min-w-fit">
             <div className="flex w-full flex-col">
-              <div className="flex min-w-max h-[36px] items-center justify-between">
+              <div className="flex h-[36px] min-w-max items-center justify-between">
                 <h2 className="text-lg font-semibold">Selected Script</h2>
                 <X onClick={closeScript} className="cursor-pointer" />
               </div>

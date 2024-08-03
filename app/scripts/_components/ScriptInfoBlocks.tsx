@@ -10,8 +10,8 @@ import { useMemo, useState } from "react";
 import { Category } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "./ui/button";
 import { extractDate } from "@/lib/time";
+import { Button } from "@/components/ui/button";
 
 const ITEMS_PER_PAGE = 3;
 

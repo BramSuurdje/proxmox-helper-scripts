@@ -17,8 +17,8 @@ import React, {
   useCallback,
 } from "react";
 import { Category } from "@/lib/types";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
 import clsx from "clsx";
 
 const ScriptBrowser = ({
