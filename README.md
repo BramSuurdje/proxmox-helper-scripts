@@ -27,6 +27,14 @@ This repository contains a collection of helper scripts for Proxmox VE, designed
 - **Script Source Access**: Easily access the source code of each script to review and enhance security.
 - **Redesigned Website**: Improved layout for easier script viewing.
 
+### Tech Stack
+- [Next.js](https://nextjs.org/) with Typescript for the frontend
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Shadcn](https://ui.shadcn.com/) for the UI
+- [Pocketbase](https://pocketbase.io/) for the database
+- [Umami](https://umami.is/) for analytics
+- [Vercel](https://vercel.com/) for hosting
+
 ## Getting Started
 
 ### Prerequisites
