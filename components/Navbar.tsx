@@ -4,14 +4,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "../public/logo.png";
 import Image from "next/image";
-import { FaGithub } from "react-icons/fa";
 import { ModeToggle } from "./theme-toggle";
-import {
-  LuGitPullRequestDraft,
-  LuBookOpenCheck,
-  LuClipboardSignature,
-} from "react-icons/lu";
-import { Coffee, Menu, MessageSquareText } from "lucide-react";
+import { Menu } from "lucide-react";
 import {
   Sheet,
   SheetClose,
@@ -75,31 +69,15 @@ function Navbar() {
     }
   }, [shouldFocusInput]);
 
-  useEffect(() => {
-    const loadLinksFromCache = () => {
-      const cacheKey = "scripts";
-      const cachedLinks = localStorage.getItem(cacheKey);
-
-      if (cachedLinks) {
-        setLinks(JSON.parse(cachedLinks));
-      } else {
-        fetchLinks();
-      }
-    };
-
-    loadLinksFromCache();
-  }, []);
-
   const fetchLinks = async () => {
-    try {
-      const res = await pb.collection("categories").getFullList({
-        expand: "items",
-        requestKey: "navbar",
-      });
-      setLinks(res as unknown as Category[]);
-    } catch (error) {
-      console.error("Error fetching links:", error);
+    const res = await fetch("/api/categories", {
+      next: { revalidate: 60 * 60 * 24 },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch categories");
     }
+    const links = await res.json();
+    setLinks(links);
   };
 
   const removeCookieAndRedirect = () => {
@@ -134,7 +112,7 @@ function Navbar() {
           </h2>
           <div className="flex items-center sm:hidden">
             <Sheet>
-              <SheetTrigger>
+              <SheetTrigger onClick={fetchLinks}>
                 <Menu className="h-8 w-8" />
               </SheetTrigger>
               <SheetContent
@@ -208,7 +186,7 @@ function Navbar() {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="hidden sm:flex gap-1">
+          <div className="hidden gap-1 sm:flex">
             {navBarLinks.map(({ href, event, icon, text }) => (
               <Button key={event} variant="ghost" asChild>
                 <Link target="_blank" href={href} data-umami-event={event}>
