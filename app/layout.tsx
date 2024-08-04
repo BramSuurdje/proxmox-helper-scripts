@@ -72,13 +72,15 @@ export default function RootLayout({
         >
           <div className="flex w-full flex-col justify-center">
             <Navbar />
-            <div className="flex w-full justify-center">
-              <div className="w-full max-w-7xl ">
-                {children}
-                <Toaster richColors />
+            <div className="flex flex-col justify-center min-h-screen">
+              <div className="flex w-full justify-center">
+                <div className="w-full max-w-7xl ">
+                  {children}
+                  <Toaster richColors />
+                </div>
               </div>
+              <Footer />
             </div>
-            <Footer />
           </div>
         </ThemeProvider>
       </body>
