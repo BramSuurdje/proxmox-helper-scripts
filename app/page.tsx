@@ -1,42 +1,82 @@
 "use client";
-import Image from "next/image";
-import { Typewriter } from "react-simple-typewriter";
+import AnimatedGradientText from "@/components/magicui/animated-gradient-text";
+import Particles from "@/components/magicui/particles";
+import ShineBorder from "@/components/magicui/shine-border";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { ArrowRightIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function LandingPage() {
+function CustomArrowRightIcon() {
+  return <ArrowRightIcon className="h-4 w-4" width={1} />;
+}
+
+export default function Page() {
+  const { theme } = useTheme();
+  const [color, setColor] = useState("#000000");
+
+  useEffect(() => {
+    setColor(theme === "dark" ? "#ffffff" : "#000000");
+  }, [theme]);
+
   return (
-    <div className="flex justify-center">
-      <div className="relative flex h-screen w-full flex-col items-center justify-center bg-grid-black/[0.1] dark:bg-grid-white/[0.1]">
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]"></div>
-        <div className="flex animate-fade-up flex-col items-center justify-center">
-          <Image src="/logo.png" alt="proxmox" width={150} height={150} />
-          <h1 className="relative z-20 bg-gradient-to-b from-[#0080C4] to-[#004c75] bg-clip-text py-4 text-center text-4xl font-bold text-transparent sm:text-left sm:text-5xl">
-            Proxmox VE Helper-Scripts
-          </h1>
-          <p className="bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-center text-xl leading-loose tracking-tight sm:text-left">
-            Proxmox VE Scripts for{" "}
-            <Typewriter
-              words={[
-                "Streamlining",
-                "Automating",
-                "Simplifying",
-                "Optimizing",
-              ]}
-              loop={false}
-              cursor={true}
-              cursorStyle="_"
-              typeSpeed={70}
-              deleteSpeed={50}
-              delaySpeed={2000}
-            />
-            Your Homelab
-          </p>
-          <div className="flex gap-2 py-4">
-            <Button asChild variant={"secondary"}>
-              <Link href="/scripts">Browse Scripts</Link>
-            </Button>
+    <div className="w-full">
+      <Particles
+        className="absolute inset-0 -z-40"
+        quantity={100}
+        ease={80}
+        color={color}
+        refresh
+      />
+      <div className="container mx-auto">
+        <div className="flex flex-col items-center justify-center gap-4 py-20 lg:py-40">
+          <div>
+            {/* <Button variant="secondary" size="sm" className="gap-4">
+              Read our launch article <MoveRight className="h-4 w-4" />
+            </Button> */}
+            <AnimatedGradientText>
+              <div
+                className={cn(
+                  `animate-gradient absolute inset-0 block size-full bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:var(--bg-size)_100%] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]`,
+                  `p-px ![mask-composite:subtract]`,
+                )}
+              />
+              🎉 <Separator className="mx-2 h-4" orientation="vertical" />
+              <span
+                className={cn(
+                  `animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+                  `inline`,
+                )}
+              >
+                Redesigned Website
+              </span>
+            </AnimatedGradientText>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h1 className="max-w-2xl text-center text-5xl font-semibold tracking-tighter md:text-7xl">
+              Make managing your Homelab a breeze
+            </h1>
+            <p className="max-w-2xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
+              150+ scripts to help you manage your <b>Proxmox VE environment</b>
+              . Whether you&apos;re a seasoned user or a newcomer, Proxmox VE
+              Helper Scripts has got you covered.
+            </p>
+          </div>
+          <div className="flex flex-row gap-3">
+            <Link href="/scripts">
+              <Button
+                size="lg"
+                variant="expandIcon"
+                Icon={CustomArrowRightIcon}
+                iconPlacement="right"
+                className="hover:"
+              >
+                View Scripts
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
