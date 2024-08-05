@@ -24,7 +24,7 @@ export default function Page() {
   return (
     <div className="w-full">
       <Particles
-        className="absolute inset-0 -z-40"
+        className="absolute inset-0"
         quantity={100}
         ease={80}
         color={color}

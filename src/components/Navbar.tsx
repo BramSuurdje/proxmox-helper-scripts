@@ -28,11 +28,14 @@ function Navbar() {
     };
   }, []);
 
+  function RemoveCookieAndRedirect() {
+    removeCookie();
+    router.push("/");
+  }
+
   function removeCookie() {
     document.cookie =
       "visited=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    router.push("/");
   }
 
   return (
@@ -43,7 +46,7 @@ function Navbar() {
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
-          <h2 className="cursor-pointer font-semibold" onClick={removeCookie}>
+          <h2 className="cursor-pointer font-semibold" onClick={RemoveCookieAndRedirect}>
             <Link
               href="/"
               className=" flex flex-row-reverse items-center gap-2 sm:flex-row"
