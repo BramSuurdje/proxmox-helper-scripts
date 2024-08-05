@@ -1,7 +1,6 @@
 "use client";
 import AnimatedGradientText from "@/components/magicui/animated-gradient-text";
 import Particles from "@/components/magicui/particles";
-import ShineBorder from "@/components/magicui/shine-border";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";

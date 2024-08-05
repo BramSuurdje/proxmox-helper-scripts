@@ -193,7 +193,7 @@ const ScriptBrowser = ({
         <Accordion {...accordionProps}>
           {filteredLinks.map((category) => (
             <AccordionItem
-              key={category.collectionId}
+              key={category.id + ":category"} 
               value={category.catagoryName}
               className={clsx("sm:text-md flex flex-col border-none", {
                 "rounded-lg bg-accent/30":

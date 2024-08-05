@@ -1,4 +1,3 @@
-import { StringToBoolean } from "class-variance-authority/types";
 
 export type ScriptProps = {
   scriptID: string;
@@ -40,6 +39,7 @@ export interface Category {
   catagoryName: string;
   collectionId: string;
   collectionName: string;
+  id : string;
   created: string;
   expand: {
     items: Script[];

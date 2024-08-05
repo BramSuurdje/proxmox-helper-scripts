@@ -31,10 +31,10 @@ export const navBarLinks = [
     icon: <LucideClipboardSignature className="mr-2 h-4 w-4" />,
     text: "Changelog",
   },
-  {
-    href: "https://github.com/tteck/Proxmox",
-    event: "View on GitHub",
-    icon: <FaGithub className="mr-2 h-4 w-4" />,
-    text: "View on Github",
-  },
+  // {
+  //   href: "https://github.com/tteck/Proxmox",
+  //   event: "View on GitHub",
+  //   icon: <FaGithub className="mr-2 h-4 w-4" />,
+  //   text: "View on Github",
+  // },
 ];
