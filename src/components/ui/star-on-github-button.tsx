@@ -33,7 +33,7 @@ export default function StarOnGithubButton() {
     <Link
       className={cn(
         buttonVariants(),
-        "hidden h-10 max-w-64 gap-2 overflow-hidden whitespace-pre lg:flex",
+        "hidden h-10 min-w-[240px] gap-2 overflow-hidden whitespace-pre lg:flex",
         "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2",
       )}
       target="_blank"
