@@ -14,12 +14,13 @@ function CustomArrowRightIcon() {
 }
 
 export default function Page() {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
   const [color, setColor] = useState("#000000");
 
   useEffect(() => {
     setColor(theme === "dark" ? "#ffffff" : "#000000");
-  }, [theme]);
+  }, [theme]); 
 
   return (
     <div className="w-full">
