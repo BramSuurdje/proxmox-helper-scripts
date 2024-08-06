@@ -28,10 +28,10 @@ function Navbar() {
     };
   }, []);
 
-  function RemoveCookieAndRedirect() {
+  const removeCookieAndRedirect = () => {
     removeCookie();
     router.push("/");
-  }
+  };
 
   function removeCookie() {
     document.cookie =
@@ -46,14 +46,12 @@ function Navbar() {
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
-          <h2 className="cursor-pointer font-semibold" onClick={RemoveCookieAndRedirect}>
-            <Link
-              href="/"
-              className=" flex flex-row-reverse items-center gap-2 sm:flex-row"
-            >
-              <Image height={18} width={18} alt="logo" src={logo} />
-              <span className="hidden lg:block">Proxmox VE Helper-Scripts</span>
-            </Link>
+          <h2
+            className="flex cursor-pointer flex-row-reverse items-center gap-2 font-semibold sm:flex-row"
+            onClick={removeCookieAndRedirect}
+          >
+            <Image height={18} width={18} alt="logo" src={logo} />
+            <span className="hidden lg:block">Proxmox VE Helper-Scripts</span>
           </h2>
           <MobileNav />
           <div className="hidden gap-1 sm:flex">
