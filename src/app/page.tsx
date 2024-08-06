@@ -25,14 +25,14 @@ export default function Page() {
   return (
     <div className="w-full">
       <Particles
-        className="absolute inset-0"
+        className="absolute inset-0 -z-40"
         quantity={100}
         ease={80}
         color={color}
         refresh
       />
       <div className="container mx-auto">
-        <div className="flex flex-col items-center justify-center gap-4 py-20 lg:py-40">
+        <div className="flex flex-col items-center justify-center gap-4 py-20 lg:py-40 h-[80vh]">
           <div>
             <AnimatedGradientText>
               <div
