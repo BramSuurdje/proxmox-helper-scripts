@@ -352,10 +352,7 @@ function ScriptItem({
                                 )}
                               </>
                             )}
-                            <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
-                              click to copy
-                            </p>
-                            <div className="flex">
+                            <div className="mt-3 flex">
                               <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
                                 <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                   {!isMobile && installCommand
@@ -392,10 +389,7 @@ function ScriptItem({
                                   {item.item_type}, run the command below in the
                                   Proxmox VE Shell
                                 </p>
-                                <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
-                                  click to copy
-                                </p>
-                                <div className="flex">
+                                <div className="mt-3 flex">
                                   <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
                                     <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                       {!isMobile && installCommand
@@ -436,10 +430,7 @@ function ScriptItem({
                               )}
                             </>
                           )}
-                          <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
-                            click to copy
-                          </p>
-                          <div className="flex">
+                          <div className="mt-3 flex">
                             <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
                               <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                 {!isMobile && installCommand
