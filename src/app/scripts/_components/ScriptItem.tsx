@@ -12,6 +12,9 @@ import {
   ExternalLink,
   Copy,
   Clipboard,
+  CheckIcon,
+  ClipboardIcon,
+  ClipboardCheck,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
@@ -20,7 +23,7 @@ import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MostViewedScripts, LatestScripts } from "./ScriptInfoBlocks";
 import { Card } from "@/components/ui/card";
-import { handleCopy } from "@/lib/utils";
+import { toast } from "sonner";
 
 function ScriptItem({
   items,
@@ -34,6 +37,35 @@ function ScriptItem({
   const [item, setItem] = useState<Script | null>(null);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+  const [hasCopied, setHasCopied] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setHasCopied(false);
+    }, 2000);
+  }, [hasCopied]);
+
+  const handleCopy = (type: string, value: any) => {
+    navigator.clipboard.writeText(value);
+
+    setHasCopied(true);
+
+    let warning = localStorage.getItem("warning");
+
+    if (warning === null) {
+      localStorage.setItem("warning", "1");
+      setTimeout(() => {
+        toast.error(
+          "be careful when copying scripts from the internet. Always remember check the source!",
+          { duration: 8000 },
+        );
+      }, 500);
+    }
+
+    toast.success(`copied ${type} to clipboard`, {
+      icon: <ClipboardCheck className="h-4 w-4" />,
+    });
+  };
 
   useEffect(() => {
     if (items) {
@@ -368,7 +400,12 @@ function ScriptItem({
                                     )
                                   }
                                 >
-                                  <Clipboard className="w-4 cursor-pointer"></Clipboard>
+                                  {hasCopied ? (
+                                    <CheckIcon className="h-4 w-4" />
+                                  ) : (
+                                    <ClipboardIcon className="h-4 w-4" />
+                                  )}
+                                  <span className="sr-only">Copy</span>
                                 </div>
                               </Card>
                             </div>
@@ -405,7 +442,12 @@ function ScriptItem({
                                         )
                                       }
                                     >
-                                      <Clipboard className="w-4 cursor-pointer"></Clipboard>
+                                      {hasCopied ? (
+                                        <CheckIcon className="h-4 w-4" />
+                                      ) : (
+                                        <ClipboardIcon className="h-4 w-4" />
+                                      )}
+                                      <span className="sr-only">Copy</span>
                                     </div>
                                   </Card>
                                 </div>
@@ -431,19 +473,24 @@ function ScriptItem({
                             </>
                           )}
                           <div className="mt-3 flex">
-                            <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
+                            <Card className="flex items-center overflow-x-auto bg-secondary pl-4 shadow-md">
                               <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                 {!isMobile && installCommand
                                   ? installCommand
                                   : "Copy install command"}
                               </code>
                               <div
-                                className=" right-0 cursor-pointer bg-primary-foreground px-4 py-2"
+                                className="right-0 cursor-pointer bg-primary-foreground px-4 py-2"
                                 onClick={() =>
                                   handleCopy("install command", installCommand)
                                 }
                               >
-                                <Clipboard className="w-4 cursor-pointer"></Clipboard>
+                                {hasCopied ? (
+                                  <CheckIcon className="h-4 w-4" />
+                                ) : (
+                                  <ClipboardIcon className="h-4 w-4" />
+                                )}
+                                <span className="sr-only">Copy</span>
                               </div>
                             </Card>
                           </div>
