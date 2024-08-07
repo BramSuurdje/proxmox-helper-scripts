@@ -3,9 +3,7 @@ import Image from "next/image";
 import { Suspense, useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "../../../components/ui/button";
-import { toast } from "sonner";
 import {
-  Clipboard,
   Info,
   X,
   Code,
@@ -13,16 +11,16 @@ import {
   BookOpenText,
   ExternalLink,
   Copy,
+  Clipboard,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Category, Script } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  MostViewedScripts,
-  LatestScripts,
-} from "./ScriptInfoBlocks";
+import { MostViewedScripts, LatestScripts } from "./ScriptInfoBlocks";
+import { Card } from "@/components/ui/card";
+import { handleCopy } from "@/lib/utils";
 
 function ScriptItem({
   items,
@@ -92,63 +90,6 @@ function ScriptItem({
     }
     return null;
   }, [installCommand, pattern]);
-
-  const handleCopy = (type: string, value: any) => {
-    navigator.clipboard.writeText(value);
-
-    let amountOfScriptsCopied = localStorage.getItem("amountOfScriptsCopied");
-
-    if (amountOfScriptsCopied === null) {
-      localStorage.setItem("amountOfScriptsCopied", "1");
-      setTimeout(() => {
-        toast.error(
-          "be careful when copying scripts from the internet. Always remember check the source!",
-          { duration: 8000 },
-        );
-      }, 500);
-    } else {
-      amountOfScriptsCopied = (parseInt(amountOfScriptsCopied) + 1).toString();
-      localStorage.setItem("amountOfScriptsCopied", amountOfScriptsCopied);
-
-      if (
-        parseInt(amountOfScriptsCopied) === 3 ||
-        parseInt(amountOfScriptsCopied) === 10 ||
-        parseInt(amountOfScriptsCopied) === 25 ||
-        parseInt(amountOfScriptsCopied) === 50 ||
-        parseInt(amountOfScriptsCopied) === 100
-      ) {
-        setTimeout(() => {
-          toast.info(
-            <div className="flex flex-col gap-3">
-              <p className="lg">
-                If you find these scripts useful, please consider starring the
-                repository on GitHub. It helps a lot!
-              </p>
-              <div>
-                <Button className="text-white">
-                  <Link
-                    href="https://github.com/tteck/Proxmox"
-                    data-umami-event="Star on Github"
-                    target="_blank"
-                  >
-                    Star on GitHub 💫
-                  </Link>
-                </Button>
-              </div>
-            </div>,
-            { duration: 8000 },
-          );
-        }, 500);
-      }
-    }
-
-    toast.success(
-      <div className="flex items-center gap-2">
-        <Clipboard className="h-4 w-4" />
-        <span>Copied {type} to clipboard</span>
-      </div>,
-    );
-  };
 
   const closeScript = () => {
     // remove the id from the url and reset the state
@@ -414,19 +355,26 @@ function ScriptItem({
                             <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
                               click to copy
                             </p>
-                            <Button
-                              variant="secondary"
-                              size={"sm"}
-                              onClick={() =>
-                                handleCopy("install command", installCommand)
-                              }
-                            >
-                              {!isMobile && installCommand
-                                ? installCommand
-                                : "Copy install command"}
-                              <span className="p-2"></span>
-                              <Copy className="w-4"></Copy>
-                            </Button>
+                            <div className="flex">
+                              <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
+                                <code className="overflow-x-visible whitespace-pre-wrap break-all pr-4 text-sm">
+                                  {!isMobile && installCommand
+                                    ? installCommand
+                                    : "Copy install command"}
+                                </code>
+                                <div
+                                  className=" right-0 cursor-pointer bg-primary-foreground px-4 py-2"
+                                  onClick={() =>
+                                    handleCopy(
+                                      "install command",
+                                      installCommand,
+                                    )
+                                  }
+                                >
+                                  <Clipboard className="w-4 cursor-pointer"></Clipboard>
+                                </div>
+                              </Card>
+                            </div>
                           </TabsContent>
                           <TabsContent value="alpine">
                             {item.hasAlpineScript && (
@@ -447,22 +395,26 @@ function ScriptItem({
                                 <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
                                   click to copy
                                 </p>
-                                <Button
-                                  variant={"secondary"}
-                                  size={"sm"}
-                                  onClick={() =>
-                                    handleCopy(
-                                      "install command",
-                                      item.alpineScript,
-                                    )
-                                  }
-                                >
-                                  {!isMobile && item.alpineScript
-                                    ? item.alpineScript
-                                    : "Copy install command"}
-                                  <span className="p-2"></span>
-                                  <Copy className="w-4"></Copy>
-                                </Button>
+                                <div className="flex">
+                                  <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
+                                    <code className="overflow-x-visible whitespace-pre-wrap break-all pr-4 text-sm">
+                                      {!isMobile && installCommand
+                                        ? installCommand
+                                        : "Copy install command"}
+                                    </code>
+                                    <div
+                                      className=" right-0 cursor-pointer bg-primary-foreground px-4 py-2"
+                                      onClick={() =>
+                                        handleCopy(
+                                          "install command",
+                                          installCommand,
+                                        )
+                                      }
+                                    >
+                                      <Clipboard className="w-4 cursor-pointer"></Clipboard>
+                                    </div>
+                                  </Card>
+                                </div>
                               </>
                             )}
                           </TabsContent>
@@ -487,19 +439,23 @@ function ScriptItem({
                           <p className="mt-3 pb-1 pl-1 text-xs text-muted-foreground">
                             click to copy
                           </p>
-                          <Button
-                            variant="secondary"
-                            size={"sm"}
-                            onClick={() =>
-                              handleCopy("install command", installCommand)
-                            }
-                          >
-                            {!isMobile && installCommand
-                              ? installCommand
-                              : "Copy install command"}
-                            <span className="p-2"></span>
-                            <Copy className="w-4"></Copy>
-                          </Button>
+                          <div className="flex">
+                            <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
+                              <code className="overflow-x-visible whitespace-pre-wrap break-all pr-4 text-sm">
+                                {!isMobile && installCommand
+                                  ? installCommand
+                                  : "Copy install command"}
+                              </code>
+                              <div
+                                className=" right-0 cursor-pointer bg-primary-foreground px-4 py-2"
+                                onClick={() =>
+                                  handleCopy("install command", installCommand)
+                                }
+                              >
+                                <Clipboard className="w-4 cursor-pointer"></Clipboard>
+                              </div>
+                            </Card>
+                          </div>
                         </>
                       )}
                     </div>
