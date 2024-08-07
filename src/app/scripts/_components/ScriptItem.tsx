@@ -357,7 +357,7 @@ function ScriptItem({
                             </p>
                             <div className="flex">
                               <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
-                                <code className="overflow-x-visible whitespace-pre-wrap break-all pr-4 text-sm">
+                                <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                   {!isMobile && installCommand
                                     ? installCommand
                                     : "Copy install command"}
@@ -397,7 +397,7 @@ function ScriptItem({
                                 </p>
                                 <div className="flex">
                                   <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
-                                    <code className="overflow-x-visible whitespace-pre-wrap break-all pr-4 text-sm">
+                                    <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                       {!isMobile && installCommand
                                         ? installCommand
                                         : "Copy install command"}
@@ -441,7 +441,7 @@ function ScriptItem({
                           </p>
                           <div className="flex">
                             <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
-                              <code className="overflow-x-visible whitespace-pre-wrap break-all pr-4 text-sm">
+                              <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
                                 {!isMobile && installCommand
                                   ? installCommand
                                   : "Copy install command"}
