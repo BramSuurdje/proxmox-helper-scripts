@@ -1,7 +1,13 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "proxmox-helper-scripts-website",
+  "version": "1.0.0",
+  "license": "MIT",
   "private": true,
+  "author": {
+    "name": "Bram Suurd",
+    "url": "https://github.com/BramSuurdje"
+  },
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -35,8 +41,7 @@
     "sharp": "^0.33.4",
     "simple-icons": "^13.4.0",
     "sonner": "^1.5.0",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -50,8 +55,9 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "postcss": "^8",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14",
+    "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
     "tailwindcss-animated": "^1.0.1",
     "typescript": "^5"
   }
