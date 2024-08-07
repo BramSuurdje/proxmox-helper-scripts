@@ -24,6 +24,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MostViewedScripts, LatestScripts } from "./ScriptInfoBlocks";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import CodeCopyButton from "@/components/ui/code-copy-button";
 
 function ScriptItem({
   items,
@@ -37,35 +38,6 @@ function ScriptItem({
   const [item, setItem] = useState<Script | null>(null);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [hasCopied, setHasCopied] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setHasCopied(false);
-    }, 2000);
-  }, [hasCopied]);
-
-  const handleCopy = (type: string, value: any) => {
-    navigator.clipboard.writeText(value);
-
-    setHasCopied(true);
-
-    let warning = localStorage.getItem("warning");
-
-    if (warning === null) {
-      localStorage.setItem("warning", "1");
-      setTimeout(() => {
-        toast.error(
-          "be careful when copying scripts from the internet. Always remember check the source!",
-          { duration: 8000 },
-        );
-      }, 500);
-    }
-
-    toast.success(`copied ${type} to clipboard`, {
-      icon: <ClipboardCheck className="h-4 w-4" />,
-    });
-  };
 
   useEffect(() => {
     if (items) {
@@ -86,6 +58,14 @@ function ScriptItem({
       /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/,
     [],
   );
+
+  function handleCopy(type: string, value: any) {
+    navigator.clipboard.writeText(value);
+
+    toast.success(`copied ${type} to clipboard`, {
+      icon: <ClipboardCheck className="h-4 w-4" />,
+    });
+  }
 
   const installCommand = useMemo(() => {
     if (item) {
@@ -124,7 +104,6 @@ function ScriptItem({
   }, [installCommand, pattern]);
 
   const closeScript = () => {
-    // remove the id from the url and reset the state
     window.history.pushState({}, document.title, window.location.pathname);
     setSelectedScript(null);
   };
@@ -153,29 +132,8 @@ function ScriptItem({
     return formattedDescription;
   };
 
-  const [width, setWidth] = useState<number>(
-    typeof window !== "undefined" ? window.innerWidth : 0,
-  );
-
-  const handleWindowSizeChange = () => {
-    if (typeof window !== "undefined") {
-      setWidth(window.innerWidth);
-    }
-  };
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", handleWindowSizeChange);
-      return () => {
-        window.removeEventListener("resize", handleWindowSizeChange);
-      };
-    }
-  }, []);
-
-  const isMobile = width <= 640;
-
   return (
-    <Suspense fallback={null}>
+    <>
       {item && (
         <div className="mr-7 mt-0 flex w-full min-w-fit">
           <div className="flex w-full min-w-fit">
@@ -384,31 +342,7 @@ function ScriptItem({
                                 )}
                               </>
                             )}
-                            <div className="mt-3 flex">
-                              <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
-                                <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
-                                  {!isMobile && installCommand
-                                    ? installCommand
-                                    : "Copy install command"}
-                                </code>
-                                <div
-                                  className=" right-0 cursor-pointer bg-primary-foreground px-4 py-2"
-                                  onClick={() =>
-                                    handleCopy(
-                                      "install command",
-                                      installCommand,
-                                    )
-                                  }
-                                >
-                                  {hasCopied ? (
-                                    <CheckIcon className="h-4 w-4" />
-                                  ) : (
-                                    <ClipboardIcon className="h-4 w-4" />
-                                  )}
-                                  <span className="sr-only">Copy</span>
-                                </div>
-                              </Card>
-                            </div>
+                            <CodeCopyButton>{installCommand}</CodeCopyButton>
                           </TabsContent>
                           <TabsContent value="alpine">
                             {item.hasAlpineScript && (
@@ -426,31 +360,9 @@ function ScriptItem({
                                   {item.item_type}, run the command below in the
                                   Proxmox VE Shell
                                 </p>
-                                <div className="mt-3 flex">
-                                  <Card className="flex items-center overflow-x-auto bg-secondary pl-4">
-                                    <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
-                                      {!isMobile && installCommand
-                                        ? installCommand
-                                        : "Copy install command"}
-                                    </code>
-                                    <div
-                                      className=" right-0 cursor-pointer bg-primary-foreground px-4 py-2"
-                                      onClick={() =>
-                                        handleCopy(
-                                          "install command",
-                                          installCommand,
-                                        )
-                                      }
-                                    >
-                                      {hasCopied ? (
-                                        <CheckIcon className="h-4 w-4" />
-                                      ) : (
-                                        <ClipboardIcon className="h-4 w-4" />
-                                      )}
-                                      <span className="sr-only">Copy</span>
-                                    </div>
-                                  </Card>
-                                </div>
+                                <CodeCopyButton>
+                                  {item.alpineScript}
+                                </CodeCopyButton>
                               </>
                             )}
                           </TabsContent>
@@ -472,28 +384,9 @@ function ScriptItem({
                               )}
                             </>
                           )}
-                          <div className="mt-3 flex">
-                            <Card className="flex items-center overflow-x-auto bg-secondary pl-4 shadow-md">
-                              <code className="overflow-x-auto whitespace-pre-wrap text-nowrap break-all pr-4 text-sm">
-                                {!isMobile && installCommand
-                                  ? installCommand
-                                  : "Copy install command"}
-                              </code>
-                              <div
-                                className="right-0 cursor-pointer bg-primary-foreground px-4 py-2"
-                                onClick={() =>
-                                  handleCopy("install command", installCommand)
-                                }
-                              >
-                                {hasCopied ? (
-                                  <CheckIcon className="h-4 w-4" />
-                                ) : (
-                                  <ClipboardIcon className="h-4 w-4" />
-                                )}
-                                <span className="sr-only">Copy</span>
-                              </div>
-                            </Card>
-                          </div>
+                          {installCommand && (
+                            <CodeCopyButton>{installCommand}</CodeCopyButton>
+                          )}
                         </>
                       )}
                     </div>
@@ -507,11 +400,10 @@ function ScriptItem({
       {id ? null : (
         <div className="flex w-full flex-col gap-5">
           <LatestScripts items={items} />
-          {/* <RecentlyUpdatedScripts items={items} /> */}
           <MostViewedScripts items={items} />
         </div>
       )}
-    </Suspense>
+    </>
   );
 }
 
