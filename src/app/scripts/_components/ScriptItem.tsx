@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Suspense, useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { extractDate } from "@/lib/time";
 import { Button } from "../../../components/ui/button";
 import {
@@ -10,10 +10,6 @@ import {
   Globe,
   BookOpenText,
   ExternalLink,
-  Copy,
-  Clipboard,
-  CheckIcon,
-  ClipboardIcon,
   ClipboardCheck,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -22,7 +18,7 @@ import { Category, Script } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MostViewedScripts, LatestScripts } from "./ScriptInfoBlocks";
-import { Card } from "@/components/ui/card";
+
 import { toast } from "sonner";
 import CodeCopyButton from "@/components/ui/code-copy-button";
 
@@ -132,6 +128,8 @@ function ScriptItem({
     return formattedDescription;
   };
 
+  const hasAlpineScript = item?.expand?.alpine_script !== undefined;
+
   return (
     <>
       {item && (
@@ -180,19 +178,19 @@ function ScriptItem({
                               </p>
                             </div>
                           )}
-                          {item.hasAlpineScript && (
+                          {hasAlpineScript && (
                             <div>
                               <h2 className="text-md font-semibold">
                                 Default Alpine settings
                               </h2>
                               <p className="text-sm text-muted-foreground">
-                                CPU: {item.alpine_default_cpu}
+                                CPU: {item.expand.alpine_script.default_cpu}
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                RAM: {item.alpine_default_ram}
+                                RAM: {item.expand.alpine_script.default_ram}
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                HDD: {item.alpine_default_hdd}
+                                HDD: {item.expand.alpine_script.default_hdd}
                               </p>
                             </div>
                           )}
@@ -315,7 +313,7 @@ function ScriptItem({
                     </h2>
                     <Separator className="w-full"></Separator>
                     <div className="p-4">
-                      {item.hasAlpineScript ? (
+                      {hasAlpineScript ? (
                         <Tabs
                           defaultValue="default"
                           className="mt-2 w-full max-w-4xl"
@@ -345,7 +343,7 @@ function ScriptItem({
                             <CodeCopyButton>{installCommand}</CodeCopyButton>
                           </TabsContent>
                           <TabsContent value="alpine">
-                            {item.hasAlpineScript && (
+                            {item.expand.alpine_script && (
                               <>
                                 <p className="mt-2 max-w-2xl text-sm">
                                   As an alternative option, you can use Alpine
@@ -361,7 +359,7 @@ function ScriptItem({
                                   Proxmox VE Shell
                                 </p>
                                 <CodeCopyButton>
-                                  {item.alpineScript}
+                                  {item.expand.alpine_script.installCommand}
                                 </CodeCopyButton>
                               </>
                             )}

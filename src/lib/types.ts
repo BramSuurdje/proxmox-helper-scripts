@@ -6,10 +6,7 @@ export type Script = {
   alert1: string;
   alert2: string;
   alert3: string;
-  alpineScript: string;
-  alpine_default_cpu: string;
-  alpine_default_hdd: string;
-  alpine_default_ram: string;
+  alpineScript: alpine_script;
   collectionId: string;
   collectionName: string;
   created: string;
@@ -18,9 +15,10 @@ export type Script = {
   default_ram: string;
   description: string;
   documentation: string;
-  hasAlpineScript: boolean;
   id: string;
-  installcommand: string;
+  expand: {
+    alpine_script: alpine_script;
+  }
   isUpdateable: boolean;
   item_type: string;
   logo: string;
@@ -32,6 +30,13 @@ export type Script = {
   isMostViewed: boolean;
   mostViewedPosition: number;
   interface: string;
+};
+
+type alpine_script = {
+  installCommand: string;
+  default_cpu: string;
+  default_hdd: string;
+  default_ram: string;
 };
 
 export interface Category {

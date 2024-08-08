@@ -5,7 +5,7 @@ import { Category } from "@/lib/types";
 export async function GET(req: NextRequest) {
   try {
     const response = await pb.collection("categories").getFullList({
-      expand: "items",
+      expand: "items.alpine_script",
       sort: "order",
     });
 
