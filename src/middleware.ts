@@ -16,7 +16,7 @@ export function middleware(req: NextRequest) {
   if (!visitedCookie) {
     res.cookies.set("visited", "true", {
       path: "/",
-      maxAge: 60 * 60 * 24 * 7, 
+      maxAge: 60 * 60 * 24 * 7,
     });
   }
 

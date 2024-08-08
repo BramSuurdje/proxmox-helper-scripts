@@ -74,8 +74,14 @@ export function LatestScripts({ items }: { items: Category[] }) {
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
-                <div className="flex w-16 h-16 items-center justify-center rounded-lg bg-accent p-1">
-                  <Image src={item.logo} height={64} width={64} alt="" className="w-11 h-11 object-contain" />
+                <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-accent p-1">
+                  <Image
+                    src={item.logo}
+                    height={64}
+                    width={64}
+                    alt=""
+                    className="h-11 w-11 object-contain"
+                  />
                 </div>
                 <p className="text-xl">
                   {item.title} {item.item_type}

@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import "@/styles/globals.css"
+import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
@@ -72,7 +72,7 @@ export default function RootLayout({
         >
           <div className="flex w-full flex-col justify-center">
             <Navbar />
-            <div className="flex flex-col justify-center min-h-screen">
+            <div className="flex min-h-screen flex-col justify-center">
               <div className="flex w-full justify-center">
                 <div className="w-full max-w-7xl ">
                   {children}
