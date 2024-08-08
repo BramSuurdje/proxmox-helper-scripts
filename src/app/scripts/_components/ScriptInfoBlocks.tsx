@@ -127,7 +127,6 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
       .map((script) => ({
         ...script,
       }))
-      .sort((a, b) => a.mostViewedPosition - b.mostViewedPosition);
     return mostViewedScripts;
   }, [items]);
 
@@ -147,10 +146,6 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
       {mostViewedScripts.length > 0 && (
         <>
           <h2 className="text-lg font-semibold">Most Viewed Scripts</h2>
-          <p className="mb-2 text-sm text-muted-foreground">
-            This data, unfortunately, is not directly influenced by interacting
-            with the website. (yet)
-          </p>
         </>
       )}
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
