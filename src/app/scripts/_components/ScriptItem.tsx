@@ -315,13 +315,11 @@ function ScriptItem({
                         {item.privileged && (
                           <TooltipProvider>
                             <Tooltip delayDuration={100}>
-                              <TooltipTrigger>
+                              <TooltipTrigger className="flex items-center">
                                 <Badge variant={"warning"}>Privileged</Badge>
                               </TooltipTrigger>
-                              <TooltipContent side="bottom">
-                                <p className="text-sm">
-                                  This script will be run in a privileged LXC
-                                </p>
+                              <TooltipContent side="bottom" className="text-sm">
+                                This script will be run in a privileged LXC
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
@@ -329,14 +327,12 @@ function ScriptItem({
                         {item.isUpdateable && (
                           <TooltipProvider>
                             <Tooltip delayDuration={100}>
-                              <TooltipTrigger>
+                              <TooltipTrigger className="flex items-center">
                                 <Badge variant={"success"}>Updateable</Badge>
                               </TooltipTrigger>
-                              <TooltipContent side="bottom">
-                                <p className="text-sm">
-                                  To Update {item.title}, run the command below
-                                  (or type update) in the LXC Console.
-                                </p>
+                              <TooltipContent side="bottom" className="text-sm">
+                                To Update {item.title}, run the command below
+                                (or type update) in the LXC Console.
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
