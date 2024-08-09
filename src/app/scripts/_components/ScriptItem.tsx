@@ -29,7 +29,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-
 function ScriptItem({
   items,
   selectedScript,
@@ -308,8 +307,8 @@ function ScriptItem({
                   </div>
 
                   <div className="mt-4 rounded-lg border bg-accent/50">
-                    <div className="flex gap-3  px-4 py-2">
-                      <h2 className=" text-lg font-semibold">
+                    <div className="flex gap-3 px-4 py-2">
+                      <h2 className="text-lg font-semibold">
                         How to {item.item_type ? "install" : "use"}
                       </h2>
                       <div className="flex items-center gap-2">
@@ -317,9 +316,7 @@ function ScriptItem({
                           <TooltipProvider>
                             <Tooltip delayDuration={100}>
                               <TooltipTrigger>
-                                <Badge variant={"success"}>
-                                  Privileged
-                                </Badge>
+                                <Badge variant={"success"}>Privileged</Badge>
                               </TooltipTrigger>
                               <TooltipContent side="bottom">
                                 <p className="text-sm">
@@ -416,8 +413,8 @@ function ScriptItem({
                 <div>
                   {hasDefaultLogin && (
                     <div className="mt-4 rounded-lg border bg-accent/50">
-                      <div className="flex gap-3  px-4 py-2">
-                        <h2 className=" text-lg font-semibold">
+                      <div className="flex gap-3 px-4 py-2">
+                        <h2 className="text-lg font-semibold">
                           Default Login Credentials
                         </h2>
                       </div>

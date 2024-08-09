@@ -58,7 +58,7 @@ export function LatestScripts({ items }: { items: Category[] }) {
             {endIndex < latestScripts.length && (
               <div
                 onClick={goToNextPage}
-                className=" cursor-pointer select-none p-2 text-sm font-semibold"
+                className="cursor-pointer select-none p-2 text-sm font-semibold"
               >
                 {page === 1 ? "More.." : "Next"}
               </div>
@@ -70,7 +70,7 @@ export function LatestScripts({ items }: { items: Category[] }) {
         {latestScripts.slice(startIndex, endIndex).map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] flex-1 flex-grow bg-accent/30"
+            className="min-w-[250px] flex-1 flex-grow bg-accent/30"
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
@@ -92,7 +92,7 @@ export function LatestScripts({ items }: { items: Category[] }) {
               </p>
             </CardHeader>
             <CardContent>
-              <CardDescription className=" line-clamp-3 text-card-foreground">
+              <CardDescription className="line-clamp-3 text-card-foreground">
                 {item.description}
               </CardDescription>
             </CardContent>
@@ -126,7 +126,7 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
       .filter((script) => script.isMostViewed)
       .map((script) => ({
         ...script,
-      }))
+      }));
     return mostViewedScripts;
   }, [items]);
 
@@ -152,7 +152,7 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
         {mostViewedScripts.slice(startIndex, endIndex).map((item) => (
           <Card
             key={item.id}
-            className=" min-w-[250px] flex-1 flex-grow bg-accent/30"
+            className="min-w-[250px] flex-1 flex-grow bg-accent/30"
           >
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
@@ -174,7 +174,7 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
               </p>
             </CardHeader>
             <CardContent>
-              <CardDescription className=" line-clamp-3 text-card-foreground">
+              <CardDescription className="line-clamp-3 text-card-foreground">
                 {item.description}
               </CardDescription>
             </CardContent>

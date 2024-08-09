@@ -20,7 +20,7 @@ export type Script = {
     alpine_script: alpine_script;
     alerts: alerts[];
     default_login: default_login;
-  }
+  };
   isUpdateable: boolean;
   item_type: string;
   logo: string;
@@ -44,12 +44,12 @@ type alpine_script = {
 
 type alerts = {
   content: string;
-}
+};
 
 type default_login = {
   username: string;
   password: string;
-}
+};
 
 export interface Category {
   catagoryName: string;
