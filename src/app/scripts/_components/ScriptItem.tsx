@@ -316,7 +316,7 @@ function ScriptItem({
                           <TooltipProvider>
                             <Tooltip delayDuration={100}>
                               <TooltipTrigger>
-                                <Badge variant={"success"}>Privileged</Badge>
+                                <Badge variant={"warning"}>Privileged</Badge>
                               </TooltipTrigger>
                               <TooltipContent side="bottom">
                                 <p className="text-sm">
