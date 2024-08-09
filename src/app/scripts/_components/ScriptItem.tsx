@@ -389,12 +389,19 @@ function ScriptItem({
                         </Tabs>
                       ) : (
                         <>
-                          {item.item_type && (
+                          {item.item_type ? (
                             <>
                               <p className="text-sm">
                                 To create a new Proxmox VE {item.title}{" "}
                                 {item.item_type}, run the command below in the
                                 Proxmox VE Shell.
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="text-sm">
+                                To use the {item.title} script, run
+                                the command below in the shell.
                               </p>
                             </>
                           )}
