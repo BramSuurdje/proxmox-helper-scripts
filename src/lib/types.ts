@@ -18,6 +18,8 @@ export type Script = {
   id: string;
   expand: {
     alpine_script: alpine_script;
+    alerts: alerts[];
+    default_login: default_login;
   }
   isUpdateable: boolean;
   item_type: string;
@@ -30,6 +32,7 @@ export type Script = {
   isMostViewed: boolean;
   mostViewedPosition: number;
   interface: string;
+  privileged: boolean;
 };
 
 type alpine_script = {
@@ -38,6 +41,15 @@ type alpine_script = {
   default_hdd: string;
   default_ram: string;
 };
+
+type alerts = {
+  content: string;
+}
+
+type default_login = {
+  username: string;
+  password: string;
+}
 
 export interface Category {
   catagoryName: string;
@@ -49,11 +61,3 @@ export interface Category {
     items: Script[];
   };
 }
-
-export type Scripts = {
-  page: number;
-  perPage: number;
-  totalItems: number;
-  totalPages: number;
-  items: Category[];
-};

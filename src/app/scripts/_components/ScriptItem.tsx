@@ -18,9 +18,17 @@ import { Category, Script } from "@/lib/types";
 import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MostViewedScripts, LatestScripts } from "./ScriptInfoBlocks";
+import { Badge } from "@/components/ui/badge";
 
 import { toast } from "sonner";
 import CodeCopyButton from "@/components/ui/code-copy-button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 
 function ScriptItem({
   items,
@@ -129,6 +137,7 @@ function ScriptItem({
   };
 
   const hasAlpineScript = item?.expand?.alpine_script !== undefined;
+  const hasDefaultLogin = item?.expand?.default_login !== undefined;
 
   return (
     <>
@@ -277,40 +286,66 @@ function ScriptItem({
                 <Separator className="mt-4" />
                 <div>
                   <div className="mt-4">
-                    <div className="p-2">
-                      <h2 className="mb-2 max-w-prose text-lg font-semibold">
-                        Description
-                      </h2>
-                      <p className="text-sm">
-                        {descriptionCodeBlock(item.description)}
-                      </p>
-                    </div>
-                    {item.alert1 && (
-                      <div className="mt-4 flex flex-col gap-2">
-                        <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
-                          <Info className="h-4 min-h-4 w-4 min-w-4" />
-                          {descriptionCodeBlock(item.alert1)}
+                    <div className="flex p-2">
+                      <div>
+                        <h2 className="mb-2 max-w-prose text-lg font-semibold">
+                          Description
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
+                          {descriptionCodeBlock(item.description)}
                         </p>
-                        {item.alert2 && (
-                          <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
-                            <Info className="min-w-42 h-4 min-h-4 w-4" />
-                            {descriptionCodeBlock(item.alert2)}
-                          </p>
-                        )}
-                        {item.alert3 && (
+                      </div>
+                    </div>
+                    {item.expand?.alerts?.length > 0 &&
+                      item.expand.alerts.map((alert: any, index: number) => (
+                        <div key={index} className="mt-4 flex flex-col gap-2">
                           <p className="inline-flex items-center gap-2 rounded-lg border border-red-500/25 bg-destructive/25 p-2 pl-4 text-sm">
                             <Info className="h-4 min-h-4 w-4 min-w-4" />
-                            {descriptionCodeBlock(item.alert3)}
+                            {descriptionCodeBlock(alert.content)}
                           </p>
-                        )}
-                      </div>
-                    )}
+                        </div>
+                      ))}
                   </div>
 
                   <div className="mt-4 rounded-lg border bg-accent/50">
-                    <h2 className="px-4 py-2 text-lg font-semibold">
-                      How to {item.item_type ? "install" : "use"}
-                    </h2>
+                    <div className="flex gap-3  px-4 py-2">
+                      <h2 className=" text-lg font-semibold">
+                        How to {item.item_type ? "install" : "use"}
+                      </h2>
+                      <div className="flex items-center gap-2">
+                        {item.privileged && (
+                          <TooltipProvider>
+                            <Tooltip delayDuration={100}>
+                              <TooltipTrigger>
+                                <Badge variant={"success"}>
+                                  Privileged
+                                </Badge>
+                              </TooltipTrigger>
+                              <TooltipContent side="bottom">
+                                <p className="text-sm">
+                                  This script will be run in a privileged LXC
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
+                        {item.isUpdateable && (
+                          <TooltipProvider>
+                            <Tooltip delayDuration={100}>
+                              <TooltipTrigger>
+                                <Badge variant={"success"}>Updateable</Badge>
+                              </TooltipTrigger>
+                              <TooltipContent side="bottom">
+                                <p className="text-sm">
+                                  To Update {item.title}, run the command below
+                                  (or type update) in the LXC Console.
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
+                      </div>
+                    </div>
                     <Separator className="w-full"></Separator>
                     <div className="p-4">
                       {hasAlpineScript ? (
@@ -332,12 +367,6 @@ function ScriptItem({
                                   {item.item_type}, run the command below in the
                                   Proxmox VE Shell.
                                 </p>
-                                {item.isUpdateable && (
-                                  <p className="text-sm">
-                                    To Update {item.title}, run the command
-                                    below (or type update) in the LXC Console.
-                                  </p>
-                                )}
                               </>
                             )}
                             <CodeCopyButton>{installCommand}</CodeCopyButton>
@@ -374,12 +403,6 @@ function ScriptItem({
                                 {item.item_type}, run the command below in the
                                 Proxmox VE Shell.
                               </p>
-                              {item.isUpdateable && (
-                                <p className="text-sm">
-                                  To Update {item.title}, run the command below
-                                  (or type update) in the LXC Console.
-                                </p>
-                              )}
                             </>
                           )}
                           {installCommand && (
@@ -389,6 +412,55 @@ function ScriptItem({
                       )}
                     </div>
                   </div>
+                </div>
+                <div>
+                  {hasDefaultLogin && (
+                    <div className="mt-4 rounded-lg border bg-accent/50">
+                      <div className="flex gap-3  px-4 py-2">
+                        <h2 className=" text-lg font-semibold">
+                          Default Login Credentials
+                        </h2>
+                      </div>
+                      <Separator className="w-full"></Separator>
+                      <div className="flex flex-col gap-2 p-4">
+                        <p className="mb-2 text-sm">
+                          You can use the following credentials to login to the{" "}
+                          {""}
+                          {item.title} {item.item_type}.
+                        </p>
+                        <div className="text-sm">
+                          Username:{" "}
+                          <Button
+                            variant={"secondary"}
+                            size={"null"}
+                            onClick={() =>
+                              handleCopy(
+                                "username",
+                                item.expand.default_login.username,
+                              )
+                            }
+                          >
+                            {item.expand.default_login.username}
+                          </Button>
+                        </div>
+                        <div className="text-sm">
+                          Password:{" "}
+                          <Button
+                            variant={"secondary"}
+                            size={"null"}
+                            onClick={() =>
+                              handleCopy(
+                                "password",
+                                item.expand.default_login.password,
+                              )
+                            }
+                          >
+                            {item.expand.default_login.password}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
