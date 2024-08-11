@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://proxmox-helper-scripts.vercel.app" target="_blank"><img src="https://github.com/user-attachments/assets/159b930c-83b9-4732-bbf6-b9ddcd8616bb" alt="Proxmox Helper Scripts" width="800"></a>
+  <a href="https://proxmox-helper-scripts.vercel.app" target="_blank"><img src="https://github.com/user-attachments/assets/4dc54de1-e29b-40ba-b7ee-b7828c059648" alt="Proxmox Helper Scripts" width="800"></a>
 </h1>
 
 <p align="center">
