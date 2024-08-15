@@ -58,7 +58,7 @@ export default function MobileNav() {
                 >
                   {links.map((category) => (
                     <AccordionItem
-                      key={category.collectionId}
+                      key={category.categoryId}
                       value={category.catagoryName}
                       className={`sm:text-md flex flex-col gap-2 text-left text-foreground`}
                     >
