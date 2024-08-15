@@ -11,6 +11,7 @@ export interface Script {
   id: string;
   item_type: string;
   interface: string;
+  installCommand: string;
   port: number;
   post_install: string;
   default_cpu: string;
