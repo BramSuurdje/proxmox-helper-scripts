@@ -1,16 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { pb } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const response = await pb.collection("categories").getFullList({
+    const response = await pb.collection("categories").getFullList<Category>({
       expand: "items.alerts,items.alpine_script,items.default_login",
       sort: "order",
     });
 
-    const res = NextResponse.json(response as unknown as Category[]);
-    return res;
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error fetching categories:", error);
     return NextResponse.json(
