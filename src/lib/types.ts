@@ -3,36 +3,31 @@ export type ScriptProps = {
 };
 
 export type Script = {
-  alert1: string;
-  alert2: string;
-  alert3: string;
-  alpineScript: alpine_script;
-  collectionId: string;
-  collectionName: string;
+  title: string;
+  description: string;
+  documentation: string;
+  website: string;
+  logo: string;
   created: string;
+  updated: string;
+  id: string;
+  item_type: string;
+  interface: string;
+  port: number;
+  post_install: string;
   default_cpu: string;
   default_hdd: string;
   default_ram: string;
-  description: string;
-  documentation: string;
-  id: string;
+  isUpdateable: boolean;
+  isMostViewed: boolean;
+  privileged: boolean;
+  alpineScript: alpine_script;
+  installCommand: string;
   expand: {
     alpine_script: alpine_script;
     alerts: alerts[];
     default_login: default_login;
   };
-  isUpdateable: boolean;
-  item_type: string;
-  logo: string;
-  port: number;
-  post_install: string;
-  title: string;
-  updated: string;
-  website: string;
-  isMostViewed: boolean;
-  mostViewedPosition: number;
-  interface: string;
-  privileged: boolean;
 };
 
 type alpine_script = {
