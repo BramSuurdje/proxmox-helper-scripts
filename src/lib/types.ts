@@ -1,63 +1,54 @@
-export type ScriptProps = {
-  scriptID: string;
-};
+// these are all the interfaces that are used in the site. these all come from the pocketbase database
 
-export type Script = {
-  alert1: string;
-  alert2: string;
-  alert3: string;
-  alpineScript: alpine_script;
-  collectionId: string;
-  collectionName: string;
+export interface Script {
+  title: string;
+  description: string;
+  documentation: string;
+  website: string;
+  logo: string;
   created: string;
+  updated: string;
+  id: string;
+  item_type: string;
+  interface: string;
+  port: number;
+  post_install: string;
   default_cpu: string;
   default_hdd: string;
   default_ram: string;
-  description: string;
-  documentation: string;
-  id: string;
+  isUpdateable: boolean;
+  isMostViewed: boolean;
+  privileged: boolean;
+  alpineScript: alpine_script;
   expand: {
     alpine_script: alpine_script;
     alerts: alerts[];
     default_login: default_login;
   };
-  isUpdateable: boolean;
-  item_type: string;
-  logo: string;
-  port: number;
-  post_install: string;
-  title: string;
-  updated: string;
-  website: string;
-  isMostViewed: boolean;
-  mostViewedPosition: number;
-  interface: string;
-  privileged: boolean;
-};
-
-type alpine_script = {
-  installCommand: string;
-  default_cpu: string;
-  default_hdd: string;
-  default_ram: string;
-};
-
-type alerts = {
-  content: string;
-};
-
-type default_login = {
-  username: string;
-  password: string;
 };
 
 export interface Category {
   catagoryName: string;
-  collectionId: string;
-  collectionName: string;
+  categoryId: string;
   id: string;
   created: string;
   expand: {
     items: Script[];
   };
 }
+
+interface alpine_script  {
+  installCommand: string;
+  default_cpu: string;
+  default_hdd: string;
+  default_ram: string;
+};
+
+interface alerts {
+  content: string;
+};
+
+interface default_login { 
+  username: string;
+  password: string;
+};
