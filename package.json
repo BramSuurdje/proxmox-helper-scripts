@@ -44,6 +44,7 @@
     "sharp": "^0.33.4",
     "simple-icons": "^13.5.0",
     "sonner": "^1.5.0",
+    "speed-insights": "vercel/speed-insights",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {

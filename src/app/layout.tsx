@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import React from "react";
 import Footer from "@/components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -77,6 +78,7 @@ export default function RootLayout({
                 <div className="w-full max-w-7xl ">
                   {children}
                   <Toaster richColors />
+                  <SpeedInsights />
                 </div>
               </div>
               <Footer />
