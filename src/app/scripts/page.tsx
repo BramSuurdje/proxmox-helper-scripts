@@ -4,6 +4,8 @@ import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
 import { Category } from "@/lib/types";
 import { useEffect, useState, useCallback } from "react";
 
+export const dynamic = "force-dynamic"
+
 const fetchCategories = async (): Promise<Category[]> => {
   const response = await fetch("/api/categories", {
     next: { revalidate: 60 * 60 * 24 },

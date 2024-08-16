@@ -12,6 +12,8 @@ import { navBarLinks } from "@/config/siteConfig";
 import MobileNav from "./MobileNav";
 import StarOnGithubButton from "./ui/star-on-github-button";
 
+export const dynamic = "force-dynamic"
+
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
