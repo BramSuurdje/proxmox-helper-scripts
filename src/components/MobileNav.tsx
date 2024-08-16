@@ -19,15 +19,13 @@ import { Category } from "@/lib/types";
 import { Badge } from "./ui/badge";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link"
 
 export default function MobileNav() {
   const [links, setLinks] = useState<Category[]>([]);
-  const [shouldFocusInput, setShouldFocusInput] = useState(false);
 
   const fetchLinks = async () => {
     const res = await fetch("/api/categories", {
-      next: { revalidate: 60 * 60 * 24 },
     });
     if (!res.ok) {
       throw new Error("Failed to fetch categories");

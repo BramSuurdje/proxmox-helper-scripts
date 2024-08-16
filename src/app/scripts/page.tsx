@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic"
 
 const fetchCategories = async (): Promise<Category[]> => {
   const response = await fetch("/api/categories", {
-    next: { revalidate: 60 * 60 * 24 },
   });
   if (!response.ok) {
     throw new Error("Failed to fetch categories");
