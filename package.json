@@ -52,7 +52,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^9.9.0",
-    "eslint-config-next": "14.2.1",
+    "eslint-config-next": "14.2.5",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
