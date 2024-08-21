@@ -3,6 +3,7 @@ import ScriptItem from "@/app/scripts/_components/ScriptItem";
 import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
 import { Category } from "@/lib/types";
 import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const sortCategories = (categories: Category[]): Category[] => {
   return categories.sort((a: Category, b: Category) => {
@@ -61,12 +62,7 @@ export default function Page() {
     return (
       <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-background px-4 md:px-6">
         <div className="space-y-2 text-center">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-            Loading...
-          </h1>
-          <p className="text-muted-foreground md:text-xl">
-            Please wait while we fetch the scripts...
-          </p>
+          <Loader2 className="h-10 w-10 animate-spin" />
         </div>
       </div>
     );
