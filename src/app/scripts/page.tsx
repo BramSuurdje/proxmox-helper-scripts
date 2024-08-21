@@ -4,8 +4,6 @@ import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
 import { Category } from "@/lib/types";
 import { useEffect, useState } from "react";
 
-export const dynamic = "force-dynamic"
-
 const sortCategories = (categories: Category[]): Category[] => {
   return categories.sort((a: Category, b: Category) => {
     if (
@@ -27,10 +25,13 @@ const sortCategories = (categories: Category[]): Category[] => {
 export default function Page() {
   const [links, setLinks] = useState<Category[]>([]);
   const [selectedScript, setSelectedScript] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategories = async (): Promise<Category[]> => {
-      const response = await fetch("/api/categories", {});
+      const response = await fetch("/api/categories", {
+        next: { revalidate: 60 * 60 * 24 },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch categories");
       }
@@ -39,19 +40,37 @@ export default function Page() {
 
     const fetchAndSortCategories = async () => {
       try {
+        setLoading(true);
         const categories = await fetchCategories();
         if (categories.length === 0) {
           throw new Error("Empty response");
         }
         const sortedCategories = sortCategories(categories);
         setLinks(sortedCategories);
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
 
     fetchAndSortCategories();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-background px-4 md:px-6">
+        <div className="space-y-2 text-center">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+            Loading...
+          </h1>
+          <p className="text-muted-foreground md:text-xl">
+            Please wait while we fetch the scripts...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-3 min-h-screen">
