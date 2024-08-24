@@ -150,7 +150,7 @@ const ScriptBrowser = ({
 
   return (
     <div className="flex min-w-72 flex-col sm:max-w-72">
-      <div className="mb-2 flex items-end justify-between">
+      <div className="pb-4 flex items-end justify-between ">
         <h1 className=" text-xl font-bold">Categories</h1>
         <p className="text-xs italic text-muted-foreground">
           {links.reduce(
@@ -160,8 +160,8 @@ const ScriptBrowser = ({
           Total scripts
         </p>
       </div>
-      <div className="relative">
-        <div className="mb-1 flex items-center">
+      <div className="">
+        {/* <div className="mb-1 flex items-center">
           <div className="relative w-full max-w-sm">
             <Input
               type="text"
@@ -187,7 +187,7 @@ const ScriptBrowser = ({
               }}
             />
           )}
-        </div>
+        </div> */}
       </div>
       <div className="rounded-lg">
         <Accordion {...accordionProps}>

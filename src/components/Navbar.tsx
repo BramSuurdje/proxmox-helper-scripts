@@ -6,17 +6,25 @@ import logo from "/public/logo.png";
 import Image from "next/image";
 import { ModeToggle } from "./theme-toggle";
 
-import { useRouter } from "next/navigation";
-import { navBarLinks } from "@/config/siteConfig";
+import { navbarLinks } from "@/config/siteConfig";
 
 import MobileNav from "./MobileNav";
 import StarOnGithubButton from "./ui/star-on-github-button";
+import CommandMenu from "./CommandMenu";
+import { FaGithub } from "react-icons/fa";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+import { MessagesSquare, Scroll } from "lucide-react";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
+
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,17 +37,6 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const removeCookieAndRedirect = () => {
-    removeCookie();
-    router.push("/");
-  };
-
-  function removeCookie() {
-    document.cookie =
-      "visited=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  }
-
   return (
     <>
       <div
@@ -48,23 +45,39 @@ function Navbar() {
         }`}
       >
         <div className="flex h-20 w-full max-w-7xl flex-row-reverse items-center justify-between sm:flex-row">
-          <h2
+          <Link
+            href={"/"}
             className="flex cursor-pointer flex-row-reverse items-center gap-2 font-semibold sm:flex-row"
-            onClick={removeCookieAndRedirect}
           >
             <Image height={18} width={18} alt="logo" src={logo} />
             <span className="hidden lg:block">Proxmox VE Helper-Scripts</span>
-          </h2>
-          <MobileNav />
-          <div className="hidden gap-1 sm:flex">
-            {navBarLinks.map(({ href, event, icon, text }) => (
-              <Button key={event} variant="ghost" asChild>
-                <Link target="_blank" href={href} data-umami-event={event}>
-                  {icon} {text}
-                </Link>
-              </Button>
-            ))}
+          </Link>
+          {/* <MobileNav /> */}
+          <div className="flex gap-2">
+            <CommandMenu />
             <StarOnGithubButton />
+            <div className="hidden flex:flex">
+              {navbarLinks.map(({ href, event, icon, text }) => (
+                <TooltipProvider key={event}>
+                  <Tooltip delayDuration={100}>
+                    <TooltipTrigger>
+                      <Button variant="ghost" size={"icon"} asChild>
+                        <Link
+                          target="_blank"
+                          href={href}
+                          data-umami-event={event}
+                        >
+                          {icon}
+                        </Link>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="text-xs">
+                      {text}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ))}
+            </div>
             <ModeToggle />
           </div>
         </div>

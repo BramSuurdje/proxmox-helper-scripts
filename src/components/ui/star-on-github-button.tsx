@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { FaGithub } from "react-icons/fa";
@@ -9,7 +7,7 @@ import { buttonVariants } from "./button";
 import { FaStar } from "react-icons/fa";
 
 export default function StarOnGithubButton() {
-  const [stars, setStars] = useState(300);
+  const [stars, setStars] = useState(13000);
 
   useEffect(() => {
     const fetchStars = async () => {
@@ -33,13 +31,13 @@ export default function StarOnGithubButton() {
     <Link
       className={cn(
         buttonVariants(),
-        "hidden h-10 min-w-[240px] gap-2 overflow-hidden whitespace-pre lg:flex",
-        "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2",
+        "hidden h-9 min-w-[240px] gap-2 overflow-hidden whitespace-pre sm:flex lg:flex",
+        "group relative justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2",
       )}
       target="_blank"
       href="https://github.com/tteck/Proxmox"
     >
-      <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
+      <span className="absolute right-0 -mt-12 h-32 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
       <div className="flex items-center">
         <FaGithub className="size-4" />
         <span className="ml-1">Star on GitHub</span>{" "}
