@@ -40,7 +40,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-7 xl:px-0 ${
+        className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-4 xl:px-0 ${
           isScrolled ? "glass border-b bg-background/50" : ""
         }`}
       >
