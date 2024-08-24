@@ -1,9 +1,10 @@
 "use client";
+
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 import ScriptItem from "@/app/scripts/_components/ScriptItem";
 import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
 import { Category } from "@/lib/types";
-import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
 
 const sortCategories = (categories: Category[]): Category[] => {
   return categories.sort((a: Category, b: Category) => {
@@ -29,20 +30,13 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCategories = async (): Promise<Category[]> => {
-      const response = await fetch("/api/categories", {
-        next: { revalidate: 60 * 60 * 24 },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch categories");
-      }
-      return response.json();
-    };
-
-    const fetchAndSortCategories = async () => {
+    const fetchCategories = async (): Promise<void> => {
       try {
-        setLoading(true);
-        const categories = await fetchCategories();
+        const response = await fetch("/api/categories");
+        if (!response.ok) {
+          throw new Error("Failed to fetch categories");
+        }
+        const categories: Category[] = await response.json();
         if (categories.length === 0) {
           throw new Error("Empty response");
         }
@@ -55,7 +49,7 @@ export default function Page() {
       }
     };
 
-    fetchAndSortCategories();
+    fetchCategories();
   }, []);
 
   if (loading) {
