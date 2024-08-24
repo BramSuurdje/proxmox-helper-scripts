@@ -63,7 +63,7 @@ export default function Page() {
   }
 
   return (
-    <div className="mb-3 min-h-screen">
+    <div className="mb-3">
       <div className="mt-20 flex sm:px-7 xl:px-0">
         <div className="hidden sm:flex">
           <ScriptBrowser
