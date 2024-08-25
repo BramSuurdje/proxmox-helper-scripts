@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -6,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useMemo, useState } from "react";
-import { Category } from "@/lib/types";
+import { useEffect, useMemo, useState } from "react";
+import { Category, Script } from "@/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { extractDate } from "@/lib/time";
@@ -15,16 +16,23 @@ import { Button } from "@/components/ui/button";
 
 const ITEMS_PER_PAGE = 3;
 
-export function LatestScripts({ items }: { items: Category[] }) {
+export function LatestScripts() {
   const [page, setPage] = useState(1);
+  const [latestScripts, setLatestScripts] = useState<Script[]>([]);
 
-  const latestScripts = useMemo(() => {
-    if (!items) return [];
-    const scripts = items.flatMap((category) => category.expand.items || []);
-    return scripts.sort(
-      (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime(),
-    );
-  }, [items]);
+  useEffect(() => {
+    fetch(`/api/scripts/latest?page=${page}`)
+      .then((res) => res.json())
+      .then((data: any) => {
+        if (Array.isArray(data.items)) {
+          setLatestScripts(data.items as Script[]);
+        } else {
+          console.error("Unexpected data format: ", data);
+          setLatestScripts([]);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const goToNextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -36,10 +44,6 @@ export function LatestScripts({ items }: { items: Category[] }) {
 
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
   const endIndex = page * ITEMS_PER_PAGE;
-
-  if (!items) {
-    return null;
-  }
 
   return (
     <div className="">
@@ -67,7 +71,7 @@ export function LatestScripts({ items }: { items: Category[] }) {
         </div>
       )}
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
-        {latestScripts.slice(startIndex, endIndex).map((item) => (
+        {latestScripts.map((item) => (
           <Card
             key={item.id}
             className="min-w-[250px] flex-1 flex-grow bg-accent/30"
@@ -99,10 +103,7 @@ export function LatestScripts({ items }: { items: Category[] }) {
             <CardFooter className="">
               <Button asChild variant="secondary">
                 <Link
-                  href={{
-                    pathname: "/scripts",
-                    query: { id: item.title },
-                  }}
+                  href={`/scripts/${item.title}`}
                   className="text-muted-foreground"
                 >
                   View Script
@@ -116,40 +117,32 @@ export function LatestScripts({ items }: { items: Category[] }) {
   );
 }
 
-export function MostViewedScripts({ items }: { items: Category[] }) {
-  const [page, setPage] = useState(1);
+export function MostViewedScripts() {
+  const [scripts, setScripts] = useState<Script[]>([]);
 
-  const mostViewedScripts = useMemo(() => {
-    if (!items) return [];
-    const scripts = items.flatMap((category) => category.expand.items || []);
-    const mostViewedScripts = scripts
-      .filter((script) => script.isMostViewed)
-      .map((script) => ({
-        ...script,
-      }));
-    return mostViewedScripts;
-  }, [items]);
-
-  const goToNextPage = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  const goToPreviousPage = () => {
-    setPage((prevPage) => prevPage - 1);
-  };
-
-  const startIndex = (page - 1) * ITEMS_PER_PAGE;
-  const endIndex = page * ITEMS_PER_PAGE;
+  useEffect(() => {
+    fetch("/api/scripts/mostviewed")
+      .then((res) => res.json())
+      .then((data: any) => {
+        if (Array.isArray(data.items)) {
+          setScripts(data.items as Script[]);
+        } else {
+          console.error("Unexpected data format: ", data);
+          setScripts([]);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div className="">
-      {mostViewedScripts.length > 0 && (
+      {scripts.length > 0 && (
         <>
           <h2 className="text-lg font-semibold">Most Viewed Scripts</h2>
         </>
       )}
       <div className="min-w flex w-full flex-row flex-wrap gap-4">
-        {mostViewedScripts.slice(startIndex, endIndex).map((item) => (
+        {scripts.map((item: Script) => (
           <Card
             key={item.id}
             className="min-w-[250px] flex-1 flex-grow bg-accent/30"
@@ -181,10 +174,7 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
             <CardFooter className="">
               <Button asChild variant="secondary">
                 <Link
-                  href={{
-                    pathname: "/scripts",
-                    query: { id: item.title },
-                  }}
+                  href={`/scripts/${item.title}`}
                   className="text-muted-foreground"
                 >
                   View Script
@@ -193,18 +183,6 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
             </CardFooter>
           </Card>
         ))}
-      </div>
-      <div className="flex justify-end gap-1 p-2">
-        {page > 1 && (
-          <Button onClick={goToPreviousPage} variant="outline">
-            Previous
-          </Button>
-        )}
-        {endIndex < mostViewedScripts.length && (
-          <Button onClick={goToNextPage} variant="outline">
-            {page === 1 ? "More.." : "Next"}
-          </Button>
-        )}
       </div>
     </div>
   );
