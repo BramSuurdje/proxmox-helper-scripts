@@ -1,10 +1,6 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
-export const config = {
-  runtime: "edge",
-}
-
 export default function handler(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const title = searchParams.get("title");
