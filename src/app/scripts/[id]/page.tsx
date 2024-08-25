@@ -17,13 +17,15 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+const baseUrl = process.env.NODE_ENV === "production" ? "https://proxmox-helper-scripts.vercel.app" : "http://localhost:3000";
+
 export async function generateMetadata({ params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const id = params.id;
 
-  const data = await fetch(`http://localhost:3000/api/scripts/script?title=${id}`).then((res) => res.json());
-  const imgURL = `http://localhost:3000/api/og?title=${data.title}?logo=${data.logo}`;
+  const data = await fetch(`${baseUrl}/api/scripts/script?title=${id}`).then((res) => res.json());
+  const imgURL = `${baseUrl}/api/og?title=${data.title}?logo=${data.logo}`;
 
   return {
     title: `${data.title} | Proxmox VE Helper-Scripts`,
@@ -45,7 +47,7 @@ export async function generateMetadata({ params, searchParams }: Props,
 
 export default async function Page({ params }: { params: { id: string } }) {
   const data = await fetch(
-    `http://localhost:3000/api/scripts/script?title=${params.id}`,
+    `${baseUrl}/api/scripts/script?title=${params.id}`,
   ).then((res) => res.json());
   return (
     <div>
