@@ -7,17 +7,13 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 import Image from "next/image";
-import { X, EyeOff, Eye, Star } from "lucide-react";
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from "react";
+import { EyeOff, Eye, Star } from "lucide-react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "../../../components/ui/badge";
-import clsx from "clsx";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "../../../components/ui/button";
+import classNames from "clsx";
+import { useSearchParams } from "next/navigation";
 
 const ScriptBrowser = ({
   items,
@@ -29,7 +25,9 @@ const ScriptBrowser = ({
   setSelectedScript: (script: string | null) => void;
 }) => {
   const [links, setLinks] = useState<Category[]>([]);
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [expandedItem, setExpandedItem] = useState<string | undefined>(
+    undefined,
+  );
   const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
   const searchParams = useSearchParams();
 
@@ -46,7 +44,7 @@ const ScriptBrowser = ({
     } else {
       setSelectedScript(null);
     }
-  }, [searchParams]);
+  }, [searchParams, setSelectedScript]);
 
   const handleSelected = useCallback(
     (title: string) => {
@@ -61,16 +59,14 @@ const ScriptBrowser = ({
         category.expand.items.some((script) => script.title === selectedScript),
       );
       if (category) {
-        setExpandedItems((prev) =>
-          Array.from(new Set([...prev, category.catagoryName])),
-        );
+        setExpandedItem(category.catagoryName);
         handleSelected(selectedScript);
       }
     }
   }, [selectedScript, links, handleSelected]);
 
-  const handleAccordionChange = (value: string[]) => {
-    setExpandedItems(value);
+  const handleAccordionChange = (value: string | undefined) => {
+    setExpandedItem(value);
   };
 
   return (
@@ -87,24 +83,24 @@ const ScriptBrowser = ({
       </div>
       <div className="rounded-lg">
         <Accordion
-          type="multiple"
-          value={expandedItems}
+          type="single"
+          value={expandedItem}
           onValueChange={handleAccordionChange}
+          collapsible
         >
           {links.map((category) => (
             <AccordionItem
               key={category.id + ":category"}
               value={category.catagoryName}
-              className={clsx("sm:text-md flex flex-col border-none", {
+              className={classNames("sm:text-md flex flex-col border-none", {
                 "rounded-lg bg-accent/30":
-                  expandedItems.includes(category.catagoryName) &&
-                  expandedItems.length <= 1,
+                  expandedItem === category.catagoryName,
               })}
             >
               <AccordionTrigger
-                className={clsx(
+                className={classNames(
                   "duration-250 rounded-lg transition ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-accent",
-                  { "": expandedItems.includes(category.catagoryName) },
+                  { "": expandedItem === category.catagoryName },
                 )}
               >
                 <div className="mr-2 flex w-full items-center justify-between">
@@ -116,9 +112,7 @@ const ScriptBrowser = ({
               </AccordionTrigger>
               <AccordionContent
                 data-state={
-                  expandedItems.includes(category.catagoryName)
-                    ? "open"
-                    : "closed"
+                  expandedItem === category.catagoryName ? "open" : "closed"
                 }
                 className="pt-0"
               >
@@ -139,14 +133,14 @@ const ScriptBrowser = ({
                         linkRefs.current[script.title] = el;
                       }}
                     >
-                        <Image
-                          src={script.logo}
-                          priority={true}
-                          alt={script.title}
-                          width={16}
-                          height={16}
-                          className="mr-1 rounded-full"
-                        />
+                      <Image
+                        src={script.logo}
+                        priority={true}
+                        alt={script.title}
+                        width={16}
+                        height={16}
+                        className="mr-1 rounded-full"
+                      />
                       <span className="flex items-center gap-2">
                         {script.title}
                         {script.isMostViewed && (
@@ -154,7 +148,7 @@ const ScriptBrowser = ({
                         )}
                       </span>
                       <Badge
-                        className={clsx(
+                        className={classNames(
                           "ml-auto w-[37.69px] justify-center text-center",
                           {
                             "text-primary/75": script.item_type === "VM",
