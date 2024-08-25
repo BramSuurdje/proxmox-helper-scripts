@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { pb } from "@/lib/pocketbase";
 import { Script } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const response = await pb
