@@ -6,9 +6,10 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const response = await pb.collection("categories").getFullList<Category>({
-      expand: "items.alerts,items.alpine_script,items.default_login",
-      sort: "order",
+      const response = await pb.collection("categories").getFullList<Category>({
+      expand: "items",
+      fields:
+        "catagoryName, expand.items.title, expand.items.logo, expand.items.item_type, expand.items.isMostViewed, id",
     });
 
     return NextResponse.json(response);

@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -12,7 +14,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-import { Category } from "@/lib/types";
+import { Category, Script } from "@/lib/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -37,6 +39,7 @@ const sortCategories = (categories: Category[]): Category[] => {
 export default function CommandMenu() {
   const [open, setOpen] = React.useState(false);
   const [links, setLinks] = React.useState<Category[]>([]);
+  const [mostViewed, setMostViewed] = React.useState<Script[]>([]);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -54,7 +57,7 @@ export default function CommandMenu() {
   React.useEffect(() => {
     const fetchCategories = async (): Promise<void> => {
       try {
-        const response = await fetch("/api/categories");
+        const response = await fetch("/api/scripts/categories");
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
         }
@@ -101,7 +104,7 @@ export default function CommandMenu() {
                   value={script.title}
                   onSelect={() => {
                     setOpen(false);
-                    router.push(`/scripts?id=${script.title}`);
+                    router.push(`/scripts/${script.title}`);
                   }}
                 >
                   <div className="flex gap-2" onClick={() => setOpen(false)}>
