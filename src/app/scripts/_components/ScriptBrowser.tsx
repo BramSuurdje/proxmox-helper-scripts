@@ -11,51 +11,40 @@ import { EyeOff, Eye, Star } from "lucide-react";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
 import classNames from "clsx";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
-const sortCategories = (categories: Category[]): Category[] => {
-  return categories.sort((a: Category, b: Category) => {
-    if (
-      a.catagoryName === "Proxmox VE Tools" &&
-      b.catagoryName !== "Proxmox VE Tools"
-    ) {
-      return -1;
-    } else if (
-      a.catagoryName !== "Proxmox VE Tools" &&
-      b.catagoryName === "Proxmox VE Tools"
-    ) {
-      return 1;
-    } else {
-      return a.catagoryName.localeCompare(b.catagoryName);
-    }
-  });
-};
-
-export const ScriptBrowser = () => {
+const ScriptBrowser = ({
+  items,
+  selectedScript,
+  setSelectedScript,
+}: {
+  items: Category[];
+  selectedScript: string | null;
+  setSelectedScript: (script: string | null) => void;
+}) => {
   const [links, setLinks] = useState<Category[]>([]);
   const [expandedItem, setExpandedItem] = useState<string | undefined>(
     undefined,
   );
   const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
-  const pathname = usePathname();
-  const [selectedScript, setSelectedScript] = useState<string | null>(null);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    fetch("/api/scripts/categories")
-      .then((res) => res.json())
-      .then((data: any) => setLinks(data as Category[]))
-      .catch((err) => console.error(err));
-  }, []);
+    if (items) {
+      setLinks(items);
+    }
+  }, [items]);
 
   useEffect(() => {
-    const scriptTitle = pathname.split("/scripts/")[1];
-    if (scriptTitle) {
-      setSelectedScript(decodeURIComponent(scriptTitle));
+    const id = searchParams.get("id");
+    if (id) {
+      setSelectedScript(id);
     } else {
       setSelectedScript(null);
     }
-  }, [pathname]);
+  }, [searchParams, setSelectedScript]);
 
   const handleSelected = useCallback(
     (title: string) => {
@@ -130,7 +119,10 @@ export const ScriptBrowser = () => {
                 {category.expand.items.map((script, index) => (
                   <p key={index}>
                     <Link
-                      href={`/scripts/${script.title}`}
+                      href={{
+                        pathname: "/scripts",
+                        query: { id: script.title },
+                      }}
                       className={`flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-accent/60 hover:dark:bg-accent/20 ${
                         selectedScript === script.title
                           ? "rounded-lg bg-accent font-semibold dark:bg-accent/30 dark:text-white"

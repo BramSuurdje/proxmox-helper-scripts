@@ -1,4 +1,3 @@
-'use client'
 import TextCopyBlock from "@/lib/TextCopyBlock";
 import { Script } from "@/lib/types";
 import { Info } from "lucide-react";

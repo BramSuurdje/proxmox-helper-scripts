@@ -25,7 +25,7 @@ export default function MobileNav() {
   const [links, setLinks] = useState<Category[]>([]);
 
   const fetchLinks = async () => {
-    const res = await fetch("/api/scripts/categories", {
+    const res = await fetch("/api/categories", {
     });
     if (!res.ok) {
       throw new Error("Failed to fetch categories");

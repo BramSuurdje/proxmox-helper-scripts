@@ -1,4 +1,3 @@
-'use client';
 import CodeCopyButton from '@/components/ui/code-copy-button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Script } from '@/lib/types';
