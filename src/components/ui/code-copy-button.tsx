@@ -38,9 +38,9 @@ export default function CodeCopyButton({
       }, 500);
     }
 
-    toast.success(`copied ${type} to clipboard`, {
-      icon: <ClipboardCheck className="h-4 w-4" />,
-    });
+    // toast.success(`copied ${type} to clipboard`, {
+    //   icon: <ClipboardCheck className="h-4 w-4" />,
+    // });
   };
 
   return (
