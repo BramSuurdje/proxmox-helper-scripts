@@ -2,6 +2,7 @@ import { pb } from "@/lib/pocketbase";
 import { Script } from "@/lib/types";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import { ClientResponseError } from 'pocketbase';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -11,11 +12,11 @@ export async function GET(req: NextRequest) {
     return new Response("Missing title parameter", { status: 400 });
   }
 
-  const script: Script = await pb.collection('proxmox_scripts').getFirstListItem(`title="${title}"`, {
-    fields: "logo,id",
-  });
-
   try {
+    const script: Script = await pb.collection('proxmox_scripts').getFirstListItem(`title="${title}"`, {
+      fields: "logo,id",
+    });
+
     return new ImageResponse(
       (
         <div
@@ -70,7 +71,12 @@ export async function GET(req: NextRequest) {
       },
     );
   } catch (error) {
-    console.error("Error generating image:", error);
+    console.error("Error fetching script or generating image:", error);
+    
+    if (error instanceof ClientResponseError && error.status === 404) {
+      return new Response("Script not found", { status: 404 });
+    }
+    
     return new Response("Error generating image", { status: 500 });
   }
 }
