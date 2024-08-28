@@ -15,17 +15,16 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     return {};
   }
 
-  const script: Script = await pb.collection('proxmox_scripts').getFirstListItem(`title="${scriptName}"`);
-  const imageurl = `https://proxmox-helper-scripts.vercel.app/api/og?title=${script.title}&logo=${script.logo}`;
+  const imageurl = `https://proxmox-helper-scripts.vercel.app/api/og?title=${scriptName}`;
 
   return {
-    title: script.title + " | Proxmox VE Helper-Scripts",
-    description: `This script is used to install ${script.title} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
+    title: scriptName + " | Proxmox VE Helper-Scripts",
+    description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
 
     openGraph: {
-      title: script.title + " | Proxmox VE Helper-Scripts",
-      description: `This script is used to install ${script.title} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
-      url: `https://proxmox-helper-scripts.vercel.app/scripts?id=${script.title}`,
+      title: scriptName + " | Proxmox VE Helper-Scripts",
+      description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
+      url: `https://proxmox-helper-scripts.vercel.app/scripts?id=${scriptName}`,
       images: [
         {
           url: imageurl,

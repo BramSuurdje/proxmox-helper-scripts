@@ -1,18 +1,19 @@
+import { pb } from "@/lib/pocketbase";
+import { Script } from "@/lib/types";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const title = searchParams.get("title");
-  const logo = searchParams.get("logo");
 
   if (!title) {
     return new Response("Missing title parameter", { status: 400 });
   }
 
-  if (!logo) {
-    return new Response("Missing logo parameter", { status: 400 });
-  }
+  const script: Script = await pb.collection('proxmox_scripts').getFirstListItem(`title="${title}"`, {
+    fields: "logo,id",
+  });
 
   try {
     return new ImageResponse(
@@ -42,7 +43,7 @@ export async function GET(req: NextRequest) {
             }}
           /> */}
           <img
-            src={logo}
+            src={script.logo}
             alt={title}
             style={{
               maxWidth: "40%",
@@ -53,7 +54,7 @@ export async function GET(req: NextRequest) {
           <p
             style={{
               color: "white",
-              fontSize: "48px",
+              fontSize: "64px",
               fontWeight: "bold",
               textAlign: "center",
               marginTop: "20px",
