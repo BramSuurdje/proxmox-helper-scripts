@@ -52,15 +52,16 @@ export async function GET(req: NextRequest) {
               <img
                 src={item.logo}
                 alt={`${item.title} logo`}
-                width={100}
-                height={100}
+                width={150}
+                height={150}
                 style={{ marginRight: "20px" }}
               />
               <img
                 src="https://proxmox-helper-scripts.vercel.app/logo.png"
                 alt="Website logo"
-                width={100}
-                height={100}
+                width={150}
+                height={150}
+                style={{ objectFit: "contain" }}
               />
             </div>
             <h1
@@ -95,6 +96,6 @@ export async function GET(req: NextRequest) {
 
 async function fetchScript(title: string): Promise<Script> {
   return await pb.collection('proxmox_scripts').getFirstListItem(`title="${title}"`, {
-    fields: "logo,id",
+    fields: "logo,id,title",
   });
 }
