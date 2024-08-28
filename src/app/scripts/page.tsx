@@ -1,18 +1,16 @@
 import React from 'react'
 import ScriptPage from './_components/ScriptPage'
-import { pb } from '@/lib/pocketbase';
-import { Script } from '@/lib/types';
 import { Metadata } from "next";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata | null> {
   const scriptName = searchParams.id;
 
-  if (!scriptName) {
-    return {};
+  if (!scriptName || typeof scriptName !== 'string') {
+    return null;
   }
 
   const imageurl = `https://proxmox-helper-scripts.vercel.app/api/og?title=${scriptName}`;
