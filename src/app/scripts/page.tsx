@@ -1,85 +1,45 @@
-"use client";
+import React from 'react'
+import ScriptPage from './_components/ScriptPage'
+import { pb } from '@/lib/pocketbase';
+import { Script } from '@/lib/types';
+import { Metadata } from "next";
 
-import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
-import ScriptItem from "@/app/scripts/_components/ScriptItem";
-import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
-import { Category } from "@/lib/types";
-
-const sortCategories = (categories: Category[]): Category[] => {
-  return categories.sort((a: Category, b: Category) => {
-    if (
-      a.catagoryName === "Proxmox VE Tools" &&
-      b.catagoryName !== "Proxmox VE Tools"
-    ) {
-      return -1;
-    } else if (
-      a.catagoryName !== "Proxmox VE Tools" &&
-      b.catagoryName === "Proxmox VE Tools"
-    ) {
-      return 1;
-    } else {
-      return a.catagoryName.localeCompare(b.catagoryName);
-    }
-  });
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default function Page() {
-  const [links, setLinks] = useState<Category[]>([]);
-  const [selectedScript, setSelectedScript] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const scriptName = searchParams.id;
 
-  useEffect(() => {
-    const fetchCategories = async (): Promise<void> => {
-      try {
-        const response = await fetch("/api/categories");
-        if (!response.ok) {
-          throw new Error("Failed to fetch categories");
-        }
-        const categories: Category[] = await response.json();
-        if (categories.length === 0) {
-          throw new Error("Empty response");
-        }
-        const sortedCategories = sortCategories(categories);
-        setLinks(sortedCategories);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-background px-4 md:px-6">
-        <div className="space-y-2 text-center">
-          <Loader2 className="h-10 w-10 animate-spin" />
-        </div>
-      </div>
-    );
+  if (!scriptName) {
+    return {};
   }
 
+  const script: Script = await pb.collection('proxmox_scripts').getFirstListItem(`title="${scriptName}"`);
+  const imageurl = `https://proxmox-helper-scripts.vercel.app/api/og?title=${script.title}&logo=${script.logo}`;
+
+  return {
+    title: script.title + " | Proxmox VE Helper-Scripts",
+    description: `This script is used to install ${script.title} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
+
+    openGraph: {
+      title: script.title + " | Proxmox VE Helper-Scripts",
+      description: `This script is used to install ${script.title} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
+      url: `https://proxmox-helper-scripts.vercel.app/scripts?id=${script.title}`,
+      images: [
+        {
+          url: imageurl,
+        },
+      ],
+    },
+  }
+}
+
+export default function page() {
+
   return (
-    <div className="mb-3">
-      <div className="mt-20 flex sm:px-4 xl:px-0">
-        <div className="hidden sm:flex">
-          <ScriptBrowser
-            items={links}
-            selectedScript={selectedScript}
-            setSelectedScript={setSelectedScript}
-          />
-        </div>
-        <div className="mx-7 w-full sm:mx-0 sm:ml-7">
-          <ScriptItem
-            items={links}
-            selectedScript={selectedScript}
-            setSelectedScript={setSelectedScript}
-          />
-        </div>
-      </div>
-    </div>
-  );
+    <>
+      <ScriptPage />
+    </>
+  )
 }
