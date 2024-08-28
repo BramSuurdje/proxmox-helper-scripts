@@ -3,7 +3,6 @@ import { Script } from "@/lib/types";
 import { ImageResponse } from "next/og";
 import { ClientResponseError } from 'pocketbase';
 
-export const alt = "Dynamic Open Graph Image";
 export const size = {
   width: 1200,
   height: 630,
