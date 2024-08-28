@@ -1,6 +1,7 @@
 import { pb } from "@/lib/pocketbase";
 import { Script } from "@/lib/types";
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 import { ClientResponseError } from 'pocketbase';
 
 const size = {
@@ -8,8 +9,8 @@ const size = {
   height: 630,
 };
 
-export async function GET({ params }: { params: { title: string } }) {
-  const title = params.title;
+export async function GET(req: NextRequest) {
+  const title = req.nextUrl.searchParams.get("title");
 
   if (!title) {
     return new Response("Missing title parameter", { status: 400 });
