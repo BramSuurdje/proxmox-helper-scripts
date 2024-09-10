@@ -35,7 +35,7 @@
     "fuse.js": "^7.0.0",
     "lucide-react": "^0.439.0",
     "mini-svg-data-uri": "^1.4.4",
-    "next": "14.2.7",
+    "next": "14.2.8",
     "next-themes": "^0.3.0",
     "pocketbase": "^0.21.4",
     "react": "^18",
