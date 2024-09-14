@@ -1,9 +1,9 @@
 <h1 align="center">
-  <a href="https://proxmox-helper-scripts.vercel.app" target="_blank"><img src="https://proxmox-helper-scripts.vercel.app/defaultimg.png" alt="Proxmox Helper Scripts" width="800"></a>
+  <a href="https://proxmoxve-scripts.com" target="_blank"><img src="https://proxmoxve-scripts.com/defaultimg.png" alt="Proxmox Helper Scripts" width="800"></a>
 </h1>
 
 <p align="center">
-    <a href="https://proxmox-helper-scripts.vercel.app/"><img alt="User count" src="https://img.shields.io/badge/Weekly_Users-3000-blue?style=for-the-badge&color=1A91FF"/></a>
+    <a href="https://proxmoxve-scripts.com/"><img alt="User count" src="https://img.shields.io/badge/Weekly_Users-3000-blue?style=for-the-badge&color=1A91FF"/></a>
     <a href="https://github.com/BramSuurdje/proxmox-helper-scripts/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/BramSuurdje/proxmox-helper-scripts?style=for-the-badge&logo=github&color=1A91FF"/></a>
     <a href="https://github.com/BramSuurdje/proxmox-helper-scripts/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/BramSuurdje/proxmox-helper-scripts?style=for-the-badge&color=1A91FF" /></a>
   </p>

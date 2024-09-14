@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
         fields: "logo,id",
       });
 
-    return new ImageResponse(
+    const imageResponse = new ImageResponse(
       (
         <div
           style={{
@@ -34,18 +34,6 @@ export async function GET(req: NextRequest) {
             alignItems: "center",
           }}
         >
-          {/* <img
-            src="https://proxmox-helper-scripts.vercel.app/logo.png"
-            alt="Proxmox Helper Scripts"
-            style={{
-              width: "75px",
-              height: "75px",
-              position: "absolute",
-              top: "10px",
-              left: "5px",
-              objectFit: "contain",
-            }}
-          /> */}
           <img
             src={script.logo}
             alt={title}
@@ -73,6 +61,16 @@ export async function GET(req: NextRequest) {
         height: 630,
       },
     );
+
+    // Set Cache-Control headers
+    const response = new Response(imageResponse.body, {
+      headers: {
+        "Content-Type": "image/png",
+        "Cache-Control": "public, max-age=31536000, immutable", // Cache for one year
+      },
+    });
+
+    return response;
   } catch (error) {
     console.error("Error fetching script or generating image:", error);
 

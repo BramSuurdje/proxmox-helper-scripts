@@ -13,7 +13,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     return null;
   }
 
-  const imageurl = `https://proxmox-helper-scripts.vercel.app/api/og?title=${scriptName}`;
+  const imageurl = `https://proxmoxve-scripts.com/api/og?title=${scriptName}`;
 
   return {
     title: scriptName + " | Proxmox VE Helper-Scripts",
@@ -22,14 +22,14 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     openGraph: {
       title: scriptName + " | Proxmox VE Helper-Scripts",
       description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
-      url: `https://proxmox-helper-scripts.vercel.app/scripts?id=${scriptName}`,
+      url: `https://proxmoxve-scripts.com/scripts?id=${scriptName}`,
       images: [
         {
           url: imageurl,
         },
       ],
     },
-  }
+  };
 }
 
 export default function page() {
