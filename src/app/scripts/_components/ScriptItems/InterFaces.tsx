@@ -11,7 +11,7 @@ const CopyButton = ({ label, value }: { label: string; value: string | number })
   <Button
     variant="secondary"
     size="sm"
-    onClick={() => handleCopy(label, value)}
+    onClick={() => handleCopy(label, String(value))}
   >
     {value}
   </Button>
