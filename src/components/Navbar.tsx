@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "/public/logo.png";
 import Image from "next/image";
-import { ModeToggle } from "./theme-toggle";
 
 import { navbarLinks } from "@/config/siteConfig";
 
