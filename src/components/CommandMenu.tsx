@@ -113,6 +113,9 @@ export default function CommandMenu() {
                       className="h-5 w-5"
                     />
                     <span>{script.title}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {script.item_type}
+                    </span>
                   </div>
                 </CommandItem>
               ))}
