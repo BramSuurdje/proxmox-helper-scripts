@@ -80,7 +80,7 @@ export default function RootLayout({
                   <SpeedInsights />
                 </div>
               </div>
-              <Footer />wwwwwwww
+              <Footer />
             </div>
           </div>
         </ThemeProvider>
