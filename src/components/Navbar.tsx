@@ -18,13 +18,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { MessagesSquare, Scroll } from "lucide-react";
+import { MessagesSquare, MoonIcon, Scroll, SunIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
+
 
 export const dynamic = "force-dynamic";
 
-
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,29 +60,48 @@ function Navbar() {
           <div className="flex gap-2">
             <CommandMenu />
             <StarOnGithubButton />
-            <div className="hidden flex:flex">
-              {navbarLinks.map(({ href, event, icon, text }) => (
-                <TooltipProvider key={event}>
-                  <Tooltip delayDuration={100}>
-                    <TooltipTrigger>
-                      <Button variant="ghost" size={"icon"} asChild>
-                        <Link
-                          target="_blank"
-                          href={href}
-                          data-umami-event={event}
-                        >
-                          {icon}
-                        </Link>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom" className="text-xs">
-                      {text}
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              ))}
-            </div>
-            <ModeToggle />
+            {navbarLinks.map(({ href, event, icon, text }) => (
+              <TooltipProvider key={event}>
+                <Tooltip delayDuration={100}>
+                  <TooltipTrigger>
+                    <Button variant="ghost" size={"icon"} asChild>
+                      <Link
+                        target="_blank"
+                        href={href}
+                        data-umami-event={event}
+                      >
+                        {icon}
+                      </Link>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="text-xs">
+                    {text}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ))}
+            <TooltipProvider>
+              <Tooltip delayDuration={100}>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    size="icon"
+                    className={cn("px-2")}
+                    aria-label="Toggle theme"
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                  >
+                    <SunIcon className="size-[1.2rem] text-neutral-800 dark:hidden dark:text-neutral-200" />
+                    <MoonIcon className="hidden size-[1.2rem] text-neutral-800 dark:block dark:text-neutral-200" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="text-xs">
+                  Theme Toggle
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
       </div>
