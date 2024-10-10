@@ -1,5 +1,6 @@
 import { pb } from "@/lib/pocketbase";
 import { Script } from "@/lib/types";
+import Image from "next/image";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import { ClientResponseError } from "pocketbase";
@@ -34,7 +35,7 @@ export async function GET(req: NextRequest) {
             alignItems: "center",
           }}
         >
-          <img
+          <Image
             src={script.logo}
             alt={title}
             style={{
