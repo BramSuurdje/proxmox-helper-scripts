@@ -69,7 +69,6 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem
-          disableTransitionOnChange
         >
           <div className="flex w-full flex-col justify-center">
             <Navbar />
@@ -81,7 +80,7 @@ export default function RootLayout({
                   <SpeedInsights />
                 </div>
               </div>
-              <Footer />
+              <Footer />wwwwwwww
             </div>
           </div>
         </ThemeProvider>
