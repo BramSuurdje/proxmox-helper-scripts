@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import logo from "/public/logo.png";
@@ -7,20 +7,17 @@ import Image from "next/image";
 
 import { navbarLinks } from "@/config/siteConfig";
 
-import MobileNav from "./MobileNav";
 import StarOnGithubButton from "./ui/star-on-github-button";
 import CommandMenu from "./CommandMenu";
-import { FaGithub } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { MessagesSquare, MoonIcon, Scroll, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-
 
 export const dynamic = "force-dynamic";
 

@@ -12,7 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { extractDate } from "@/lib/time";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CalendarPlus } from "lucide-react";
+import { CalendarPlus } from "lucide-react";
 
 const ITEMS_PER_PAGE = 3;
 

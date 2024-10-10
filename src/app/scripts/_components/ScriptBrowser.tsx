@@ -7,11 +7,10 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 import Image from "next/image";
-import { EyeOff, Eye, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Category } from "@/lib/types";
 import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
 import classNames from "clsx";
 import { useSearchParams } from "next/navigation";
 
