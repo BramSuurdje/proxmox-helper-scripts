@@ -39,7 +39,7 @@ const buttonVariants = cva(
   },
 );
 
-const handleCopy = (type: string, value: any) => {
+const handleCopy = (type: string, value: string) => {
   navigator.clipboard.writeText(value);
 
   let amountOfScriptsCopied = localStorage.getItem("amountOfScriptsCopied");

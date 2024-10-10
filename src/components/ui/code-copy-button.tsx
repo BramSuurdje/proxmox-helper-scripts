@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Card } from "./card";
-import { CheckIcon, ClipboardCheck, ClipboardIcon } from "lucide-react";
+import { CheckIcon, ClipboardIcon } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 

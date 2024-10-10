@@ -14,7 +14,7 @@ function CustomArrowRightIcon() {
 }
 
 export default function Page() {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   const [color, setColor] = useState("#000000");
 
