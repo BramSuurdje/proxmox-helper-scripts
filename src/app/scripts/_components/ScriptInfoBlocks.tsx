@@ -12,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { extractDate } from "@/lib/time";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, CalendarPlus } from "lucide-react";
 
 const ITEMS_PER_PAGE = 3;
 
@@ -83,13 +84,16 @@ export function LatestScripts({ items }: { items: Category[] }) {
                     className="h-11 w-11 object-contain"
                   />
                 </div>
-                <p className="text-xl">
-                  {item.title} {item.item_type}
-                </p>
+                <div className="flex flex-col">
+                  <p className="text-lg line-clamp-1">
+                    {item.title} {item.item_type}
+                  </p>
+                  <p className="text-sm text-muted-foreground flex items-center gap-1">
+                    <CalendarPlus className="h-4 w-4" />
+                    {extractDate(item.created)}
+                  </p>
+                </div>
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Date added: {extractDate(item.created)}
-              </p>
             </CardHeader>
             <CardContent>
               <CardDescription className="line-clamp-3 text-card-foreground">
@@ -165,16 +169,19 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
                     className="h-11 w-11 object-contain"
                   />
                 </div>
-                <p className="text-xl">
-                  {item.title} {item.item_type}
-                </p>
+                <div className="flex flex-col">
+                  <p className="line-clamp-1 text-lg">
+                    {item.title} {item.item_type}
+                  </p>
+                  <p className="flex items-center gap-1 text-sm text-muted-foreground">
+                    <CalendarPlus className="h-4 w-4" />
+                    {extractDate(item.created)}
+                  </p>
+                </div>
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Date added: {extractDate(item.created)}
-              </p>
             </CardHeader>
             <CardContent>
-              <CardDescription className="line-clamp-3 text-card-foreground">
+              <CardDescription className="line-clamp-3 text-card-foreground break-words">
                 {item.description}
               </CardDescription>
             </CardContent>
