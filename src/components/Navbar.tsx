@@ -1,30 +1,29 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import logo from "/public/logo.png";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import logo from "/public/logo.png";
 
 import { navbarLinks } from "@/config/siteConfig";
 
-import StarOnGithubButton from "./ui/star-on-github-button";
+import { cn } from "@/lib/utils";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 import CommandMenu from "./CommandMenu";
+import StarOnGithubButton from "./ui/star-on-github-button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { MoonIcon, SunIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 export const dynamic = "force-dynamic";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
-
 
   useEffect(() => {
     const handleScroll = () => {

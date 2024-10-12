@@ -1,8 +1,4 @@
-import React from "react";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -11,8 +7,11 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Category } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import React from "react";
+import { Button } from "./ui/button";
 
 const sortCategories = (categories: Category[]): Category[] => {
   return categories.sort((a: Category, b: Category) => {

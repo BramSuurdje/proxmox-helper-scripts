@@ -1,7 +1,6 @@
 import TextCopyBlock from "@/lib/TextCopyBlock";
 import { Script } from "@/lib/types";
 import { Info } from "lucide-react";
-import React from "react";
 
 export default function Alerts({ item }: { item: Script }) {
   return (

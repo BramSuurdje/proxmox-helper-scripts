@@ -1,7 +1,4 @@
-import {
-  MessagesSquare,
-  Scroll,
-} from "lucide-react";
+import { MessagesSquare, Scroll } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 export const navbarLinks = [

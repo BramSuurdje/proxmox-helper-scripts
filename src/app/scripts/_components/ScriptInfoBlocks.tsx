@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,13 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useMemo, useState } from "react";
-import { Category } from "@/lib/types";
-import Link from "next/link";
-import Image from "next/image";
 import { extractDate } from "@/lib/time";
-import { Button } from "@/components/ui/button";
+import { Category } from "@/lib/types";
 import { CalendarPlus } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 
 const ITEMS_PER_PAGE = 3;
 

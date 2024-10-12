@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Card } from "./card";
-import { CheckIcon, ClipboardIcon } from "lucide-react";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { CheckIcon, ClipboardIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { Card } from "./card";
 
 export default function CodeCopyButton({
   children,

@@ -1,7 +1,12 @@
-import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Script } from '@/lib/types';
-import React from 'react'
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Script } from "@/lib/types";
+import React from "react";
 
 interface TooltipProps {
   variant: "warning" | "success";
@@ -25,13 +30,13 @@ const TooltipBadge: React.FC<TooltipProps> = ({ variant, label, content }) => (
 export default function Tooltips({ item }: { item: Script }) {
   return (
     <div className="flex items-center gap-2">
-      {item.privileged && 
+      {item.privileged && (
         <TooltipBadge
           variant="warning"
           label="Privileged"
           content="This script will be run in a privileged LXC"
         />
-      }
+      )}
       {item.isUpdateable && (
         <TooltipBadge
           variant="success"

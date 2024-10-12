@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Script } from "@/lib/types";
 import { BookOpenText, Code, ExternalLink, Globe } from "lucide-react";
 import Link from "next/link";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 export default function Buttons({ item }: { item: Script }) {
   const pattern = useMemo(

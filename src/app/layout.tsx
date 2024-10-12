@@ -1,11 +1,11 @@
-import { Inter } from "next/font/google";
-import "@/styles/globals.css";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import Navbar from "@/components/Navbar";
-import React from "react";
-import Footer from "@/components/Footer";
+import "@/styles/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter } from "next/font/google";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,11 +65,7 @@ export default function RootLayout({
         ></script>
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="flex w-full flex-col justify-center">
             <Navbar />
             <div className="flex min-h-screen flex-col justify-center">

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
-import ScriptItem from "@/app/scripts/_components/ScriptItem";
 import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
+import ScriptItem from "@/app/scripts/_components/ScriptItem";
 import { Category } from "@/lib/types";
+import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const sortCategories = (categories: Category[]): Category[] => {
   return categories.sort((a: Category, b: Category) => {

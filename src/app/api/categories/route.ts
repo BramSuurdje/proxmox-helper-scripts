@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import { pb } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { FaGithub } from "react-icons/fa";
-import NumberTicker from "../magicui/number-ticker";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FaGithub, FaStar } from "react-icons/fa";
+import NumberTicker from "../magicui/number-ticker";
 import { buttonVariants } from "./button";
-import { FaStar } from "react-icons/fa";
 
 export default function StarOnGithubButton() {
   const [stars, setStars] = useState(13000);

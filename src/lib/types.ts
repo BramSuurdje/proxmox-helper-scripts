@@ -26,7 +26,7 @@ export interface Script {
     alerts: alerts[];
     default_login: default_login;
   };
-};
+}
 
 export interface Category {
   catagoryName: string;
@@ -38,18 +38,18 @@ export interface Category {
   };
 }
 
-interface alpine_script  {
+interface alpine_script {
   installCommand: string;
   default_cpu: string;
   default_hdd: string;
   default_ram: string;
-};
+}
 
 interface alerts {
   content: string;
-};
+}
 
-interface default_login { 
+interface default_login {
   username: string;
   password: string;
-};
+}

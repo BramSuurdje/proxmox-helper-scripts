@@ -1,15 +1,16 @@
-import React from 'react'
-import ScriptPage from './_components/ScriptPage'
 import { Metadata } from "next";
+import ScriptPage from "./_components/ScriptPage";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata | null> {
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata | null> {
   const scriptName = searchParams.id;
 
-  if (!scriptName || typeof scriptName !== 'string') {
+  if (!scriptName || typeof scriptName !== "string") {
     return null;
   }
 
@@ -33,10 +34,9 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 }
 
 export default function page() {
-
   return (
     <>
       <ScriptPage />
     </>
-  )
+  );
 }

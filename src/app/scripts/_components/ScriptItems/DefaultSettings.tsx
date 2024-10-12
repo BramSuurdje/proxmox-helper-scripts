@@ -1,5 +1,4 @@
-import { Script } from '@/lib/types';
-import React from 'react'
+import { Script } from "@/lib/types";
 
 export default function DefaultSettings({ item }: { item: Script }) {
   const hasAlpineScript = item?.expand?.alpine_script !== undefined;

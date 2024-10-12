@@ -1,5 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   Sheet,
   SheetClose,
@@ -9,24 +14,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
 import { Category } from "@/lib/types";
-import { Badge } from "./ui/badge";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
-import Link from "next/link"
+import Link from "next/link";
+import { useState } from "react";
+import { Badge } from "./ui/badge";
 
 export default function MobileNav() {
   const [links, setLinks] = useState<Category[]>([]);
 
   const fetchLinks = async () => {
-    const res = await fetch("/api/categories", {
-    });
+    const res = await fetch("/api/categories", {});
     if (!res.ok) {
       throw new Error("Failed to fetch categories");
     }

@@ -1,21 +1,21 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { extractDate } from "@/lib/time";
-import { X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { extractDate } from "@/lib/time";
 import { Category, Script } from "@/lib/types";
+import { X } from "lucide-react";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { MostViewedScripts, LatestScripts } from "./ScriptInfoBlocks";
+import { useEffect, useState } from "react";
+import { LatestScripts, MostViewedScripts } from "./ScriptInfoBlocks";
 
-import DefaultPassword from "./ScriptItems/DefaultPassword";
-import InstallCommand from "./ScriptItems/InstallCommand";
-import Tooltips from "./ScriptItems/Tooltips";
 import Alerts from "./ScriptItems/Alerts";
-import Description from "./ScriptItems/Description";
 import Buttons from "./ScriptItems/Buttons";
+import DefaultPassword from "./ScriptItems/DefaultPassword";
 import DefaultSettings from "./ScriptItems/DefaultSettings";
+import Description from "./ScriptItems/Description";
+import InstallCommand from "./ScriptItems/InstallCommand";
 import InterFaces from "./ScriptItems/InterFaces";
+import Tooltips from "./ScriptItems/Tooltips";
 
 function ScriptItem({
   items,

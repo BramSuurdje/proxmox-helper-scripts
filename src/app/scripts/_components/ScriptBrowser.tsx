@@ -1,18 +1,18 @@
 "use client";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from "@/components/ui/accordion";
-import Link from "next/link";
-import Image from "next/image";
-import { Star } from "lucide-react";
-import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Category } from "@/lib/types";
-import { Badge } from "../../../components/ui/badge";
 import classNames from "clsx";
+import { Star } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Badge } from "../../../components/ui/badge";
 
 const ScriptBrowser = ({
   items,

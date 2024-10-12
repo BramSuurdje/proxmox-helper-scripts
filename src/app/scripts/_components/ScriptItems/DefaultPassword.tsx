@@ -1,8 +1,7 @@
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import handleCopy from '@/lib/handleCopy';
-import { Script } from '@/lib/types';
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import handleCopy from "@/lib/handleCopy";
+import { Script } from "@/lib/types";
 
 export default function DefaultPassword({ item }: { item: Script }) {
   const hasDefaultLogin = item?.expand?.default_login !== undefined;

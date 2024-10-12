@@ -1,13 +1,18 @@
-import { Button } from '@/components/ui/button';
-import handleCopy from '@/lib/handleCopy';
-import React from 'react';
+import { Button } from "@/components/ui/button";
+import handleCopy from "@/lib/handleCopy";
 
 interface Item {
   interface?: string;
   port?: number;
 }
 
-const CopyButton = ({ label, value }: { label: string; value: string | number }) => (
+const CopyButton = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | number;
+}) => (
   <Button
     variant="secondary"
     size="sm"
@@ -25,9 +30,12 @@ export default function InterFaces({ item }: { item: Item }) {
       {iface || (port && port !== 0) ? (
         <div className="flex items-center justify-end">
           <h2 className="mr-2 text-end text-lg font-semibold">
-            {iface ? 'Interface:' : 'Default Port:'}
+            {iface ? "Interface:" : "Default Port:"}
           </h2>{" "}
-          <CopyButton label={iface ? 'interface' : 'port'} value={iface || port!} />
+          <CopyButton
+            label={iface ? "interface" : "port"}
+            value={iface || port!}
+          />
         </div>
       ) : null}
     </div>
