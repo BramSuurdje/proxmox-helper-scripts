@@ -101,13 +101,12 @@ export function LatestScripts({ items }: { items: Category[] }) {
               </CardDescription>
             </CardContent>
             <CardFooter className="">
-              <Button asChild variant="secondary">
+              <Button asChild variant="outline">
                 <Link
                   href={{
                     pathname: "/scripts",
                     query: { id: item.title },
                   }}
-                  className="text-muted-foreground"
                 >
                   View Script
                 </Link>
@@ -186,13 +185,12 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
               </CardDescription>
             </CardContent>
             <CardFooter className="">
-              <Button asChild variant="secondary">
+              <Button asChild variant="outline">
                 <Link
                   href={{
                     pathname: "/scripts",
                     query: { id: item.title },
                   }}
-                  className="text-muted-foreground"
                 >
                   View Script
                 </Link>
