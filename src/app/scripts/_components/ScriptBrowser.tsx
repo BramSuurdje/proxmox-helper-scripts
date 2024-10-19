@@ -115,7 +115,10 @@ const ScriptBrowser = ({
                 }
                 className="pt-0"
               >
-                {category.expand.items.map((script, index) => (
+              {category.expand.items
+                .slice()
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .map((script, index) => (
                   <p key={index}>
                     <Link
                       href={{
@@ -163,7 +166,7 @@ const ScriptBrowser = ({
                       </Badge>
                     </Link>
                   </p>
-                ))}
+              ))}
               </AccordionContent>
             </AccordionItem>
           ))}
