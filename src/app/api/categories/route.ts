@@ -7,6 +7,9 @@ export async function GET() {
     const response = await pb.collection("categories").getFullList<Category>({
       expand: "items.alerts,items.alpine_script,items.default_login",
       sort: "order",
+      next: {
+        revalidate: 60 * 60 * 24,
+      }
     });
 
     return NextResponse.json(response);
