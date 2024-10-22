@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -35,13 +35,13 @@
     "fuse.js": "^7.0.0",
     "lucide-react": "^0.453.0",
     "mini-svg-data-uri": "^1.4.4",
-    "next": "14.2.15",
+    "next": "15.0.0",
     "next-themes": "^0.3.0",
     "pocketbase": "^0.21.4",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "react": "^18",
+    "react": "19.0.0-rc-65a56d0e-20241020",
     "react-code-blocks": "^0.1.6",
-    "react-dom": "^18",
+    "react-dom": "19.0.0-rc-65a56d0e-20241020",
     "react-icons": "^5.1.0",
     "react-simple-typewriter": "^5.0.1",
     "sharp": "^0.33.5",
@@ -51,12 +51,12 @@
   },
   "devDependencies": {
     "@types/node": "^22",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
     "eslint": "^9",
-    "eslint-config-next": "^14.2.15",
+    "eslint-config-next": "15.0.0",
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.6.5",
@@ -64,5 +64,9 @@
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-animated": "^1.1.2",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
   }
 }

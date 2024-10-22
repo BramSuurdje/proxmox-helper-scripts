@@ -2,12 +2,11 @@ import { Metadata } from "next";
 import ScriptPage from "./_components/ScriptPage";
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export async function generateMetadata({
-  searchParams,
-}: Props): Promise<Metadata | null> {
+export async function generateMetadata(props: Props): Promise<Metadata | null> {
+  const searchParams = await props.searchParams;
   const scriptName = searchParams.id;
 
   if (!scriptName || typeof scriptName !== "string") {
