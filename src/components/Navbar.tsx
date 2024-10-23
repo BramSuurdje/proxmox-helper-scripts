@@ -66,8 +66,8 @@ function Navbar() {
                         data-umami-event={event}
                       >
                         {icon}
+                        <span className="sr-only">{text}</span>
                       </Link>
-                      <span className="sr-only">{text}</span>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="bottom" className="text-xs">
