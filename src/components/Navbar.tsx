@@ -67,6 +67,7 @@ function Navbar() {
                       >
                         {icon}
                       </Link>
+                      <span className="sr-only">{text}</span>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="bottom" className="text-xs">
