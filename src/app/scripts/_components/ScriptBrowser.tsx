@@ -125,6 +125,7 @@ const ScriptBrowser = ({
                         pathname: "/scripts",
                         query: { id: script.title },
                       }}
+                      prefetch={false}
                       className={`flex cursor-pointer items-center justify-between gap-1 px-1 py-1 text-muted-foreground hover:rounded-lg hover:bg-accent/60 hover:dark:bg-accent/20 ${
                         selectedScript === script.title
                           ? "rounded-lg bg-accent font-semibold dark:bg-accent/30 dark:text-white"
