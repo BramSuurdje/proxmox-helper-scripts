@@ -62,13 +62,13 @@ function ScriptItem({
               <div className="rounded-lg border bg-accent/20 p-4">
                 <div className="flex justify-between">
                   <div className="flex">
-                    <Image
+                    <img
                       className="h-32 w-32 rounded-lg bg-accent/60 object-contain p-3 shadow-md"
                       src={item.logo}
-                      width={400}
-                      height={400}
+                      // width={400}
+                      // height={400}
                       alt={item.title}
-                      priority
+                      // priority
                     />
                     <div className="ml-4 flex flex-col justify-between">
                       <div className="flex h-full w-full flex-col justify-between">
