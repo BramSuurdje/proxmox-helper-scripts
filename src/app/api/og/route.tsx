@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
             alignItems: "center",
           }}
         >
-          <img
+          <Image
             src={script.logo}
             alt={title}
             style={{
