@@ -135,12 +135,12 @@ const ScriptBrowser = ({
                         linkRefs.current[script.title] = el;
                       }}
                     >
-                      <Image
+                      <img
                         src={script.logo}
-                        priority={true}
+                        // priority={true}
                         alt={script.title}
-                        width={16}
-                        height={16}
+                        // width={16}
+                        // height={16}
                         className="mr-1 rounded-full"
                       />
                       <span className="flex items-center gap-2">

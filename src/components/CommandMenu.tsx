@@ -102,7 +102,7 @@ export default function CommandMenu() {
                   }}
                 >
                   <div className="flex gap-2" onClick={() => setOpen(false)}>
-                    <Image
+                    <img
                       src={script.logo}
                       height={16}
                       width={16}
