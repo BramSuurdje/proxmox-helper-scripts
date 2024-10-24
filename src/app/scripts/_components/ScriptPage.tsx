@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
 import ScriptItem from "@/app/scripts/_components/ScriptItem";
 import { Category } from "@/lib/types";
