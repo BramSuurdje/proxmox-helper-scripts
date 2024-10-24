@@ -191,6 +191,7 @@ export function MostViewedScripts({ items }: { items: Category[] }) {
                     pathname: "/scripts",
                     query: { id: item.title },
                   }}
+                  prefetch={false}
                 >
                   View Script
                 </Link>
