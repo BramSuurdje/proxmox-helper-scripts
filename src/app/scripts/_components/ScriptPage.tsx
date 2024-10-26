@@ -2,7 +2,6 @@
 
 import ScriptBrowser from "@/app/scripts/_components/ScriptBrowser";
 import ScriptItem from "@/app/scripts/_components/ScriptItem";
-import { Spinner } from "@/components/ui/spinner";
 import { Category } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -57,7 +56,7 @@ export default function ScriptPage() {
     return (
       <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-background px-4 md:px-6">
         <div className="space-y-2 text-center">
-          <Spinner size="lg" className="bg-black dark:bg-white" />
+          <Loader2 className="h-10 w-10 animate-spin" />
         </div>
       </div>
     );
