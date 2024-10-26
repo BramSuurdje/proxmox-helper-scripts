@@ -12,15 +12,6 @@ export default function Buttons({ item }: { item: Script }) {
   );
 
   const sourceUrl = useMemo(() => {
-    const transformUrlToInstallScript = (url: string) => {
-      if (url.includes("/misc/") || url.includes("/vm/")) {
-        return url;
-      } else if (url.includes("/ct/")) {
-        return url.replace("/ct/", "/install/").replace(/\.sh$/, "-install.sh");
-      }
-      return url;
-    };
-
     if (item.installCommand) {
       const match = item.installCommand.match(pattern);
       return match ? transformUrlToInstallScript(match[0]) : null;
