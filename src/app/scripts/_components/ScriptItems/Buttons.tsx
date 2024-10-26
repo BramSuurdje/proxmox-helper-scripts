@@ -11,6 +11,15 @@ export default function Buttons({ item }: { item: Script }) {
     [],
   );
 
+    const transformUrlToInstallScript = (url: string): string => {
+      if (url.includes("/pve/")) {
+        return url;
+      } else if (url.includes("/ct/")) {
+        return url.replace("/ct/", "/install/").replace(/\.sh$/, "-install.sh");
+      }
+      return url;
+    };
+
   const sourceUrl = useMemo(() => {
     if (item.installCommand) {
       const match = item.installCommand.match(pattern);
@@ -18,15 +27,6 @@ export default function Buttons({ item }: { item: Script }) {
     }
     return null;
   }, [item.installCommand, pattern]);
-
-  const transformUrlToInstallScript = (url: string): string => {
-    if (url.includes("/pve/")) {
-      return url;
-    } else if (url.includes("/ct/")) {
-      return url.replace("/ct/", "/install/").replace(/\.sh$/, "-install.sh");
-    }
-    return url;
-  };
 
   return (
     <div className="flex flex-wrap justify-end gap-2">
