@@ -6,6 +6,10 @@
 .pnp.js
 .yarn/install-state.gz
 
+# wrangler
+.worker-next
+.wrangler
+
 # testing
 /coverage
 
