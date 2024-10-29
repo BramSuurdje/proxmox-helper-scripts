@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import logo from "/public/logo.png";
+import logo from "../../public/logo.png";
 
 import { navbarLinks } from "@/config/siteConfig";
 

@@ -89,12 +89,12 @@ export default function CommandMenu() {
           <CommandEmpty>No scripts found.</CommandEmpty>
           {links.map((category) => (
             <CommandGroup
-              key={category.categoryId}
+              key={"category:" + category.categoryId}
               heading={category.catagoryName}
             >
               {category.expand.items.map((script) => (
                 <CommandItem
-                  key={script.id}
+                  key={"script:"+script.id}
                   value={script.title}
                   onSelect={() => {
                     setOpen(false);
