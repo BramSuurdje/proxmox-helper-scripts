@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef, useState } from "react";
 
 interface MousePosition {
@@ -70,7 +71,7 @@ const Particles: React.FC<ParticlesProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
-  const circles = useRef<any[]>([]);
+  const circles = useRef<Circle[]>([]);
   const mousePosition = MousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
@@ -269,7 +270,11 @@ const Particles: React.FC<ParticlesProps> = ({
   };
 
   return (
-    <div className={className} ref={canvasContainerRef} aria-hidden="true">
+    <div
+      className={cn("pointer-events-none", className)}
+      ref={canvasContainerRef}
+      aria-hidden="true"
+    >
       <canvas ref={canvasRef} className="size-full" />
     </div>
   );
