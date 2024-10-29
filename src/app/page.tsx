@@ -77,7 +77,7 @@ export default function Page() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
                   >
-                    <FaGithub className="mr-2 h-4 w-4" /> Tteck's GitHub
+                    <FaGithub className="mr-2 h-4 w-4" /> Tteck&apos;s GitHub
                   </a>
                 </Button>
                 <Button className="w-full" asChild>
