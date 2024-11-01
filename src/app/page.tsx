@@ -100,7 +100,7 @@ export default function Page() {
               Make managing your Homelab a breeze
             </h1>
             <p className="max-w-2xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
-              150+ scripts to help you manage your <b>Proxmox VE environment</b>
+              200+ scripts to help you manage your <b>Proxmox VE environment</b>
               . Whether you&apos;re a seasoned user or a newcomer, Proxmox VE
               Helper Scripts has got you covered.
             </p>
