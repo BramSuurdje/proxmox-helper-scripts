@@ -14,7 +14,8 @@ const nextConfig = {
     ],
   },
 
-  output: "standalone",
+  output: "export",
+  basePath: "/proxmox-helper-scripts",
 
   async rewrites() {
     return [
