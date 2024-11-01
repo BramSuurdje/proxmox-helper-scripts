@@ -13,9 +13,6 @@
 > [!WARNING]
 > always check the source code of the scripts before running them. Copying random scripts without understanding what they do can lead to data loss or other security issues.
 
-> [!NOTE]
-> This website is not affiliated with the Proxmox VE Helper Scripts repository. This website is simply a redesign of the original website, with a focus on readability and security.
-
 ## 👀 Why even use the Re-design?
 
 ### Overview
