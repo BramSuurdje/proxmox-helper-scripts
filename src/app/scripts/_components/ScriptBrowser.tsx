@@ -119,7 +119,7 @@ const ScriptBrowser = ({
                 .slice()
                 .sort((a, b) => a.title.localeCompare(b.title))
                 .map((script, index) => (
-                  <p key={index}>
+                  <div key={index}>
                     <Link
                       href={{
                         pathname: "/scripts",
@@ -164,7 +164,7 @@ const ScriptBrowser = ({
                         {script.item_type}
                       </Badge>
                     </Link>
-                  </p>
+                  </div>
               ))}
               </AccordionContent>
             </AccordionItem>
