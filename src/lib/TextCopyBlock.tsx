@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import handleCopy from "./handleCopy";
+import { Copy } from "lucide-react";
 
 export default function TextCopyBlock(description: string) {
   const pattern = /`([^`]*)`/g;
@@ -8,14 +9,16 @@ export default function TextCopyBlock(description: string) {
   const formattedDescription = parts.map((part: string, index: number) => {
     if (index % 2 === 1) {
       return (
-        <Button
-          variant={"secondary"}
-          size={"null"}
+        <span
           key={index}
-          onClick={() => handleCopy("command", part)}
+          className="bg-secondary py-1 px-2 rounded-lg inline-flex items-center gap-2"
         >
           {part}
-        </Button>
+          <Copy
+            className="size-3 cursor-pointer"
+            onClick={() => handleCopy("command", part)}
+          />
+        </span>
       );
     } else {
       return part;
