@@ -7,7 +7,7 @@ import { useMemo } from "react";
 export default function Buttons({ item }: { item: Script }) {
   const pattern = useMemo(
     () =>
-      /(https:\/\/github\.com\/tteck\/Proxmox\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/,
+      /(https:\/\/github\.com\/community-scripts\/ProxmoxVE\/raw\/main\/(ct|misc|vm)\/([^\/]+)\.sh)/,
     [],
   );
 
