@@ -51,7 +51,7 @@ export default function CommandMenu() {
   React.useEffect(() => {
     const fetchCategories = async (): Promise<void> => {
       try {
-        const response = await fetch("/api/categories");
+        const response = await fetch("api/categories");
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
         }
@@ -104,6 +104,7 @@ export default function CommandMenu() {
                   <div className="flex gap-2" onClick={() => setOpen(false)}>
                     <Image
                       src={script.logo}
+                      unoptimized
                       height={16}
                       width={16}
                       alt=""

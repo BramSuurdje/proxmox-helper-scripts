@@ -2,6 +2,8 @@ import { pb } from "@/lib/pocketbase";
 import { Category } from "@/lib/types";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-static";
+
 export async function GET() {
   try {
     const response = await pb.collection("categories").getFullList<Category>({

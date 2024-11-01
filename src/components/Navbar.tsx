@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import logo from "../../public/logo.png";
 
 import { navbarLinks } from "@/config/siteConfig";
 
@@ -48,7 +47,13 @@ function Navbar() {
             href={"/"}
             className="flex cursor-pointer flex-row-reverse items-center gap-2 font-semibold sm:flex-row"
           >
-            <Image height={18} width={18} alt="logo" src={logo} />
+            <Image
+              height={18}
+              unoptimized
+              width={18}
+              alt="logo"
+              src="/proxmox-helper-scripts/logo.png"
+            />
             <span className="hidden lg:block">Proxmox VE Helper-Scripts</span>
           </Link>
           {/* <MobileNav /> */}

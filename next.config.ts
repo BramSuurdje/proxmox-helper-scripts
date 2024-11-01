@@ -15,16 +15,7 @@ const nextConfig = {
   },
 
   output: "export",
-  basePath: "/proxmox-helper-scripts",
-
-  async rewrites() {
-    return [
-      {
-        source: "/analytics/:path*",
-        destination: `https://${process.env.NEXT_PUBLIC_ANALYTICS_URL}/:path*`,
-      },
-    ];
-  },
+  // basePath: "/proxmox-helper-scripts",
 };
 
 export default nextConfig;

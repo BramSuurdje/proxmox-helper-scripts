@@ -60,7 +60,7 @@ export default function RootLayout({
       <head>
         <script
           defer
-          src="/analytics/script.js"
+          src={`https://${process.env.NEXT_PUBLIC_ANALYTICS_URL}/script.js`}
           data-website-id={process.env.NEXT_PUBLIC_ANALYTICS_TOKEN}
         ></script>
         <link rel="preconnect" href={process.env.NEXT_PUBLIC_POCKETBASE_URL} />
@@ -75,7 +75,6 @@ export default function RootLayout({
                 <div className="w-full max-w-7xl ">
                   {children}
                   <Toaster richColors />
-                  <SpeedInsights />
                 </div>
               </div>
               <Footer />

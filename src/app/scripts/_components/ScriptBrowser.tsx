@@ -136,9 +136,11 @@ const ScriptBrowser = ({
                         linkRefs.current[script.title] = el;
                       }}
                     >
-                      <img
+                      <Image
                         src={script.logo}
-                        // priority={true}
+                        height={16}
+                        width={16}
+                        unoptimized
                         alt={script.title}
                         className="mr-1 w-4 h-4 rounded-full"
                       />

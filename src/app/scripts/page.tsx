@@ -1,36 +1,32 @@
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import ScriptPage from "./_components/ScriptPage";
 
-type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
+export const dynamic = "force-static";
 
-export async function generateMetadata(props: Props): Promise<Metadata | null> {
-  const searchParams = await props.searchParams;
-  const scriptName = searchParams.id;
+// type Props = {
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+// };
 
-  if (!scriptName || typeof scriptName !== "string") {
-    return null;
-  }
+// export async function generateMetadata(props: Props): Promise<Metadata | null> {
+//   const searchParams = await props.searchParams;
+//   const scriptName = searchParams.id;
 
-  const imageurl = `https://proxmoxve-scripts.com/api/og?title=${scriptName}`;
+//   if (!scriptName || typeof scriptName !== "string") {
+//     return null;
+//   }
 
-  return {
-    title: scriptName + " | Proxmox VE Helper-Scripts",
-    description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
 
-    openGraph: {
-      title: scriptName + " | Proxmox VE Helper-Scripts",
-      description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
-      url: `https://proxmoxve-scripts.com/scripts?id=${scriptName}`,
-      images: [
-        {
-          url: imageurl,
-        },
-      ],
-    },
-  };
-}
+//   return {
+//     title: scriptName + " | Proxmox VE Helper-Scripts",
+//     description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
+
+//     openGraph: {
+//       title: scriptName + " | Proxmox VE Helper-Scripts",
+//       description: `This script is used to install ${scriptName} on your Proxmox VE host. | Proxmox VE Helper-Scripts is a collection of scripts to help manage your Proxmox Virtual Environment. with over 150+ scripts, you are sure to find what you need.`,
+//       url: `https://proxmoxve-scripts.com/scripts?id=${scriptName}`,
+//     },
+//   };
+// }
 
 export default function page() {
   return (
